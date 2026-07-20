@@ -1,0 +1,1028 @@
+============================================================
+## Paper Source: Adaptive Interventions Reducing Social Identity Threat to Increase Equity in Higher Distance Educatin: A Use Case and Ethical Considerations on Algorithmic Fairness
+============================================================
+
+## Adaptive Interventions  Reducing  Social Identity Threat to Increase Equity in Higher Distance Education: A Use Case and Ethical Considerations on Algorithmic Fairness
+
+Laura Froehlich 1  and Sebastian Weydner-Volkmann 2
+
+## Abstract
+
+Educational disparities between traditional and non-traditional student groups in higher distance education can potentially be reduced by alleviating social identity threat and strengthening students' sense of belonging in the academic context. We present a use case of how Learning Analytics and Machine Learning can be applied to develop and implement an algorithm to classify students as at-risk of experiencing social identity threat. These students would be presented with an intervention fostering a sense of belonging. We systematically analyze the intervention's intended positive consequences to reduce structural discrimination and increase educational equity, as well as potential risks based on privacy, data protection, and algorithmic fairness considerations. Finally, we provide recommendations for Higher Education Institutions to mitigate risk of bias and unintended consequences during algorithm development and implementation from an ethical perspective.
+
+## Notes for Practice
+
+- There are educational disparities between traditional and non-traditional students in higher distance education that can be partly explained by social identity threat
+- We present a use case of an algorithmic system to identify students at risk of experiencing social identity threat and to present these students with an intervention to reduce it
+- Several ethical issues concerning privacy and potential algorithmic bias must be considered during algorithm development and implementation
+- We provide recommendations for Higher Education Institutions considering these ethical issues
+
+Keywords: Algorithmic  fairness,  higher  education,  student  diversity,  social  identity  threat,  non-traditional students
+
+Submitted: 17/11/2023 - Accepted: 10/05/2024 - Published: 04/07/2024
+
+Corresponding author 1 Email: laura.froehlich@fernuni-hagen.de Address: Research  Center CATALPA,  FernUniversität in Hagen, Universitätsstr. 27, 58097 Hagen, Germany. ORCID iD: https://orcid.org/0000-0001-8610-2750
+
+2 Email:  sebastian.weydner-volkmann@ruhr-uni-bochum.de  Address:  Ruhr  University  Bochum,  Faculty  of  Philosophy  and  Educational Research, Institute for Philosophy I, Ethics of Digital Methods and Technologies, 44780 Bochum, Germany. ORCID iD: https://orcid.org/00000003-3948-4770
+
+## 1.  Introduction
+
+Higher  education  is  affected  by  two  trends.  First,  students  come  from  increasingly  heterogeneous  sociodemographic backgrounds and the proportion of non-traditional students (i.e., students from historically underrepresented demographic groups in higher education; e.g., Stoessel et al., 2015) is increasing. 1  Second, accelerated by the COVID-19 pandemic, higher education progressively incorporates digital and distance education formats (e.g., Lockee, 2021). These trends make higher
+
+1  We use the term 'non-traditional' students to convey that these groups were historically underrepresented in face-to-face higher education. In distance education, some non-traditional student groups are in the majority (e.g., students older than 30 years, full-time employed students), while others are still underrepresented compared to the general population (e.g., students with migration background, chronic illness, or disability).
+
+## JOURNALOFLEARNINGANALYTICS
+
+
+
+ANALYTICSRESEARCH
+
+education more accessible for sociodemographically diverse students. However, sociodemographic group memberships are related  to  educational  disparities.  For  example,  students  with  migration  background,  chronic  illness,  or  first-generation students  from  lower  socio-economic  backgrounds  show  lower  performance  and  higher  dropout  compared  to  traditional student groups. Non-traditional students also have more difficulties identifying with their academic institution or developing a sense of belonging in the academic context than traditional students (e.g., Stoessel et al., 2015; Stürmer et al., 2018).
+
+To increase  equity  in  education,  Higher  Education  Institutions  (HEIs)  strive  to  reduce  group-related  disparities  in academic success. Academic success should be determined by individual ability rather than by factors related to group membership that present structural hurdles and hinder individual students from fulfilling their academic potential. HEIs might thus seek to implement interventions to reduce group-related educational disparities. One interventional approach is based on social-psychological research on social identity threat. Concerns about being negatively stereotyped due to one's group  membership  can  hinder  non-traditional  students  from  fulfilling  their  academic  potential  (Steele  et  al.,  2002). Subsequently, we describe current research on the role of social identity threat in explaining educational disparities. We then depict a use case (not a specific implementation) for an adaptive algorithm to determine which students should receive an intervention to alleviate social identity threat. Even though such algorithms are specifically meant to address inequity, their use may still inadvertently (re)produce ethical issues, such as invasion of privacy (Pardo &amp; Siemens, 2014; Prinsloo et al., 2022)  or  other  discriminatory  effects  (Cerratto  Pargman  et  al.,  2023)  that  countervail  their  intended  positive  effect  on educational equity. Hence, we analyze the potential for ethical issues with a focus on algorithmic (un)fairness. Lastly, we derive recommendations for developing HEI-specific algorithms and point out limitations and future research directions.
+
+## 2.  Group-Related Educational Disparities Due to Social Identity Threat
+
+Educational disparities  between traditional and non-traditional students can partly be explained by negative stereotypes (unfavourable traits or characteristics ascribed to non-traditional student groups). The stereotype content model (e.g., Cuddy et al., 2007) posits that stereotypes can be described on two basic dimensions: warmth (how friendly an outgroup is perceived) and  competence  (how  capable  it  is  perceived).  In  the  educational  context,  the  stereotype  dimension  of  competence  is particularly relevant. Student groups that are underrepresented in education (e.g., students with migration background or disability) are often stereotyped as low on competence (e.g., Froehlich et al., 2016; Krischler et al., 2018). Bick et al. (2022) investigated stereotypes about different student groups in higher distance education. In a sample of 626 distance education students, students with migration background, non-native first language, or chronic illness and disability were perceived as low on competence. Such negative stereotypes can have detrimental consequences for members of negatively stereotyped groups.  Research  on  social  identity  threat  (Steele  et  al.,  2002)  has  shown  that  if  a  group  is  associated  with  negative stereotypes, this threatens group members' need for a positive social identity. This research is based on social identity theory (Tajfel &amp; Turner, 1979), which states that a person's identity is comprised of a personal identity (i.e., traits and characteristics differentiating the individual from others) and a social identity (i.e., being a member of a social group). Individuals strive for a positive social identity in that they want to feel a positive association between themselves and their group. However, when the group is stereotypically associated with a negative trait like low competence, this threatens the individual's positive social identity. The resulting fear of being associated with the negative traits ascribed to one's group in the academic context is called social identity threat (e.g., Steele et al., 2002). Consequences of social identity threat for affected individuals are reduced academic performance, reduced sense of belonging, disengagement from the academic domain, as well as lower motivation  to  form  relationships  with  classmates  (e.g.,  Froehlich  et  al.,  2023;  Spencer  et  al.,  2016).  From  a  societal perspective, this in turn may lead to a loss in diversity amongst high-performing students and academia in general, and a further reproduction of structural discrimination (e.g., Schmader &amp; Hall, 2014).
+
+Research on social identity threat and its consequences was predominantly conducted in face-to-face learning contexts. Bick et al. (2024) showed that in a distance learning environment with computer-supported collaborative learning, students experiencing higher social identity threat reported a lower sense of belonging to university and the virtual study group, as well as lower motivation to initiate and maintain peer relationships. Therefore, social identity threat can also have detrimental consequences in virtual learning contexts.
+
+## 3.  Interventions to Alleviate Social Identity Threat
+
+Several intervention approaches to reduce social identity threat and its consequences have been developed (Liu et al., 2021). Some approaches aim at creating learning contexts in which social group memberships and associated stereotypes are less salient  and  therefore  do  not  unfold  their  negative  consequences  for  non-traditional  students.  Other  approaches  target individual learners and aim at strengthening student resilience against social identity threat. One possibility is to strengthen non-traditional students' sense of belonging to the academic domain and thereby reduce the uncertainty of whether they fit in the academic context when their group is underrepresented and negatively stereotyped in this context (Walton &amp; Cohen,
+
+## JOURNALOFLEARNINGANALYTICS
+
+
+
+2007).  Belongingness  interventions  often  contain  statements  from  other  students  explaining  that  belonging  uncertainty experienced at the beginning of their studies usually fades over time and is not dependent on minority group membership. Students then write such a statement themselves (e.g., Kizilcec et al., 2020).
+
+Research investigating the effectiveness of interventions to strengthen student resilience against social identity threat has been mainly conducted in face-to-face or laboratory settings, whereas research in digital learning contexts is scarce. Kizilcec et al. (2020) showed that two brief interventions to increase a sense of belonging and decrease social identity threat were effective in eliminating performance differences between students from developed and less developed countries in MOOCs offered by the universities of Harvard and Stanford. The study demonstrated that interventions can reduce groupbased performance disparities in asynchronous, computer-mediated learning contexts, which are common in higher distance education.
+
+## 4.  Intended Consequences of Intervention Implementation in Higher Distance Education
+
+Considering this evidence, a major goal to reduce group-based disparities in higher distance education is to use learning analytics (LA) to adaptively present students at risk of experiencing social identity threat with such interventions. Especially in distance education contexts, where students complete individual or group assignments in virtual learning environments, it is possible to monitor learning and performance via LA. For example, machine learning (ML) algorithms can be used to target students most likely to benefit from these interventions.
+
+Operating such a socio-technical intervention system aims at actively strengthening educational equity and supports HEIs in reducing the structural discrimination effects vis-à-vis non-traditional students. This aim will be achieved if the intervention is effective in alleviating social identity threat. Non-traditional students would then be able to perform closer to their intellectual ability. Hence non-traditional students' performance in distance education would be a purer measure of innate ability. To be precise, we must differentiate between two educational performance gaps observable in HEIs: 1) the gap  between  true  intellectual  ability  and  actual  performance  (or  development  over  time)  for  individual  students  that  is attributable  to  the  effect  of  social  identity  threat;  and  2)  the  educational  performance  gap  between  the  groups  of  nontraditional students and traditional students due to structural discrimination. Targeted interventions are assumed to benefit individual students by reducing or closing the first gap. Thereby, interventions are assumed to also have a positive effect on campus diversity by reducing the second gap. This resonates with recent calls in LA ethics to put equity at the centre of LA data science by looking 'first at those at the margins of the education system' and by actively 'doing ethics' as part of LA data science (Cerratto Pargman et al., 2023, p. 144).
+
+However, the effects of closing the first gap by reducing individual experiences of social identity threat on overall structural  discrimination  will  be  limited.  The  concept  of  'structural  discrimination'  is  meant  to  capture  effects  that consistently  keep  saliently  underprivileged  groups  in  society  at  a  disadvantage  -  independent  of  the  intent  of  current individual or institutional actors (Altman, 2020). Hence, structural discrimination can have historical, often diffuse causes. Social identity threat can be understood as both a cause and an effect of structural discrimination: it is a cause since it is an unintended psychological effect that reproduces unjust and disproportionately disadvantageous outcomes; and it is an effect in that, in itself, it is produced as a result of discriminatory structures independent of the intent of current actors in HEIs. The group-related impact of interventions is, hence, expected to be limited to mitigating the causal effects of social identity threat. After interventions, the group of non-traditional students is unlikely to perform completely equal to the group of traditional students. Still, especially due to the empirically established positive effect on individual students, it is worth developing and implementing such an intervention system. In the following section, we describe a corresponding use case.
+
+## 5. A Use Case of an Algorithm to Recommend an Intervention to Reduce Social Identity Threat to Non-traditional Students
+
+To outline a use case for adaptively reducing the influence of social identity threat on student performance in higher distance education,  we  will  provide  a  realistic  description  of  an  educational  context  applicable  for  regular,  non-experimental operation. We base this use case on the educational context at the FernUniversität in Hagen in Germany. With more than 68,000 students and a sociodemographically diverse student body, the FernUniversität is like other large distance universities and  is  thus  an  ideal  educational  context  for  our  considerations.  Students  from  non-traditional  backgrounds  are  well represented in the student body. For example, students are on average 39 years old,  most of whom are employed while studying (75%), and 10% of whom have a foreign nationality (FernUniversität in Hagen, 2023a). Moreover, approximately 10% report chronic illness or disability (FernUniversität in Hagen, 2023b). Furthermore, a gap between traditional and nontraditional students' performance has been identified (Stoessel et al., 2015) and non-traditional student groups report higher social identity threat than traditional student groups (Bick et al., 2024).
+
+## JOURNALOFLEARNINGANALYTICS
+
+
+
+Consequently, such a higher distance education institution might aim at implementing an adaptive intervention to reduce social  identity  threat,  which  in  turn  should  increase  non-traditional  students'  performance.  Ideally,  the  group-related performance gap would be reduced, because learning and performance assessments reflect a purer measure of non-traditional students' true ability. The institution thus aims to present the intervention only to those students whose performance and belonging are likely to be negatively affected by social identity threat. By reducing or removing the influence of social identity threat, educational disparities would be levelled, as sociodemographic group memberships associated with negative ability-related stereotypes are less influential for performance and students' true individual ability is better reflected by their educational outcomes (e.g., participation in individual and group assignments, exam enrollment, grades).  This notion of fairness aims at achieving educational equity, meaning that pre-existing gaps are narrowed due to the implementation of an intervention that is only presented to student groups experiencing social identity threat.
+
+In our use case, the higher education institution is assumed to seek the development and implementation of an ML algorithm that classifies which students are at risk of experiencing social identity threat and should therefore be assigned to the intervention condition. The ensuing prediction problem can be described as follows: Based on which group-related and individual characteristics should students receive the intervention? This prediction problem arises  since not all students belonging to negatively stereotyped non-traditional student groups are at risk of experiencing social identity threat to similar extents.  Students vary in their individual susceptibility to social identity threat, which in turn is associated with further psychological constructs. For instance, students who place high value on the negatively stereotyped academic domain or on their membership in the negatively stereotyped group are more prone to experience social identity threat (Spencer et al., 2016). Therefore, an algorithm assigning students to the intervention based only on demographic information would make considerable assignment errors. Consequently, training data for the algorithm should include assessments of psychological constructs like social identity threat and associated variables (e.g., group identification, domain identification).
+
+A crucial issue regarding the viability of the use case concerns its potentially limited prediction accuracy. In the context of social identity threat interventions, it is still unclear whether state-of-the-art ML can develop algorithms that perform considerably  better  than  alternative  non-adaptive  intervention  recommendations.  The  dataset  of  the  study  reported  in Kizilcec et al. (2020) was used as training data for ML algorithms to target behavioural science interventions for individual students. However, the developed algorithms failed to produce better student outcomes than assigning the intervention to all or a random selection of students. Kizilcec and Lee (2021) conclude that currently there are prediction limitations of datadriven models and that stakeholders like  HEIs should not place too much confidence in algorithmic systems to reduce educational disparities. We believe that it is worth exploring this further, however, as previous data used for algorithm development did not contain direct measures of social identity threat and related psychological constructs. The inclusion of direct measures such as self-reported perceived social identity threat assessed in a survey might increase the algorithm's prediction accuracy.
+
+Addressing such issues related to the technical implementation are planned as a next step in our research process. Currently, however, we focus on describing the use case and systematically reflecting on potential ethical issues concerning algorithmic fairness. Corresponding recommendations about how to tackle these issues can then be directly considered during  the  development  phase  (value  sensitive  design;  Franssen  et  al.,  2023).  To  identify  potential  ethical  issues,  the following section highlights unintended consequences of the ML algorithm described in our use case.
+
+## 6. Unintended Negative Consequences of the Proposed System
+
+## 6.1.  Privacy Impact and Other Ethical Considerations
+
+Any operation of an ML-based intervention system must be expected to create unintended negative consequences - even when the  intended  impact  is  ethically  laudable.  This  section  describes  aspects  immediately  relevant  to  the  use  case  to highlight the need for ethical assessment in the design phase. The next section will focus in more detail on aspects related to bias and discrimination as those may directly countervail the ambitions described in the use case.
+
+Since the use case foresees regular operation , students are not to be considered research participants . While this may be different for the design phase of the intervention system (including the training phase of the classification algorithm), operational LA applications must undergo ethical reflection beyond standards of responsible research in behavioural science, such as those outlined in the Belmont report (National Commission, 1979, pp. 23193-23194) and enforced through ethics review boards (Willis et al., 2016). For example, it has been established early on that LA's data collection, analysis methods, and  adaptive  interventions  resemble  the  dynamic  and  structure  of  surveillance activities  such  as  tracking  and  profiling (Prinsloo &amp; Slade, 2017; Slade &amp; Prinsloo, 2013).
+
+This highlights the need to reflect potential privacy issues resulting from more personal data on students being collected and analyzed to support the algorithm's classification function as non-traditional students at risk of experiencing social identity threat or not. As Prinsloo et al. (2022) note, privacy considerations should go beyond complying with legal data protection requirements and making use of privacy-enhancing technologies. Rather, they should be responsive to norms of appropriateness governing the flow of information in the local context of the HEI (contextual integrity; Nissenbaum, 2009).
+
+## JOURNALOFLEARNINGANALYTICS
+
+
+
+ANALYTICSRESEARCH
+
+For example, more personal data on students such as self-report measures on group identification or social identity threat should be collected sparsely and be kept confidential.
+
+However,  if  social  identity  threat  is  to  be  extrapolated  from  demographics  only,  its  extent  might  be  over-  or underestimated for certain students based on imperfect correlations between demographics, group identification, and social identity threat. This affects both the training data for the algorithm (which could, in principle, be obtained through informed consent)  and  the  data  needed  for  operational  implementation,  as  the  algorithm  cannot  be  trained  to  use  sets  of  data substantially different from the data to be classified. While including psychological constructs in the training data and in the operational context will certainly increase the costs of designing and operating  the algorithm, its privacy impact in the operational phase may be minimized by running the trained algorithm in a decentralized fashion on student computers to avoid  collecting  and  storing  additional  personal,  potentially  sensitive  data  on  HEI  servers.  The  detailed  technical implementation of this is beyond the scope of this article. It should be noted, however, that generating lists of identifiable non-traditional students at risk of experiencing social identity threat creates manifold privacy and discrimination risks that need to be thoroughly assessed and mitigated for the training data, but especially for the operational context, where such risks may be prohibitive.
+
+Furthermore, as Drachsler and Greller (2016, p. 95) note, expecting constant, state-of-the-art data security measures from public institutions like universities may be unrealistic. Hence, one may need to start from the assumption that any data gathered in LA-related databases will at some point in the future be compromised . Not collecting more sensitive information on HEI servers but leaving them on student machines may be the best option to minimize risks of misuse and hacking.
+
+As opposed to an  experimental  research  setting  (which  may  also  include  the  collection  of  training  data)  in  which informed consent is the expected norm and can only be withheld in exceptional cases, an operational setting at an HEI may have different demands. Aside from the transparency and accountability requirements, European data protection regulations, for example, allow for forms of legal basis other than consent, especially when HEIs are public institutions and process data in an official capacity laid down in the law. If the intervention is effective in reducing educational disparities, its effect would be maximized if all target students identified by the algorithm to be at risk of experiencing social identity threat participated in the intervention. Hence, it is an ethical question whether participation in the intervention should be mandatory for the students selected or whether students should be given the choice.
+
+As correlations between individual predispositions for the experience of social identity threat and performance outcomes are imperfect, however, there is the risk of false-positive recommendations to participate in the intervention. This would be problematic in the case of adverse effects of the intervention recommendation for some students. It remains an open question what information is necessary for students to make an informed decision about  participating in the intervention. Future research should investigate how LA can be used to enable positive interventions while minimizing adverse impacts (Sclater, 2016).
+
+From a practical perspective, since some forms of co-operation are required on behalf of the students (e.g., regarding self-report  measures)  for  the  algorithm  to  work,  and  since  subsequent  interventions  require  participation  by  students categorized as at risk of experiencing social identity threat, asking for consent seems to be the most viable option. Conducting the  interventions  on  a  non-voluntary  basis  seems  like  an  ethical  and  legal  no-go  and  would  likely  be  unproductive  by rendering the interventions unpopular and the students resistive. Subjecting students to spending time on self-reporting data for  classification  and,  for  some,  on  the  interventions  would  likely  only  be  reasonable  when  such  measures  remain  the exception on campus: incentivizing students to take part in a plethora of self-report and intervention activities could amount to accosting them.
+
+While there are some ethics frameworks for LA applications (e.g., Drachsler &amp; Greller, 2016; Sclater, 2015), practical implementations of such approaches in education are scarce and a general gap between research and practice exists (Ladjal et  al.,  2022).  While  frameworks  have  considerable merit, we do not believe that it is possible to use them in a simple 'checking the boxes' fashion for operational LA applications, as too many contextual factors should be considered during technology  design  and  implementation.  This  section  has  addressed  some,  but  not  all  ethical  issues  relevant  for  a comprehensive  ethical  assessment.  Subsequently,  we  focus  on  bias  and  discrimination  issues,  as  they  may  directly countervail the intended benefits of the intervention.
+
+## 6.2.  Bias and Fairness Aspects of the Classification Algorithm
+
+To ensure that unintended outcomes of the use case do not countervail the intended positive effects, potential biases and discriminatory effects need to be taken into account as the classification algorithm is subject to the same risks of inadvertently (re-)producing inequities as any algorithmic LA application (Simbeck, 2022). Datasets used for training ML-based decisionmaking algorithms will, thus, usually reflect historic biases underlying structural discrimination (Müller, 2023). At best, such datasets can be made unbiased for one single kind of issue, which makes the common reuse of datasets for other purposes and contexts prone to inadvertently introducing bias (Müller, 2023). Hence, implementations of the use case should refrain from reusing existing datasets for what Kizilcec and Lee (2021) label the measurement and training phases of LA algorithm
+
+## JOURNALOFLEARNINGANALYTICS
+
+
+
+development, which precede the action phase, where the algorithm is applied in an operational context and unintended negative effects become manifest.
+
+As Müller (2023) highlights, however, this bias isn't problematic per se : it is not the bias itself that is harmful, but the combination  of  bias  and individual  or  organizational  reliance on  the  correctness  of  the  data  in  decision-making.  This highlights  that  the  classification  algorithm  proposed  in  the  use  case  should  also  be  considered  within  its  institutional embedding as a socio-technical intervention system, rather than as an isolated piece of software. Hence, as an alternative way of addressing bias and discrimination in the design phase of the algorithm, one could also try to mitigate potential discriminatory impact by relying less on its correctness (e.g., by planning for alternative ways to identify students at risk of experiencing social identity threat or to allow self-enrollment in an intervention). While, in the following, we focus on the algorithm itself, this should be duly noted for actual implementation.
+
+## 6.2.1. Risk of False-Negative Classification of At-Risk Students
+
+As established above, the algorithm's use case is narrowing the performance gap between traditional and non-traditional students due to structural discrimination (in the sense that social identity threat is one of its effects). Hence, a potential source of countervailing discriminatory effects of the classification algorithm might be that it inadvertently fails to identify distinct subgroups  of  non-traditional  students  and,  consequently,  deprives  them  of  the  intervention's  positive  effect.  Are  there subgroups  of  non-traditional  students  saliently  affected  by  structural  discrimination  but  not  classified  as  at  risk  of experiencing social identity threat, but who would profit from the intervention, while other subgroups are correctly classified? This seemingly rephrases the classification problem of the algorithm (distinguishing students at risk from students not at risk of experiencing social identity threat), but it is crucial whether, in the action phase, the classification is reliable, to a similar extent, for different salient student groups. As social identity threat is highest for non-traditional student groups who are usually  in  the  minority  (e.g.,  students  with  migration  background,  chronic  illness,  or  disability;  Bick  et  al.,  2024), intersectional discrimination is of particular relevance.
+
+Addressing  this  question  during  the  measurement  and  training  phases  entails  a  more  detailed  definition  of  nontraditionality and risk of experiencing social identity threat reflecting the local context of the student population at the HEI in question. In the measurement phase, some of the subgroups and intersectional subgroups are likely reduced to only a few cases in the training data or even fully absent, which is prone to result in bias and discriminatory impact (e.g., Chawla et al., 2002). In the model learning phase, this may lead to the prediction accuracy being lower for certain subgroups of nontraditional students.
+
+Conceptually,  one  may  refer  to  the  idea  of  'algorithmic  fairness,'  which  was  introduced  to  answer  the  growing awareness of such issues in algorithmic decision-making and data analysis (Binns, 2020, p. 515). Algorithmic fairness can be defined as the absence of bias and discriminatory effects in such a system (Kizilcec &amp; Lee, 2021, p. 177). Since complete fairness is a regulative ideal rather than actually obtainable, fairness should 'be measured on a continuous and not binary scale, and there are multiple ways to measure fairness'  (Kizilcec &amp; Lee, 2021, p. 176). Hence, the field tries to give an operationalized account of measuring fairness in  ML  systems  (Binns,  2018,  p. 1).  From  a  statistical  point  of  view,  the question raised above would be one of adequate sufficiency: 'Sufficiency encodes the belief that algorithmic decisions should carry the same level of significance for all groups' (Kizilcec &amp; Lee, 2021, p. 187). In general, however, dealing with intersectionality of multiple kinds of discrimination as well as currently unidentified vulnerable groups poses problems for such kinds of approaches to algorithmic fairness (Binns, 2020, p. 515).
+
+## 6.2.2. Risks of Being Classified for the Intervention
+
+Ethical considerations are also necessary for algorithm implementation during the action phase (i.e., the operational context). First,  the  way  the  intervention  is  recommended  to  at-risk  students  needs  to  be  carefully  considered  and  evaluated. Stigmatizing responses to model predictions are possible when at-risk students are flagged for the intervention in a way that further contributes to discrimination. If non-traditional students have accumulated experiences of social identity threat and group-based discrimination during their educational biographies, being flagged for the intervention might elicit negative responses.  Informing  students  about  social  identity  threat  can  in  itself  already  work  as  an  intervention  against  its consequences (e.g., Johns et al., 2005). However, being transparent about the intervention's aim to reduce social identity threat  can  make  negatively  stereotyped  group  memberships  more  salient  and  thus  exacerbate  their  influence  in  the educational context. Communicating to non-traditional students that they were selected for an intervention as they might be affected by social identity threat might further reduce their sense of belonging to the academic context due to highlighting their minority status (e.g., Walton &amp; Cohen, 2007). To date, research empirically investigating different ways to inform participants about being selected for such interventions is lacking.
+
+## 6.2.3. Risks of False-Positive Classification
+
+Furthermore, it needs to be assessed if traditional students from some salient social groups are incorrectly classified more often as at risk of experiencing social identity threat than others (e.g., female as opposed to male students where gender is
+
+## JOURNALOFLEARNINGANALYTICS
+
+
+
+ANALYTICSRESEARCH
+
+not a factor determining the risk of experiencing social identity threat). This can be captured by the statistical measure of separation, which 'encodes the belief that a fair algorithm makes correct and incorrect predictions at similar rates for different groups.' (Kizilcec &amp; Lee, 2021, p. 186). Similarly to non-traditional, at-risk students, the negative impact of being invited as a traditional student to participate in an intervention may vary depending on how the intervention is recommended: Being classified  as  at  risk  of  experiencing  social  identity  threat  may  give  reason  to  traditional  students  who  struggle  in  the introductory phase of their studies due to factors other than social identity threat to question their belonging and whether other members of the HEI see them as non-traditional. Whether this issue of potential negative impact (and, in case of algorithmic unfairness, its unequal distribution across salient social groups) is a mere theoretical possibility or practically relevant has not been established. However, in case of false classifications of traditional students, we believe that this risk may be sufficiently mitigated by openly communicating that the algorithm may be unreliable in this fashion.
+
+Contrary, as (Binns, 2018, pp. 7-9) notes, for some groups the relevant question regarding algorithmic fairness may not be 'correctly' identified as at-risk of social identity threat according to a chosen definition adequate to the local context, but rather one of appropriate representation. Some groups may expect to be classified or not classified as such, irrespective of whether this really reflects proneness to social identity threat or self-image as (non-)traditional. A subgroup may consider it important to identify as a traditional constituent group at an HEI, but still be prone to social identity threat. In such a case, it is unclear whether to give precedence to group identity and forego the potential benefits of recommending interventions, or to signal non-traditionality to group members in favour of those benefits. Here, adapting the communication may avoid such dilemmas (e.g., by avoiding the connection to traditionality and focusing on stereotypes), but the choice of action may ultimately be best left to university policy and self-governance.
+
+The third statistical measure proposed by Kizilcec and Lee (2021, p. 186), independence, is meant to reflect 'that an algorithm's decision be independent of group membership.' Since, however, the goal of the classification is the identification of students at risk of experiencing social identity threat, it would not make sense to compare the outcomes across different salient social groups, as differences in the classification rates are to be expected and the absence of such differences would probably indicate a lack of algorithmic reliability.
+
+## 6.2.4. Group Fairness, Individual Fairness, and Counterfactual Fairness
+
+As Binns (2020, p. 515) notes, algorithmic fairness research began with 'fairness measures based on statistical parity between protected groups (e.g., gender, race) in each outcome class, and hence are classed as group fairness measures.' The arguments presented above largely follow this line of thinking. While group fairness (GF) is currently the dominant research approach to  algorithmic  fairness,  it  'suffers  from  a  number  of  problems.  A  wide  variety  of  group  fairness  definitions  have  been proposed, and there has been little agreement about which is the most promising' (Fleisher, 2021, p. 481). Furthermore, group fairness measures use a limited number of coarse-grained, prescribed protected groups. This poses challenges for intersectionality and for currently unidentified vulnerable groups (Binns, 2020, p. 515).
+
+Alternative  approaches  were  proposed  that  are  labelled  individual  fairness  (IF)  measures,  which  suggest  'that  the intuitive notion of fairness is expressed by the principle similar treatment: similar individuals should be treated similarly' (Dwork et al., 2012; Fleisher, 2021, p. 480). Here, two individuals are alike if their:
+
+Combinations of task-relevant attributes are 'nearby' each other in the defined metric space. It is assumed that the distance metric is somehow defined by the people who set the policy (e.g. college admissions tutors), and possibly with broader societal agreement, and that this can be applied to individuals (e.g. college applicants) … Individual fairness says that for any two individuals, if their distance in task-relevant similarity is sufficiently small, they should receive the same outcome. (Binns, 2020, p. 516)
+
+It is sometimes argued that notions of individual and group fairness are in conflict and that using group fairness measures to influence the measurement and model learning phases may violate conditions of individual fairness. In turn, treating similar individuals similarly may not produce outcomes that satisfy group-level notions of fairness (Kizilcec &amp; Lee, 2021, p. 190). However, both Binns (2018, 2020) and Fleisher (2021) contend that the two paradigms are complementary rather than oppositional. As Binns (2020, p. 524) shows, the main challenge in finding the right measures and choosing the right approach (be it IF or GF) lies in the situative description of the potential biases.
+
+Consequently, group fairness measures seem to be a good fit for the described use case. Since the classification problem of  the  algorithm  is  itself  group-related,  we  consider  it  unlikely  that  individual  fairness  measures  can  capture  the  'nontraditionality'  and  the  'risk  of  experiencing  social  identity  threat'  based  on  individual  properties  that  serve as  distance metrics and that are independent from group membership.
+
+Kizilcec  and  Lee  (2021,  p. 190)  also  note  counterfactual  measures  to  algorithmic  fairness,  where  the  decision  to recommend a social identity threat intervention is fair if the prediction for a member of a certain negatively stereotyped student group remains unchanged in the counterfactual scenario when the student belongs to another negatively stereotyped student  group,  keeping  all  other  features  constant.  Again,  it  seems  unsound  to  assume  the  algorithm  can  succeed  in classifying students as at risk of experiencing social identity threat independent of actually being a member of a specific student group (i.e., while passing the counterfactual test). Moreover, due to bias arising from limited available variables and
+
+## JOURNALOFLEARNINGANALYTICS
+
+
+
+ANALYTICSRESEARCH
+
+unbalanced samples in the training data, it might occur that no student with a different group membership has the same individual features. In such a case, the algorithm needs to extrapolate outside of the training data set, which can lead to further prediction inaccuracies. Hence, as opposed to group fairness measures, we deem neither individual nor counterfactual fairness measures to be a good fit for the described use case.
+
+## 7. Discussion: Limitations and Future Directions
+
+Finally,  we  discuss  issues  that  should  be  considered  during  algorithm  development  and  implementation.  A  first  issue concerns the effectiveness of the proposed intervention. If the intended consequence is to mitigate the performance gap between non-traditional and traditional students in higher distance education, the success of this endeavour naturally depends on the effectiveness of the intervention in mitigating the psychological processes leading to social identity threat. If designed in  a  theory-driven  and  context-sensitive  way,  even  short  one-shot  belongingness  interventions  have  lasting  effects  by triggering a recursive cycle (e.g., Walton, 2014; Walton &amp; Wilson, 2018). However, previous attempts to scale up such educational interventions have produced heterogeneous results. Brief interventions to increase non-traditional students' sense of belonging were particularly effective when the universities or learning environments provided opportunities to experience belonging  (Walton  et  al.,  2023).  Moreover,  contextual  factors  created  heterogeneity  in  effect  sizes  when  scaling  up behavioural  science  interventions  in  MOOCs  (Kizilcec  et  al.,  2020).  In  future  research,  this  heterogeneity  must  be systematically taken into account (Bryan et al., 2021) and ML algorithms are likely to be useful in this endeavour because they can take complex multivariate associations into account when classifying students.
+
+A  related  question  concerns  the  extent  of  the  second  performance  gap  (between  student groups due  to  structural discrimination) that can be reduced by addressing the first gap (between true ability and actual performance for individual students  due  to  social  identity  threat)  with  an  adaptive  intervention.  It  is  still  unclear  what  other  forms  of  structural discrimination beyond social identity threat contribute to group-related disparities in higher distance education and how these  forms  of  discrimination  can  be  addressed  when  investigating  the  effectiveness  of  adaptive  interventions.  Beyond specifically targeting non-traditional students and increasing their resilience against social identity threat, HEIs can also implement measures to decrease the likelihood that stereotypes are activated (e.g., by deleting stereotypical depictions in study materials and learning environments). HEIs can also implement diversity statements and collaborative learning formats to increase intergroup contact and thus reduce stereotypes and prejudice (e.g., Aronson et al., 1978). Taking contextual factors concerning the learning environment and the situation at the HEI into account will also determine the generalizability of  the  use  case  to  other  contexts.  For  example,  previous  research  has  shown  that  belongingness  interventions  reduced achievement  gaps  in  MOOCs.  Future  research  thus  needs  to  investigate  to  what  extent  these  promising  results  are generalizable.
+
+In  the  action  phase,  it  is  unclear  what  information  is  necessary  for  students  to  make  an  informed  decision  about participating in the intervention. Even small changes in the presentation and administration of interventions can drastically change the results and sometimes even render the interventions ineffective (e.g., Walton &amp; Yeager, 2020). Future research should investigate how to present the intervention while simultaneously reducing potential adverse effects for students that were classified for intervention participation and ensuring that the intervention still achieves the intended effects (Sclater, 2016). Similarly, risks of adverse effects for traditional students who are incorrectly classified for the intervention might be mitigated by communicating that the algorithm-based decision is not 100% accurate. In turn, such communication might impede student trust in LA and the educational benefit of ML, which might also render the intervention ineffective.
+
+## 8. Ethical Recommendations for HEIs Regarding Algorithms to Reduce Social Identity Threat
+
+- Assess potential ethical risks beyond bias and discrimination (e.g., privacy, data security, consent procedures).
+- Oversample underrepresented student groups to increase prediction accuracy.
+- Include surveys measuring psychological constructs in training data.
+- Think about ways to reduce reliance on the correctness of the algorithms' classifications as part of the socio-technical implementation.
+- Apply group fairness measures to show that the underlying data are not neutral and highlight specific areas where the algorithm may need to compensate; consider what is not measured in the data (e.g., psychological variables associated with social identity threat).
+- Pay attention to intersectional forms of structural discrimination and algorithmic bias.
+
+## JOURNAL OFLEARNINGANALYTICS
+
+- Include feedback loops to optimize the algorithm's prediction accuracy.
+- Evaluate:  Does  the  algorithm  perform  better  than  random  assignment  of  students  to  the  intervention  or  control condition? Does the algorithm perform better in reducing educational disparities than simply presenting all students with the intervention?
+- Implement discrimination-aware unit tests at each step so that fairness issues can be identified and addressed in a timely and targeted manner (d'Alessandro et al., 2017).
+- Consider reasons for data collection and the way the interventions are recommended to prevent countervailing effects.
+- Ensure legitimacy through student acceptance and participatory processes: Some ethical conflicts will remain, and it may not be an ethically innocent option to refrain from developing and applying an algorithmic intervention system.
+- Consider  if  some  salient  social  groups  would  oppose  being  labelled  (non-)traditional  and  think  about  potential conflicts in terms of policy and self-governance rather than in prescriptive normative terms.
+
+## Declaration of Conflicting Interest
+
+The authors declared no potential conflicts of interest with respect to the research, authorship, and/or publication of this article.
+
+## Funding
+
+The authors declared no financial support for the research, authorship, and/or publication of this article.
+
+> [!NOTE]
+> References section has been removed.
+============================================================
+## Paper Source: An Unsupervised Learning and EDA Approach for Specialized High School Admissions
+============================================================
+
+## An Unsupervised Learning and EDA Approach for Specialized High School Admissions
+
+Adi Suryaputra Paramita 1,* , Arief Ramadhan 2
+
+1  Information Systems Department, School of Information Technology, Universitas Ciputra Surabaya, Indonesia
+
+2  School of Computing, Telkom University, Bandung,40257, Indonesia
+
+(Received: February 26, 2024; Revised: March 1, 2024; Accepted: March 13, 2024; Available online: May 17, 2024)
+
+## Abstract
+
+This research investigates disparities in access and representation within specialized high school admissions processes, focusing on public middle schools  in  New  York  City.  Leveraging  a  dataset  by  a  non-profit  organization  dedicated  to  increasing  diversity  in  specialized  high  school admissions,  the  study  employs  exploratory  data  analysis  and  unsupervised  learning  techniques  to  identify  schools  with  high  levels  of underrepresentation  and  academic  potential.  The  analysis  reveals  significant  disparities  in  access  to  specialized  high  schools,  with  certain demographic  groups  and  schools  facing  barriers  to  entry.  Through  k-means  clustering,  schools  are  categorized  based  on  their  academic performance and demographic composition, enabling targeted intervention strategies to address disparities in access and representation. The research proposes general use towards education, including on-campus interventions, awareness campaigns, and regional information sessions, aimed at fostering equitable access to specialized high school programs. This study contributes to the broader discourse on educational equity and offers valuable insights for policymakers, educators, and researchers seeking to promote diversity and inclusion within educational systems.
+
+Keywords: Exploratory data analysis, Unsupervised learning, Demographic composition, Specialized high schools
+
+## 1. Introduction
+
+In  contemporary  education  systems,  ensuring  equitable  access  to  specialized  educational  opportunities  remains  a critical concern [1], [2], [3]. The landscape of high school admissions often reflects broader societal disparities, with certain demographic groups facing barriers to entry into prestigious programs [4], [5], [6]. Addressing these disparities requires a nuanced understanding of the factors influencing students' access and success within specialized high school environments [7], [8], [9]. This study seeks to explore the complex interplay between school demographics, academic performance, and access to specialized high schools, proposing a methodology to identify and address inequities in admissions processes.
+
+The proposed methodology centers on a comprehensive analysis of middle school data, leveraging both demographic indicators and academic performance metrics [10], [11], [12]. By examining the compositional differences between feeder  and  non-feeder  middle  schools,  the  study  aims  to  identify  patterns  of  underrepresentation  among  specific demographic groups [13]. Utilizing unsupervised learning techniques such as k-means clustering, the research seeks to categorize middle schools based on their academic performance levels and potential as feeders for specialized high schools.  This  approach  enables  a  nuanced  understanding  of  the  factors  contributing  to  disparities  in  access  to specialized educational opportunities [14], [15].
+
+One of the key innovations of this study lies in its emphasis on unsupervised learning methods and exploratory data analysis, diverging from traditional predictive modeling approaches. By prioritizing exploratory analysis, the research aims to uncover hidden patterns and insights within the data, avoiding the perpetuation of existing biases encoded in predictive models. Furthermore, the study proposes targeted interventions based on the intersection of demographic composition and academic performance, offering a novel framework for addressing inequities in specialized  high school admissions processes.
+
+*Corresponding author: Adi Suryaputra Paramita (adi.suryaputra@ciputra.ac.id)
+
+DOI: https://doi.org/10.47738/jads.v5i2.178
+
+This is an open access article under the CC-BY license (https://creativecommons.org/licenses/by/4.0/).
+
+© Authors retain all copyrights
+
+The primary objective of this research is to provide actionable insights for stakeholders involved in educational equity initiatives. By identifying schools with significant disparities in access to specialized high schools, the study aims to inform  targeted  intervention  strategies  aimed  at  increasing  diversity  and  representation  within  these  institutions. Additionally,  the  research  seeks  to  contribute  to  the  broader  discourse  on  educational  equity,  highlighting  the importance  of  data-driven  approaches  in  identifying  and  addressing  systemic  disparities  in  access  to  specialized educational opportunities. Through these objectives, the study aims to catalyze positive change in the landscape of high school admissions, fostering a more equitable and inclusive educational environment for all students.
+
+## 2. Literature Review
+
+Numerous studies have delved into the complexities surrounding access and representation within specialized high school  admissions,  offering  valuable  insights  into  the  factors  influencing  students'  pathways  to  these  prestigious institutions. For example, Lovett [16] conducted a comprehensive analysis of demographic trends in specialized high school admissions, highlighting disparities in acceptance rates among different racial and socioeconomic groups. Their study underscored the need for targeted interventions to address these disparities, emphasizing the importance of early intervention programs and outreach initiatives in fostering diversity within specialized high school populations [17], [18].
+
+In a similar Chamorro et al. [19] explored the role of middle school academic preparation in influencing students' likelihood of admission to specialized high schools. Through a longitudinal analysis of academic performance data, they identified key predictors of success on specialized high school entrance exams, shedding light on the importance of early academic enrichment programs and access to resources in middle school settings. Their findings underscored the  need  for  interventions  aimed  at  enhancing  academic  readiness  among  underrepresented  student  populations, particularly in schools with limited access to educational resources [20].
+
+Building upon these foundational studies, Czibula et al. [10] employed machine learning algorithms to identify patterns of underrepresentation among middle schools in specialized high school admissions. By analyzing demographic data and academic performance metrics, they developed a predictive model capable of identifying schools with significant disparities in access to specialized high schools. Their study highlighted the potential of data-driven approaches in informing  targeted  intervention  strategies  aimed  at  increasing  diversity  and  representation  within  specialized  high school populations [11], [21], [22].
+
+Furthermore, Mahindru and Sangal [23] conducted a qualitative study exploring the experiences of underrepresented students in specialized high school settings. Through in-depth interviews and focus group discussions, they examined the socio-cultural factors influencing students' sense of belonging and academic success within these institutions. Their findings underscored the importance of fostering inclusive environments and providing targeted support services for underrepresented student populations in specialized high schools [24], [25].
+
+In summary, previous research on similar concepts has highlighted the multifaceted nature of disparities in specialized high  school  admissions,  emphasizing  the  need  for  targeted  interventions  aimed  at  increasing  diversity  and representation within these institutions. By leveraging data-driven approaches, such as machine learning algorithms and qualitative analyses, researchers have provided valuable insights into the factors influencing students' pathways to specialized high schools and identified promising strategies for fostering inclusivity and equity within these educational settings.
+
+## 3. Method
+
+## 3.1. Dataset Analysis
+
+The dataset utilized for this research is sourced from Kaggle and provided by PASSNYC, a non-profit organization dedicated to increasing diversity in students applying for and receiving placements at specialized high schools (SPHS) in New York City. This dataset comprises comprehensive information on public middle schools in New York City, including demographic data, academic performance metrics, and indicators of socioeconomic status. The relevance of this dataset to the research lies in its alignment with the central focus of the study, which seeks to explore disparities in access and representation within specialized high school admissions processes.
+
+The dataset's suitability for this research is multifaceted. Firstly, it offers rich insights into the demographic composition and academic performance of middle schools in New York City, allowing for a nuanced analysis of factors influencing students' pathways to specialized high schools. Additionally, the dataset includes indicators of socioeconomic status, providing valuable context for understanding disparities in access to specialized high school programs. Moreover, the dataset's provision of school-level data enables a comprehensive examination of the educational landscape, facilitating the identification of patterns and trends that inform targeted intervention strategies.
+
+The relevance of this dataset extends beyond the context of New York City and holds significant implications for educational  policies  and  practices  worldwide,  including  in  Indonesia.  While  the  specific  nuances  of  educational systems may vary between countries, the overarching challenges of promoting diversity, equity, and inclusion within specialized  high  school  admissions  processes  are  universal.  By  leveraging  insights  from  the  PASSNYC  dataset, policymakers, educators, and researchers in Indonesia can gain valuable insights into effective strategies for addressing disparities  in  access  to  specialized  high  school  programs  and  fostering  equitable  educational  opportunities  for  all students.  Thus,  the  dataset's  high  relevance  and  applicability  to  the  Indonesian  case  underscore  its  importance  in informing evidence-based decision-making and fostering positive change in educational systems globally.
+
+## 3.2. Research Steps
+
+The research step as shown in Figure 1, process begins with an executive summary and exploratory data analysis (EDA), offering a succinct overview of dataset analysis and preliminary findings. This summary serves as a precursor to  subsequent  steps  aimed  at  investigating  which  public  middle  schools  are  more  likely  to  have  students underrepresented at SPHS.
+
+Figure 1. Research Steps
+
+
+
+The analysis unfolds by examining the compositional differences between feeder and non-feeder schools, utilizing statistical methods to assess demographic and socioeconomic disparities. Additionally, an Underrepresentation Score is  calculated  for  each  middle  school,  delineating  the  extent  of  underrepresentation  among  specific  groups. Subsequently,  middle  schools  with  the  highest  underrepresentation  scores  are  pinpointed,  spotlighting  areas necessitating targeted interventions to alleviate disparities in SPHS access.
+
+Further exploration focuses on identifying public middle schools more likely to have students qualified for SPHS. Through K-means clustering, schools are categorized based on academic performance and pertinent features. This step aims to unveil schools with a heightened likelihood of producing academically qualified SPHS candidates. Subsequent analysis of the resulting clusters elucidates patterns and trends in academic performance levels among middle schools, providing insights into factors influencing students' readiness for SPHS admissions.
+
+The culmination of the research culminates in recommendations to PASSNYC, tailored to address identified disparities and enhance access to specialized high schools. These recommendations encompass targeted interventions, such as oncampus interventions at schools with high academic potential (Cluster A), awareness campaigns at schools with notable education quality (Cluster B), and regional information sessions and workshops aimed at all schools, particularly those clustered in areas with pronounced underrepresentation. Through these targeted strategies, the research endeavors to foster equitable access and representation within specialized high school admissions.
+
+## 4. Result and Discussion
+
+## 4.1. Exploratory Data Analysis
+
+EDA presented in this study delves into the dynamics of the SPHS in New York City, particularly focusing on issues of diversity and academic performance among middle school students. By examining school-level data, the analysis seeks  to  offer  actionable  insights  to  PASSNYC,  an  organization  committed  to  enhancing  diversity  among  SPHS applicants and recipients. Unlike traditional approaches that rely on biased data or predictive models, this analysis adopts a novel perspective, leveraging exploratory analysis and unsupervised learning techniques. By dissecting the demographic  composition  and  academic  performance  of  middle  schools,  the  study  aims  to  identify  schools  that historically underrepresent certain demographics while also harboring academically qualified students likely to aspire to SPHS admission. Through this intersectional lens, the analysis pinpoints middle schools where interventions from PASSNYC  could  be  most  effective.  The  recommendations  advocate  for  targeted  strategies  such  as  on-campus interventions at five specific middle schools, a widespread awareness campaign across 48 schools, and the organization of regional information sessions and workshops at three key locations. These initiatives are strategically designed to address the multifaceted challenges surrounding access and representation within the SPHS system, thereby fostering a more equitable and inclusive educational landscape in New York City.
+
+## 4.2. Underrepresented Data Analysis
+
+The specialized high schools in New York City are currently under scrutiny due to their perceived lack of diversity, particularly in terms of gender, race, and socioeconomic background. Corcoran and Baker-Smith's research utilizes sequential logistic  models  to  highlight  the  underrepresentation  of  specific  social  groups,  namely  Black,  Hispanic, female,  and  low-income  students,  across  various  stages  of  the  SPHS  application  process.  This  section  utilizes demographic data at the school level to explore the diversity issue within SPHS, with a focus on two main inquiries: whether feeder schools, which contribute significantly to SPHS offers, exhibit distinct compositions compared to other schools, and which public schools' students are most likely to face underrepresentation in the SPHS application process.
+
+## 4.2.1. Compositional difference between feeder and non-feeder schools
+
+In a typical year, approximately 25,000 students in New York City take the Specialized High Schools Admissions Test (SHSAT) and apply for placement in SPHS, constituting about one-third of the total eighth-grade cohort in the city. However, the distribution of offers among students from various middle schools is unequal, with the top 10 middle schools accounting for a quarter of all offers in 2018. To assess whether these feeder schools, which concentrate offers, differ in composition from other schools, density plots were utilized to analyze three key metrics: the percentage of female students, the percentage of Black and Hispanic students, and the Economic Need Index (ENI), calculated based on factors such as temporary housing as shown in Figure 2.
+
+Figure 2. Distribution of % Female Students
+
+
+
+The analysis revealed that feeder schools and non-feeder schools exhibited similar distributions in terms of gender ratio, with both centered around 49%. Despite gender disparities observed at various stages of the application process, the similarity in gender ratio across schools complicates the assessment of middle school impact using solely schoollevel data. Conversely, significant disparities were observed in the racial composition and economic need level between feeder and non-feeder schools, as depicted in Figures 3 and 4. Notably, Asian, Caucasian, and high-income students were not only more likely to attend SPHS but also originated from middle schools with a higher proportion of Asian and Caucasian students and lower economic need.
+
+Figure 3. Distribution of % Black and Hispanic Students
+
+
+
+Figure 4. Distribution of Economic Need Index
+
+
+
+These  compositional  disparities,  along  with  the  widespread  distribution  of  the  latter  two  metrics,  underscore  the socioeconomic  and  racial  segregation  inherent  in  New  York  City's  public  school  system.  Such  disparities  are perpetuated  by  social  prejudices  and  discriminatory  policies,  further  contributing  to  societal  divisions.  In  the subsequent section, the ENI and racial composition metrics will be utilized to calculate a scaled score, aiding in the measurement of the likelihood that students from a particular middle school will be underrepresented at SPHS.
+
+## 4.2.2. Underrepresentation Score
+
+The  scatterplot  depicted  Figure  5  below  illustrates  a  strong  positive  correlation  (r  =  0.77,  p  &lt;  0.01)  between  the Economic Need Index and the percentage of Black and Hispanic students. Feeder schools, indicated by larger-sized blue points, generally exhibit low-to-medium economic need and a lower proportion of Black or Hispanic students, while a notable cluster of non-feeder schools (gray points) appears in the upper right corner of the plot. These nonfeeder schools predominantly consist of low-income Hispanic or Black students who are often underrepresented at SPHS.
+
+Figure 5. Positive correlation between Economic Need Index and % Black and Hispanic students
+
+
+
+To facilitate PASSNYC's prioritization of outreach efforts based on the varying needs of students across different schools, an Underrepresentation Score will be introduced. This score aims to quantify the likelihood of students from a particular school experiencing underrepresentation during the SPHS application process. Calculated as the scaled Euclidean distance between each school's data point and the origin, the Underrepresentation Score ranges from 0 to 1. A score closer to 1 indicates a higher level of underrepresentation at SPHS. For a comprehensive list of middle schools with their corresponding Underrepresentation Scores, please refer to Table 1 in the appendix.
+
+## 4.2.3. Middle schools with the highest underrepresentation scores
+
+In order to maximize the impact of PASSNYC's efforts, it is crucial to pinpoint the middle schools most likely to be underrepresented  at  SPHS  and  strategically  allocate  resources  accordingly.  As  such,  the  subsequent  analysis  will concentrate on the top 25% of middle schools exhibiting the highest Underrepresentation Scores, comprising 121 out of the 482 middle schools with available demographic data as shown in Figure 6. Notably, none of these 121 schools had more than five students admitted to SPHS in 2018. The provided table details information on these 121 schools, arranged in descending order based on their Underrepresentation Scores. Refer to the appendix for a comprehensive list of middle schools alongside their corresponding Underrepresentation Scores. Remarkably, the top 25% of schools with the highest Underrepresentation Scores span across 20 out of the 32 school districts in New York City, with districts showcasing higher index scores generally harboring a greater proportion of underrepresented middle schools.
+
+Figure 6. School Breakdown and Underrepresentation Score by District
+
+
+
+## 4.3. Analysis Qualified Data Analysis
+
+SPHS in New York City have a rich tradition of catering to the educational needs of students with exceptional academic or artistic abilities. Admission to eight out of nine SPHS is primarily determined by performance on the Specialized SHSAT, which evaluates proficiency in English and Math. Given the pivotal role of SHSAT in securing placements in these prestigious institutions, it is presumed that students from middle schools with robust academic performance are more inclined  to  seek  admission  to  SPHS.  Consequently,  this  section  will  concentrate  on  academic  performance, specifically aiming to address one key question through the utilization of k-means clustering: which non-feeder schools exhibit education quality and academic performance levels akin to those of feeder schools?
+
+## 4.3.1. K-means Clustering and Features Used
+
+In  this  section,  we  utilize the  k-means  clustering  algorithm,  an  unsupervised learning technique, to investigate the academic characteristics of non-feeder schools in comparison to feeder schools. Building upon the conclusion drawn in the previous section that feeder schools exhibit distinct compositions from non-feeder schools, our focus shifts to identifying non-demographic features that could render non-feeder schools academically similar to feeder schools. The analysis encompasses various indicators, including New York State annual test results such as the percentage of eighth graders scoring at each level in Math and English Language Arts (ELA) tests, as well as the average scale scores for these  subjects.  Additionally,  data  from  the  New  York  City  Department  of  Education's  annual  quality  review, encompassing measures of rigorous instruction, collaborative teaching practices, supportive environments, effective school leadership, strong family-community ties, and trust, are examined. Other factors under consideration include average  student  attendance  rates,  chronic  absenteeism  rates,  pupil-to-teacher  ratios,  and  average  class  sizes.  By leveraging k-means clustering, we aim to identify non-feeder schools that demonstrate academic similarities to feeder schools, thereby shedding light on potential pathways to enhancing academic preparation and opportunities for students from underrepresented backgrounds.
+
+## 4.3.2. K-Means Clusters
+
+Utilizing the elbow method based on within-cluster sum of squares, the analysis identified three as the optimal number of clusters. Employing the k-means algorithm and utilizing the 20 listed features, 472 middle schools with available non-demographic data were partitioned into three distinct clusters showcasing varying levels of academic performance, as depicted in Figure 7 the subsequent scatterplot. Notably, Cluster A emerged with over 60% of its middle schools categorized as feeder schools, indicating that these institutions had more than five students accepted by SPHS in 2018. Furthermore, Cluster A exhibited the highest mean scores in state-wide ELA and Math examinations, both recognized as robust predictors for students' performance in the SHSAT. Leveraging the cluster labels assigned to each middle school based on non-demographic features, the analysis proposes an inference regarding the likelihood of a given middle school to have students qualified for SPHS.
+
+Figure 7. K-Means Clusters Result
+
+
+
+Note: Cluster A is deemed the most probable; Cluster B somewhat likely; and Cluster C least likely to have students qualified for SPHS admission.
+
+## 4.4. Recommendation to Resulting Dataset
+
+## 4.4.1. Recommendation 1: On-campus intervention at 5 schools in Cluster A
+
+In Cluster A, which comprises middle schools most likely to have students qualified for SPHS, 5 schools from the top quantile of the Underrepresentation Score are identified as shown in Figure 8. Despite their potential, none of these schools had more than 5 students accepted by SPHS in 2018. Thus, it is crucial to prioritize on-campus interventions at  these  schools  to  ensure  that  students  benefit  from  services  provided  by  PASSNYC  and  its  partners.  The recommended  interventions  include  organizing  on-campus  information  sessions  to  engage  parents  and  students, assigning  volunteers  to  address  questions  and  assist  with  the  application  process,  and  facilitating  access  to  test preparation  resources  through  recruitment  and  matching  processes.  Additionally,  on-campus  test  preparation workshops or tutoring sessions should be organized to enhance students' readiness for the SHSAT.
+
+
+
+Cluster
+
+Figure 8. K-means Clusters for Top 25% Middle Schools with the Highest Underrepresentation Scores
+
+## 4.4.2. Recommendation 2: Awareness campaign at 48 schools in Cluster B
+
+Cluster  B  encompasses  48  middle  schools  with  notable  education  quality  and  academic  potential.  To  increase awareness about the SHSAT and SPHS within this cluster, an awareness campaign is recommended. This campaign could involve distributing informational flyers, sending physical mails or emails to teachers, parents, and students, and conducting  outreach  activities  to  disseminate  essential  information  about  the  application  process  and  available resources.
+
+## 4.4.3. Recommendation 3: Regional information sessions and workshops at 3 locations
+
+An analysis of the geographic distribution of public middle schools in New York City highlights three prominent locations: Harlem, Bronx, and Brooklyn (Broadway Junction), which are characterized by a high proportion of Black and Hispanic residents as shown in Figure 9. Given this clustering and the historical impact of residential segregation on  education  and  household  income,  it  is  proposed  that  PASSNYC  organize  regional  information  sessions  and workshops at these locations. These sessions would aim to boost awareness of the SHSAT and SPHS, assign volunteers to provide guidance and support to parents and students, and facilitate access to regional test preparation workshops tailored to the needs of the communities. This targeted approach ensures that resources are effectively allocated to address the specific challenges faced by schools in these geographic clusters.
+
+Figure 9. Locations of Middle Schools
+
+
+
+Note: Circles = Public Middle Schools; Markers = Specialized High Schools
+
+## 5. Conclusion
+
+This research delineates the intricacies of the educational landscape in New York City, focusing on the compositional disparities between feeder and non-feeder middle schools as well as the levels of representation among students in SPHS programs. Data analysis indicates that while there are several middle schools that produce academically qualified students for SPHS, significant disparities persist in the representation of certain social groups, such as Black, Hispanic, female,  and  low-income  students.  These  findings  underscore  the  importance  of  targeted  interventions  to  enhance accessibility and representation in SPHS, with recommendations for awareness campaigns in specific schools, regional information sessions, and direct assistance in schools with high academic potential but low representation in SPHS.
+
+Thus, the research provides valuable insights for organizations like PASSNYC in designing more effective intervention strategies to address disparities in access and representation in these prestigious higher education institutions.
+
+Within the context of available data limitations, this study also emphasizes the necessity of a holistic approach in understanding the educational challenges in New York City. The findings highlight the importance of considering factors  such  as  demographic  composition,  educational  quality,  and  geographic  location  in  designing  effective intervention strategies. By providing specific and measured recommendations, this research offers a deep insight into the potential improvements that can be achieved through collaboration between non-profit organizations, educational institutions,  and  local  governments.  In  conclusion,  this  research  not  only  provides  a  better  understanding  of  the dynamics of education in New York City but also lays a strong foundation for collaborative efforts aimed at enhancing equality of access and representation in prestigious higher education institutions in the city.
+
+## 6. Declarations
+
+## 6.1. Author Contributions
+
+Conceptualization: A.S.P. and A.R.; Methodology: A.R.; Software: A.S.P.; Validation: A.S.P., A.R.; Formal Analysis: A.S.P., A.R.; Investigation: A.S.P.; Resources: A.R.; Data Curation: A.R.; Writing Original Draft Preparation: A.S.P. and A.R.; Writing Review and Editing: A.R. and A.S.P.; Visualization: A.S.P.; All authors have read and agreed to the published version of the manuscript.
+
+## 6.2. Data Availability Statement
+
+The data presented in this study are available on request from the corresponding author.
+
+## 6.3. Funding
+
+The authors received no financial support for the research, authorship, and/or publication of this article.
+
+## 6.4. Institutional Review Board Statement
+
+Not applicable.
+
+## 6.5. Informed Consent Statement
+
+Not applicable.
+
+## 6.6. Declaration of Competing Interest
+
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+> [!NOTE]
+> References section has been removed.
+============================================================
+## Paper Source: Clustering Students Based on Academic Performance and Social Factors An Unsupervised Learning Approach  to Identify Student Patterns
+============================================================
+
+## Clustering Students Based on Academic Performance and Social Factors: An Unsupervised Learning Approach to Identify Student Patterns
+
+Felinda Aprilia Rahma 1,* , Siti Zayyana Ulfah 2
+
+1,2 Master's Program in Teacher Education, School of Postgraduate Studies, Universitas Pendidikan Indonesia, Bandung, Indonesia
+
+(Received: March 1, 2025; Revised: April 5, 2025; Accepted: July 25, 2025; Available online: September 10, 2025)
+
+## Abstract
+
+This study explores the application of K-Means clustering, an unsupervised learning method, to group students based on academic performance and social factors. The primary objective is to uncover hidden patterns among students by analyzing academic scores in mathematics, reading, and writing, as well as demographic attributes including gender, ethnicity, parental education level, and lunch type. Data preprocessing steps, such as normalization and one-hot encoding, were conducted to prepare the dataset for clustering. The optimal number of clusters was determined using the Elbow Method and Silhouette Score, with K=3 selected for its balance between cluster quality and interpretability. The clustering results revealed three distinct groups of students: low performers, average performers, and high performers. These clusters were visualized using PCA and t-SNE, which showed clear separation and internal consistency. Interpretation of the clusters suggests that social factors may influence academic outcomes, with students from disadvantaged backgrounds more likely to fall into the lower-performing group. The study highlights the importance of data-driven approaches in understanding student diversity and designing targeted interventions. Furthermore, this research underlines the potential of clustering techniques to inform educational strategies by identifying students' needs more precisely. However, limitations include reliance on academic and basic demographic variables, and sensitivity of the K-Means algorithm to outliers and the predefined number of clusters. Future research should incorporate additional factors such as emotional well-being and learning preferences to develop more comprehensive educational models. Overall, the study demonstrates that clustering can serve as a valuable tool for enhancing the effectiveness and equity of educational programs.
+
+Keywords: Academic Performance, Educational Interventions, K-Means clustering, Social Factors, Student Grouping
+
+## 1. Introduction
+
+The organization of students into groups based on academic performance and social factors plays a pivotal role in enhancing educational outcomes. Research has shown that collaborative learning environments foster higher academic engagement, as students who receive strong social support tend to be more motivated and actively participate in their studies. This heightened engagement ultimately leads to improved academic performance [1]. Such social support is particularly valuable during transitional periods, such as the shift from high school to college, where students often experience anxiety. It not only boosts motivation but also facilitates the development of self-efficacy, further contributing to academic success [1], [2].
+
+Furthermore, variations in academic achievement often reflect underlying sociocultural influences and classroom dynamics. Students who form strong connections with their peers and engage meaningfully in cooperative settings are more likely to thrive academically [3]. The classroom environment plays a crucial role in shaping these interactions, which in turn bolster the motivational factors necessary for academic success [4]. By strategically grouping students based on these academic and social characteristics, educators can cultivate supportive peer relationships, implement tailored instructional methods, and create a more enriching learning atmosphere. This approach, in turn, promotes holistic academic success [5].
+
+The growing diversity in student abilities and backgrounds necessitates an approach to education that recognizes and accommodates this variation. In today's educational systems, significant disparities in academic performance are driven
+
+* Corresponding author: Felinda Aprilia Rahma (felindaaprilia16@upi.edu)
+
+DOI: https://doi.org/10.47738/ijaim.v5i3.109
+
+This is an open access article under the CC-BY license (https://creativecommons.org/licenses/by/4.0/).
+
+© Authors retain all copyrights
+
+by a complex mix of sociocultural factors, cognitive styles, and emotional needs. Addressing these differences requires educational strategies that are flexible enough to engage and support students from various demographics. The integration of customized pedagogical approaches that acknowledge each student's individual strengths and challenges helps create a more inclusive educational environment, ensuring that all students have an equal opportunity for success.
+
+Moreover, fostering effective interpersonal relationships within educational settings is key to bridging the gaps in learning outcomes. Strong teacher-student and peer connections are fundamental for enhancing academic motivation and improving performance [6]. In addition, incorporating diverse teaching resources, such as open educational resources (OER), can reduce barriers created by socio-economic factors, further promoting a more equitable learning environment [7]. By addressing the varied needs of students, educational institutions can build supportive and effective learning climates that serve all students, regardless of their background [6], [7].
+
+In light of these challenges, clustering techniques, especially those based on unsupervised learning, offer powerful methods for uncovering hidden patterns within student data. By grouping students according to their academic performance, behaviors, and social factors, researchers can gain a deeper understanding of the dynamics influencing academic success. For instance, Khamis et al. used clustering to categorize students based on their internet usage and academic records, revealing distinct student profiles that correlated with performance [8]. This approach demonstrates the effectiveness of clustering in identifying patterns that may not be immediately visible through traditional analysis.
+
+Similarly, clustering can also be used to improve educational recommendations, such as personalized learning resources and teaching strategies [9]. The application of K-Means clustering in educational contexts has proven effective in categorizing students based on academic performance, shedding light on disparities in educational outcomes and highlighting potential interventions [10]. Furthermore, clustering techniques have been successfully employed to extract valuable insights from learning management system data, reinforcing their versatility in educational applications [11]. This not only helps in organizing student data but also plays a crucial role in refining educational strategies through data-driven insights.
+
+The contemporary educational landscape is characterized by considerable variations in student academic performance, which educational systems often struggle to address effectively. These disparities arise from multiple factors, including socio-economic background, learning styles, and institutional support systems [12]. Marginalized groups, in particular, face additional barriers such as feelings of inferiority and tokenism, which only serve to deepen performance gaps [12]. Responding to the needs of diverse student populations requires tailored approaches that address these underlying issues. Leveraging techniques like clustering offers a promising avenue to uncover hidden patterns within student data, allowing for a more nuanced classification of students based on their unique characteristics [10].
+
+By employing these methods, educators can more effectively customize learning strategies and resources to meet the varied needs of students, ultimately improving academic outcomes for all learners [13]. Data-driven approaches can help create a more equitable education system and foster improved performance across different student groups [14]. However, the lack of comprehensive and well-analyzed data often complicates efforts to effectively group students based on relevant social and academic factors. Insufficient data collection and analysis hinder the formation of nuanced understandings of student groups, thus undermining efforts to provide targeted interventions [15].
+
+For example, while data-driven models can analyze student interactions and behaviors within educational contexts, their success depends on the quality and completeness of the data inputs. If critical variables are overlooked, it becomes difficult to identify patterns that can guide interventions aimed at addressing students' diverse needs [16]. By incorporating a variety of data sources, such as student feedback and demographic information, the clustering process can be enriched, providing a more accurate and comprehensive view of student groups and thereby enhancing the support provided [17]. Therefore, improving data utilization is essential to developing inclusive educational environments that meet the needs of all students.
+
+Designing educational programs that effectively address the diverse needs of students is an ongoing challenge in modern education. This complexity arises from the diverse backgrounds and learning requirements of students, necessitating a deep understanding of their unique characteristics [18]. For instance, research by Arifin et al. highlights the gap between existing curricula and the needs of students in visual communication design, underscoring the importance of aligning educational content with students' expectations and experiences [18]. Achieving such alignment requires continuous analysis and adaptation of instructional materials and pedagogical approaches.
+
+Tailored educational programs depend on accurately identifying students' learning preferences and behavioral patterns. Research shows that clustering can group students based on shared attributes, providing valuable insights into their academic needs. This data-driven approach not only improves the effectiveness of educational interventions but also empowers educators to implement strategies that enhance engagement and success across diverse student demographics [19]. By integrating comprehensive data analytics into educational program design, institutions can more effectively address the specific needs of diverse student groups, leading to a more equitable and effective educational landscape [20].
+
+## 2. Literature Review
+
+## 2.1. Importance of Student Grouping
+
+The importance of strategic student grouping based on academic and social performance has been well-documented in enhancing educational interventions. Group work, particularly in collaborative learning environments, has shown to significantly improve academic outcomes by fostering peer interaction, idea-sharing, and critical thinking. Studies like those by Saputro [21], emphasize the value of group work in fields such as nursing education, where peer discussions and debates help develop clinical skills and deepen students' understanding of complex concepts. Cooperative learning models enhance both academic skills and students' self-esteem, fostering social and academic growth. Through such interactions, students are encouraged to view challenges from multiple perspectives, contributing to a more holistic educational experience.
+
+The effectiveness of collaborative teaching models like the Group Investigation (GI) approach. Their research reveals that learning methods which promote student interaction, such as GI, help students develop a deeper understanding of complex subjects. Additionally, engaging instructional methods boost students' motivation and conceptual grasp, leading to improved performance. These findings highlight that well-structured, interaction-based frameworks not only enhance academic outcomes but also stimulate intrinsic motivation, fostering a deeper engagement with the material.
+
+However, challenges such as social loafing, where students disengage in group tasks, can hinder the effectiveness of group-based learning. Research by Riwoe et al. [22] suggests that group dynamics must be carefully managed to ensure full participation and accountability. To optimize academic outcomes, Cvitković et al. [23] argue that educators must address the diverse needs and capabilities of students within groups, fostering an environment that encourages active participation and boosts academic self-efficacy. In conclusion, strategic student grouping plays a pivotal role in fostering effective learning environments, with continuous adaptations in teaching methods necessary to overcome challenges and maximize the benefits of collaborative learning.
+
+## 2.2. Clustering Techniques in Education
+
+Clustering techniques, particularly K-Means, have gained widespread application in educational research for analyzing student performance and social factors. These algorithms help categorize students based on various attributes, enabling more personalized educational interventions and improving overall learning outcomes. K-Means clustering to optimize student grouping based on learning styles in programming classes, cluster analysis can reveal patterns in student engagement and learning behaviors, allowing educators to adjust their teaching strategies to better accommodate diverse student populations.
+
+In addition to K-Means, other clustering methods, such as hierarchical clustering, are also valuable in educational settings. Lorente-Echeverría et al. [24] used this approach to analyze teachers' profiles in relation to sustainability practices in physical education. By evaluating cluster cohesion and separating subgroups based on squared Euclidean distances, they demonstrated how such a structured clustering analysis could be applied to student data as well. This methodology ensures clear boundaries between groups, which can be instrumental in precisely targeting educational strategies and resources. Similarly, Ren [25] discusses how clustering techniques optimize educational resources by aligning subject matter relevance and learning objectives, further enhancing the quality of educational delivery.
+
+Moreover, the versatility of clustering extends to diverse educational contexts. Ligibel et al. [26] illustrate how cluster randomization can be used to analyze students' responses to physical activity interventions, highlighting its effectiveness in clinical educational settings. The integration of clustering with decision trees in educational data mining, focusing on predicting student performance based on self-reported learning patterns. This approach reinforces the utility of clustering in identifying students who require additional support. In conclusion, clustering techniques, such as K-Means, provide invaluable insights into student performance and social dynamics, fostering data-driven educational practices that can improve academic outcomes and overall student well-being.
+
+## 2.3. Social Factors Influencing Student Performance
+
+Social factors such as gender, ethnicity, parental education, and socioeconomic status play a significant role in shaping student performance. Research underscores the importance of these factors in influencing academic outcomes and highlights the need for educators, policymakers, and researchers to address these dynamics in order to foster more equitable learning environments. For example, gender and ethnicity have been found to be critical in determining academic success. Hwang et al. [27] found that matching teacher and student ethnicity, especially in elementary settings, can lead to better academic performance. Similarly, Glock et al. [28] suggest that ethnic minority students may perceive less support from teachers, which can negatively impact their achievement. This points to the need for more diverse teaching staff to create an inclusive environment that supports all students.
+
+Parental education is another influential factor, as studies show that students' perceptions of their parents' emotional support and the level of parental education correlate with better academic performance. Liu et al. [6] highlighted that students with higher parental educational attainment tend to have more academic support, leading to better outcomes. Gul et al. [29] further reinforce this by emphasizing the role of parental involvement in academic achievement. Additionally, socioeconomic factors, such as lunch type, have a profound impact on student performance. Segkulu [30] notes that students from lower socioeconomic backgrounds often struggle due to limited access to resources, which impedes their academic engagement. The type of lunch students receive can affect their energy and focus, with those receiving adequate nutrition showing better academic capabilities.
+
+Finally, social engagement also plays a vital role in academic success. Abubakar et al. [31] found that students who participate actively in school activities tend to perform better academically, regardless of their social background. This highlights the importance of creating a positive school climate and encouraging peer interactions to support academic achievement. In conclusion, understanding the influence of social factors such as gender, ethnicity, parental education, and nutrition is crucial for educators and stakeholders to implement targeted strategies that promote equitable learning opportunities and improve student outcomes.
+
+## 2.4. Strengths and Limitations of K-Means Clustering
+
+K-Means clustering has become a widely used technique in educational research due to its simplicity, computational efficiency, and ability to organize large datasets into meaningful clusters. It allows educators and researchers to analyze student performance, engagement, and other educational metrics effectively. One of the primary strengths of K-Means, as highlighted by Faisal et al. [32], is its ability to partition data based on similarities, enabling the identification of patterns in student competencies. The algorithm minimizes the Sum of Squared Errors (SSE) iteratively, which makes it adaptable across various educational contexts. For example, Agha et al. [20] demonstrated the utility of K-Means in forecasting academic performance by uncovering underlying trends in educational data. This ability to reveal patterns can help institutions make data-driven decisions that ultimately benefit student outcomes. Additionally, the algorithm's flexibility allows it to be used in diverse scenarios, from grouping students based on academic performance to identifying trends in engagement levels [33], making it valuable for addressing individual learning needs.
+
+However, K-Means clustering does have notable limitations. One significant drawback is the requirement to predefine the number of clusters (k), which can greatly affect the results of the analysis. The choice of k is often arbitrary, and an incorrect selection can lead to poor cluster formation and misinterpretation of the data [6] , [33]. Liu et al. [6] caution that incorrect assumptions about the number of clusters can skew analysis, particularly when assessing student data. Another limitation is K-Means' sensitivity to outliers and noise within the data. Additionally, the reliance on Euclidean distance for measuring similarity may not always be appropriate, especially for data with varying scales and distributions, as noted by Agha et al. [20].
+
+Furthermore, K-Means can yield inconsistent results when working with high-dimensional datasets [34]. This issue may require dimensionality reduction techniques to improve clustering performance, adding complexity to the analysis process. In comparison to other clustering methods like K-Medoids or Hierarchical clustering, K-Means may lack robustness, particularly when clusters are not spherical or evenly sized [35]. These limitations can affect the accuracy of the results and the strategies implemented based on the clustering outcomes. In conclusion, while K-Means clustering offers significant strengths in computational efficiency and flexibility for educational data analysis, it also has limitations that must be carefully managed. Understanding both the strengths and weaknesses of K-Means is essential for researchers and educators looking to use clustering techniques effectively to support student learning and improve academic performance.
+
+## 3. Methodology
+
+The following diagram illustrates the steps involved in the data analysis process using the K-Means algorithm, as shown in figure 1.
+
+Figure 1. Research Methodology
+
+
+
+## 3.1. Data Collection
+
+The research object in this study consists of students whose data includes academic performance in mathematics, reading, and writing, as well as key social features. These social factors will be used as features for clustering the students. Table 1 summarizing the features considered for this research:
+
+Table 1. Student Academic and Social Features
+
+| Feature       | Description                     |
+|---------------|---------------------------------|
+| Math Score    | Student's score in mathematics. |
+| Reading Score | Student's score in reading.     |
+| Writing Score | Student's score in writing.     |
+
+| Gender                   | The gender of the student (Male/Female).                                                                       |
+|--------------------------|----------------------------------------------------------------------------------------------------------------|
+| Ethnicity                | The ethnic group of the student (e.g., Group A, Group B, etc.).                                                |
+| Parental Education Level | The highest level of education attained by the student's parents (e.g., High School, Bachelor's Degree, etc.). |
+| Lunch Type               | Whether the student receives a standard or free/reduced lunch.                                                 |
+
+These features will serve as the basis for clustering the students. By considering both academic and social factors, this research aims to uncover clusters of students who share similar patterns in their academic performance and social backgrounds. The findings from these clusters could provide valuable insights into the influence of social factors on academic performance and help inform the design of targeted educational interventions for different student groups.
+
+## 3.2. Data Preprocessing
+
+The data preprocessing steps are crucial for ensuring the quality and suitability of the data for clustering analysis. The first step involves data processing, which includes identifying and handling any missing values. Missing data can be addressed by either imputing values (using mean, median, or mode) or removing records with significant missing data, depending on the context. Next, one-hot encoding is applied to the categorical variables, such as gender, ethnicity, parental education level, and lunch type, to convert them into numeric representations. This transformation is necessary because clustering algorithms like K-Means can only work with numerical data. For instance, gender might be encoded as 0 for male and 1 for female, and different ethnic groups might be encoded as separate binary variables.
+
+Once the categorical variables are encoded, the numeric features such as math scores, reading scores, and writing scores are normalized or standardized. Normalization or standardization ensures that the scales of the different numeric variables are similar, preventing any one feature from disproportionately influencing the clustering process. For example, without scaling, math scores with a much larger range than writing scores might dominate the clustering process. The StandardScaler method is commonly used to standardize features so that they have a mean of 0 and a standard deviation of 1.
+
+Finally, data splitting is performed to organize the data for clustering. The dataset is divided into relevant features for clustering, ensuring that the social and academic data are in formats that can be analyzed. The clustering process will consider all these features together, allowing for a holistic understanding of how academic and social characteristics interact in determining the student groups. Once the preprocessing is complete, the data will be ready for input into the K-Means Clustering algorithm, where the features will be grouped into clusters based on their similarities.
+
+## 3.3. Clustering Algorithm
+
+K-Means Clustering is employed as the primary algorithm to group students based on their academic and social characteristics. The K-Means algorithm is a popular unsupervised learning method that partitions the data into K clusters, where each cluster consists of students with similar attributes. The algorithm minimizes the sum of squared distances between data points and their respective cluster centroids. Specifically, for each data point x\_i, the algorithm assigns it to the cluster C\_k who's centroid μ\_k is the closest, according to the following formula:
+
+
+
+Note: 𝑥 𝑖 is the i-th data point. 𝜇 𝑘 is the centroid of the k-th cluster.
+
+𝑛 is the total number of data points.
+
+To determine the optimal number of clusters (K), the Elbow Method and Silhouette Score are used.
+
+The Elbow Method helps identify the point at which adding more clusters does not significantly improve the model. The method involves plotting the inertia (sum of squared distances from each point to its assigned centroid) for different values of K. The inertia for a given number of clusters K is given by:
+
+Note:
+
+𝑟 𝑖𝑘 is the membership indicator (1 if point 𝑥 𝑖 belongs to cluster 𝑘 , 0 otherwise).
+
+𝜇𝑘 is the centroid of cluster 𝑘 .
+
+The optimal number of clusters is chosen where the elbow in the inertia plot appears, this is where adding more clusters no longer results in a significant decrease in inertia.
+
+The Silhouette Score is used to evaluate the separation of the clusters. It measures how similar each data point is to the other points in its cluster compared to points in the nearest neighboring cluster. The Silhouette Score for a given data point 𝑥 𝑖 is computed as:
+
+
+
+Note:
+
+𝑎 𝑥 𝑖 is the average distance between 𝑥 𝑖 and all other points in the same cluster (intra-cluster distance).
+
+𝑏 𝑥 𝑖 is the minimum average distance between 𝑥 𝑖 and all points in any other cluster (inter-cluster distance).
+
+The overall Silhouette Score is the average of the individual Silhouette Scores for all points in the dataset, and a higher value indicates better-defined clusters. The Silhouette Score ranges from -1 to 1, with a higher value indicating wellseparated and appropriately assigned clusters.
+
+Once the optimal number of clusters is determined using the Elbow Method and Silhouette Score, the K-Means algorithm is applied to the dataset. After clustering, model validation is performed using the Silhouette Score to assess the quality of the clustering results. A higher Silhouette Score indicates that the clusters are well-separated and that each student is appropriately grouped based on their academic and social features. This validation step ensures that the clustering results are meaningful and provide useful insights into the data.
+
+## 3.4. Visualization
+
+After performing the clustering, it is important to visualize the resulting clusters to better understand the distribution and relationships between the data points. In this study, scatter plots and dimensionality reduction techniques, such as Principal Component Analysis (PCA) and t-Distributed Stochastic Neighbor Embedding (t-SNE), are used to display the cluster distribution in a 2D or 3D space.
+
+Scatter plots are a simple and effective way to visualize clusters, especially when dealing with two or three features. In this case, we can plot the data points from the clusters using math score vs. reading score or writing score. Each data point in the scatter plot will be color-coded according to its assigned cluster label, allowing for an easy visual identification of how the students are grouped based on their academic performance.
+
+PCAis a linear dimensionality reduction technique that projects the data onto the top two or three principal components, capturing the most variance in the data. PCA is useful for visualizing high-dimensional data by reducing it to lower dimensions without losing much information. After performing PCA, the data can be plotted in 2D or 3D space, where each data point is colored according to its cluster label. The resulting plot allows for a visual understanding of how well the clusters are separated along the principal components. The formula for PCA is as follows:
+
+
+
+𝑍 is the matrix of principal components (lower-dimensional representation), 𝑋 is the original data matrix, and 𝑊 is the matrix of eigenvectors (the directions of maximum variance).
+
+
+
+t-SNE is a non-linear dimensionality reduction technique that is particularly well-suited for visualizing highdimensional datasets in 2D or 3D space. t-SNE minimizes the divergence between probability distributions in highdimensional space and their 2D or 3D counterparts, allowing it to group similar points together. This technique is effective for visualizing complex clusters when the data has more than two dimensions. It is particularly useful when the clusters might not be linearly separable. The formula for t-SNE involves pairwise affinities between data points and their representation in lower dimensions, but for simplicity, it's mostly used via libraries like scikit-learn.
+
+The visualizations using PCA and t-SNE help in identifying whether the clusters are well-separated, whether there is any overlap between groups, and whether there are any outliers or unusual patterns in the data. These visual representations provide an intuitive way to interpret the clustering results and assess the effectiveness of the grouping algorithm.
+
+## 4. Results and Discussion
+
+## 4.1. Result
+
+Figure 2 shows the silhouette scores for various values of K tested in this analysis. The silhouette score is used to evaluate how well each object is grouped within its assigned cluster, with higher scores indicating better separation between clusters. At K=7, the silhouette score reaches its highest value of approximately 0.149, suggesting that the clustering at this point exhibits the best separation.
+
+Figure 2 . Silhouette Scores
+
+
+
+However, further analysis reveals that K=3 and K=5 also yield consistent and interpretable results, with clear separation between clusters. K=3 was ultimately selected as the optimal number of clusters because, in addition to providing a reasonable level of separation, it offers simpler and more practically relevant interpretation. A smaller number of clusters is easier to analyze and explain. While several values of K provide good results, K=3 was considered the best choice for this analysis due to the balance it strikes between cluster separation quality and ease of interpretation.
+
+The optimal number of clusters for the dataset was determined using the Elbow Method, as shown in figure 3. In this method, the inertia (sum of squared distances between points and their cluster centers) is plotted against the number of clusters. The plot reveals a clear elbow at K=3, where the rate of decrease in inertia slows down significantly. Before K=3, adding more clusters resulted in a substantial reduction in inertia, indicating that the clusters were becoming more compact. However, beyond K=3, the reduction in inertia becomes less pronounced, and the improvements in clustering quality become marginal. This flattening of the curve suggests that additional clusters do not add substantial value in terms of better grouping, making K=3 the most appropriate and meaningful choice for the dataset.
+
+Figure 3. Elbow Method
+
+
+
+Following the identification of the optimal number of clusters, the three clusters revealed distinct patterns in academic performance. It is important to interpret these clusters not only based on academic scores but also considering potential underlying social factors. Cluster 0 (Purple), which contains students with lower scores in both math and reading, may represent a group that faces various challenges. These students might come from socioeconomically disadvantaged backgrounds, where access to educational resources or family support is limited. Additionally, students in this cluster might struggle with motivation or face environmental stressors, such as language barriers or insufficient academic guidance at home. This cluster may also be overrepresented by students from specific ethnic or cultural groups who historically face educational inequities.
+
+Cluster 1 (Teal), which includes students with average academic performance, may represent a more balanced group in terms of academic abilities. Students in this cluster might come from families with moderate socioeconomic backgrounds, where they receive a reasonable amount of educational support but lack access to more specialized resources or enrichment programs. It's possible that this group includes a mix of students from diverse ethnic backgrounds, with a variety of academic experiences that result in a middle-range performance. These students might be in need of some academic enrichment or intervention to help boost their performance and push them to higher levels.
+
+Cluster 2 (Yellow), consists of students who show higher scores in both math and reading, identifying them as high performers. This group may include students from more privileged backgrounds, where access to high-quality educational resources, parental support, and extracurricular activities is more common. These students could also come from ethnic groups that are more likely to have educational support systems in place, which foster academic success. Additionally, students in this cluster may benefit from more advanced learning opportunities, and their higher performance may be attributed to the availability of enrichment programs or a more robust academic environment both at home and in school.
+
+To provide a deeper understanding of how social factors, such as ethnicity, family income, and parental education levels, influence academic performance, further analysis would be valuable. For instance, by examining how students from specific ethnic backgrounds or low-income families are distributed across the clusters, we could identify any disparities and understand how these factors might contribute to the observed differences in academic performance.
+
+To enhance this analysis, t-SNE (t-Distributed Stochastic Neighbor Embedding) is used as a dimensionality reduction technique to visualize high-dimensional data in a lower-dimensional space, shown in figure 4. The three clusters are clearly separated, indicating that there is a significant differentiation between the groups based on their academic performance. The well-defined boundaries between the clusters suggest that the clustering algorithm has successfully identified distinct patterns within the data.
+
+Figure 4 . t-SNE Cluster Visualization
+
+
+
+Moreover, the tightness of each cluster in the t-SNE plot indicates that students within each group share similar academic performance characteristics, supporting the idea that students in the same cluster are academically similar to one another.
+
+In addition to t-SNE, PCA further validates the clustering process, as shown in figure 5. The clusters are primarily separated along the first principal component, suggesting that the largest variance in student performance is captured by this component. This confirms that the features contributing to student performance, such as math, reading, and writing scores, are strongly aligned with the principal components that explain the major variations in performance across the groups.
+
+Figure 5. PCA Cluster Visualization
+
+
+
+The fact that the clusters are well-separated in the PCA plot indicates that PCA has effectively reduced the complexity of the data while retaining the most important information.
+
+Finally, the scatter plot in figure 6 compares math and reading scores, showing how students are grouped into three clusters based on their academic performance. Cluster 2 (Yellow) is in the top-right corner, indicating high scores in both subjects, representing high performers. Cluster 1 (Teal) is in the middle, showing average performance, while Cluster 0 (Purple) is in the lower-left, indicating lower scores. The centroids, or average positions, of each cluster further define the groups. Cluster 0 (Purple) has lower average scores, suggesting these students would benefit from academic support. Cluster 1 (Teal), with average performance, could benefit from enrichment programs, while Cluster 2 (Yellow), with higher scores, may be suited for advanced academic opportunities.
+
+Figure 6. Cluster Visualization (Math vs. Reading Scores)
+
+
+
+The clustering analysis has successfully segmented students into three distinct groups based on their academic performance. Moving forward, targeted interventions, enrichment opportunities, and advanced programs can be implemented to address the needs of students at different academic levels. Students in Cluster 0 (Purple), who exhibit lower performance in both math and reading, would benefit from additional academic support or remediation strategies aimed at addressing their specific learning gaps. Cluster 1 (Teal), with middle-range performance, could thrive with enrichment or supplemental academic programs designed to challenge them and encourage further academic growth. Meanwhile, students in Cluster 2 (Yellow), who demonstrate above-average performance, should be offered advanced academic opportunities, such as gifted programs or specialized learning tracks, to maximize their potential. Further analysis incorporating demographic and social factors, such as ethnicity, socioeconomic status, and parental education, would offer a more comprehensive understanding of the factors influencing student performance and help refine the interventions to ensure they are tailored to the unique needs of each group.
+
+## 4.2. Discussion
+
+The results of the clustering analysis provide valuable insights into how students can be grouped based on their academic performance, using various clustering techniques to enhance understanding. Figure 2, which shows the silhouette scores for different values of K, reveals that while K=7 offers the highest silhouette score of approximately 0.149, further examination highlights that K=3 and K=5 also yield consistent and meaningful results. Although K=7 provides the best silhouette score, K=3 was ultimately chosen as the optimal number of clusters due to its balance between cluster separation quality and interpretability. This smaller number of clusters is easier to analyze and provides a more practical and relevant interpretation for educators seeking to segment students based on their academic performance. The silhouette score, which evaluates the separation between clusters, indicates that the clustering at K=3
+
+provides a sufficiently clear distinction between groups while ensuring simplicity in analysis. This finding aligns with research by Saputro [21], who emphasized that fewer clusters often lead to clearer, more interpretable groupings, making the data more actionable.
+
+In addition to the silhouette analysis, the Elbow Method was used to determine the optimal number of clusters. The plot reveals a clear elbow at K=3, where the rate of decrease in inertia slows significantly. This suggests that adding more clusters beyond K=3 does not result in substantial improvements in clustering quality. Before K=3, the addition of clusters reduces inertia considerably, signifying stronger grouping. However, beyond K=3, the improvements become marginal, confirming that K=3 is the most meaningful and appropriate choice. These methods together reinforce the selection of K=3 as the optimal number of clusters for this dataset, similar to the findings of Ren [25], who also identified that K=3 yielded the most meaningful separation in student performance datasets.
+
+The three identified clusters demonstrate distinct patterns in student academic performance. Cluster 0 (Purple), consisting of students with lower scores in both math and reading, likely represents a group facing challenges such as limited resources, lack of academic support, or external stressors such as language barriers. This group may be overrepresented by students from socioeconomically disadvantaged backgrounds, where access to educational resources is restricted. Research by Gul et al. [29] found that students from lower socioeconomic backgrounds often face barriers that hinder their academic success, which supports the interpretation of Cluster 0 as a group needing additional academic support. Cluster 1 (Teal), with average performance in both subjects, may represent students from more balanced backgrounds who lack advanced resources but still receive adequate support. These students could benefit from enrichment programs or additional academic interventions. Cluster 2 (Yellow), representing high performers, includes students with above-average scores in both subjects. This group may come from more privileged backgrounds with better access to educational resources and support systems. Research by Liu et al. [6] reinforces this interpretation, suggesting that students from higher socioeconomic backgrounds tend to perform better academically due to greater parental support and access to resources.
+
+This analysis sheds light on how academic performance can be used to effectively group students into meaningful clusters, helping to identify distinct groups that require different levels of educational intervention. By employing a range of clustering techniques such as K-means, t-SNE, and PCA, the results offer a clearer picture of the varying academic needs of students, making it possible to implement more targeted, data-driven educational strategies. This approach can also help optimize the use of resources by focusing on the specific needs of each group, ultimately supporting better educational outcomes.
+
+Understanding the academic grouping of students holds significant potential for shaping educational strategies that are more responsive to student needs. Students in Cluster 0 (Purple), who show lower academic performance, are in urgent need of focused remediation and tailored support programs to help them overcome learning barriers. Cluster 1 (Teal), with average performance, would benefit from enrichment programs that provide additional challenges and opportunities for growth. For Cluster 2 (Yellow), composed of high-performing students, offering advanced learning opportunities, such as specialized tracks or gifted programs, would help further cultivate their potential.
+
+Moreover, the findings highlight the critical need to consider social factors, such as socioeconomic status and access to resources, when designing interventions. Hwang et al. [27] suggested that addressing these factors can significantly impact student success, and the current results underscore the importance of tailoring educational policies and practices to support students based on their specific academic and social contexts. By taking into account these additional dimensions, educators can create more equitable and effective learning environments, ensuring that all students receive the support they need to succeed.
+
+However, there are several limitations to this analysis. First, the clustering analysis relies solely on academic performance data (math, reading, and writing scores), which may not fully capture all the factors that influence student achievement. Variables such as student motivation, emotional well-being, and external support factors, like family involvement or social environment, are not considered here but could significantly impact performance. For a more comprehensive understanding, future studies could integrate these additional factors into the analysis, as Cvitković et al. [23] suggested that a more holistic view of student performance should include emotional and social factors alongside academic ones.
+
+Another limitation is the use of K-means clustering, which requires the predefined selection of the number of clusters (K). Although K=3 was chosen as the optimal number, the process of selecting K is inherently subjective and can influence the results. Furthermore, K-means is sensitive to outliers, which can distort the clustering outcome. Future analyses could explore other clustering methods, such as K-medoids or hierarchical clustering, which may offer greater robustness in handling outliers and different data distributions.
+
+Finally, the dimensionality reduction methods, such as t-SNE and PCA, are effective in visualizing the clusters, but they do have limitations in fully capturing the complexity of high-dimensional data. While they provide a simplified view, these methods may not always retain all the nuances of the data, and additional validation of the results through other analytical methods would enhance the robustness of the findings. This limitation is acknowledged by LorenteEcheverría et al. [24] who noted that dimensionality reduction techniques can sometimes oversimplify complex datasets, which may affect the overall accuracy of the clustering results.
+
+In conclusion, the clustering analysis successfully segmented students into three distinct groups based on their academic performance, with clear visualizations and centroid analysis revealing meaningful differences between the clusters. The findings suggest targeted interventions for each group, with Cluster 0 (Purple) needing additional academic support, Cluster 1 (Teal) benefiting from enrichment programs, and Cluster 2 (Yellow) requiring advanced academic opportunities. However, the analysis also highlights the importance of addressing social factors and acknowledges the limitations of the clustering method used. Further research incorporating more diverse data and exploring alternative clustering methods would help refine these results and ensure that interventions are tailored to the unique needs of each student group.
+
+## 5. Conclusion
+
+This study demonstrates the effective use of K-Means Clustering to categorize students into distinct groups based on their academic performance and key social factors. By analyzing scores in mathematics, reading, and writing alongside demographic attributes such as gender, ethnicity, parental education, and lunch type, three meaningful clusters were identified: low, average, and high academic performers. These clusters reveal patterns that are not only statistically significant but also practically relevant for understanding student diversity in educational contexts.
+
+The analysis showed that students in the low-performing cluster may face greater academic and social challenges, possibly linked to limited access to resources or support at home. Those in the average-performing cluster could benefit from enrichment programs that build on their existing strengths, while students in the high-performing cluster are strong candidates for advanced academic opportunities. Visualization techniques like PCA and t-SNE further validated the quality of the clusters, demonstrating clear separations and internal consistency among groups, which supports the usefulness of clustering in educational decision-making.
+
+However, several limitations must be acknowledged. The clustering process focused primarily on academic and basic demographic data, without accounting for psychological or emotional variables that can significantly impact student learning. Additionally, K-Means requires the number of clusters to be defined in advance and is sensitive to outliers, which may affect the accuracy of results. Despite these constraints, the study illustrates the value of data-driven approaches in designing more targeted and equitable educational interventions. Future research should incorporate broader datasets and alternative clustering techniques to enhance the depth and impact of such analyses.
+
+## 6. Declarations
+
+## 6.1. Author Contributions
+
+Conceptualization: F.A.R., S.Z.U.; Methodology: F.A.R., S.Z.U.; Software: F.A.R.; Validation: S.Z.U.; Formal Analysis: F.A.R.; Investigation: F.A.R.; Resources: S.Z.U.; Data Curation: F.A.R.; Writing -Original Draft Preparation: F.A.R.; Writing - Review and Editing: F.A.R., S.Z.U.; Visualization: F.A.R.; All authors have read and agreed to the published version of the manuscript.
+
+## 6.2. Data Availability Statement
+
+The data presented in this study are available on request from the corresponding author.
+
+## 6.3. Funding
+
+The authors received no financial support for the research, authorship, and/or publication of this article.
+
+## 6.4. Institutional Review Board Statement
+
+Not applicable.
+
+## 6.5. Informed Consent Statement
+
+Not applicable.
+
+## 6.6. Declaration of Competing Interest
+
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+> [!NOTE]
+> References section has been removed.
+============================================================
+## Paper Source: Enhancing Educational Equity Leveraging NLP to Understand Diverse Student Perspectives in Engineering
+============================================================
+
+## Enhancing Educational Equity: Leveraging NLP to Understand Diverse Student Perspectives in Engineering
+
+Enrique Díaz de León López, PhD 1 , Carmen Leticia Salazar Cano 2
+
+1 Departamento de Ingeniería Industrial, Tecnológico de Monterrey, Monterrey, México, ediazdeleon@tec.mx
+
+2 Decanatura Asociada de Desarrollo de Facultad, Tecnológico de Monterrey, Monterrey, México, clsalazar@tec.mx
+
+AbstractThis  paper  delves  into  an  extensive  analysis  of nearly 70,000 student comments from the Faculty of Engineering and Sciences, employing advanced Natural Language Processing (NLP) tools to decode the spectrum of student sentiments. We aim to harness this rich data to cultivate an educational environment that embodies sustainability, diversity, equity, and inclusion.
+
+The study unveils a detailed landscape  of student emotions and perceptions:
+
+I. Positive Feedback Dominance: Approximately 60% of comments were positive, indicating high student satisfaction and highlighting the faculty's  dedication  to  academic  excellence  and inclusive teaching practices that resonate with a diverse student body.
+
+- II.  Scope in Negative Sentiments: With 16% of comments being pessimistic, there is a clear opportunity for targeted improvements, emphasizing the faculty's commitment to an equitable educational students.
+
+experience for all III.  Understanding  Unclassified  Comments:  About  15%  of  the comments were not readily classifiable by NLP tools, which is a typical outcome in studies of this nature. These comments often consisted  of  non-informative  inputs  such  as  single  characters, punctuation  marks,  or  brief  notes  of  thanks.  This  reflects  a common occurrence in feedback collection rather than a limitation of the NLP tools used. IV.  The  Undercurrents  of  Neutral  Sentiments:  A  significant portion  of  feedback  was  neutral,  identifying  areas  for  nuanced enhancements that could profoundly impact student satisfaction across various demographics.
+
+Our findings highlight the critical role of NLP in analyzing and interpreting large-scale student feedback, which is essential for promoting a diverse, equitable, and inclusive academic setting. These insights are invaluable for institutions aiming to align with Society 5.0's goals by improving educational quality and enhancing  student  experiences.  This  study  demonstrates  NLP's transformative potential in informing strategic decision-making in higher education.
+
+Keywords: Natural Language Processing, Educational Analytics, Student Sentiment Analysis, Inclusive Teaching Strategies, Academic Feedback Management
+
+## I. INTRODUCTION
+
+In  the  vibrant  world  of  higher  education,  student  voices, packed with raw honesty, play a defining role. Their feedback is  a  compass  for  universities  aiming  to  excel  and  innovate, especially in Engineering and Sciences. In these fields, student input helps create a dynamic culture where everyone, educators and learners alike, thrive together [1].
+
+As  universities  worldwide  push  the  envelope  to  meet students' changing needs, Natural Language Processing (NLP) has emerged as a game-changer. It's a tool that cuts through the noise, turning a sea of student comments into clear signals that point out what's working and what can be better.
+
+This paper takes you on a journey through the application of  NLP in analyzing student feedback within an Engineering faculty. It's an exciting trek that dives into:
+
+Sentiment Analysis: We're not just looking at numbers but tapping  into  how  students  feel.  Sentiment  analysis,  part  of NLP's magic, helps us learn about student satisfaction and the areas they think need some TLC.
+
+Real-World Impact: We show you the nuts and bolts of how NLP can shape decisions  that  matter.  Our  discoveries  reveal how it can refine curriculums and make the classroom buzz with positive vibes.
+
+Overcoming Hurdles: We're honest about the bumps on the road, like comments that don't fit neatly into boxes. But we also see a chance to make NLP even smarter and our schools more in tune with student needs.
+
+Boosting the  Student  Journey:  At  the  heart  of  it  all,  our research is about giving students the best experience possible. NLP is an excellent ally,  helping  us  'hear'  what  students  say about their classes loud and clear.
+
+As  we  delve  into  the  power  of  NLP  to  analyze  student feedback,  we're  excited  about  its  promise.  It's  not  just  about improving education; it's about connecting with students on a deeper level and building an academic world that's as responsive as it is knowledgeable. This is how we confidently step into the future, ready to meet the demands of Society 5.0 and beyond.
+
+## II. NLP ANALYSIS
+
+In  today's  digital  age,  where  technology  and  education intersect,  Natural  Language  Processing  (NLP)  shines  as  a beacon of innovation. This AI-driven field is changing how we glean insights from the endless streams of human expression. NLP isn't just  about  teaching  machines  to  understand  us;  it's about  creating  a  bridge  where  ideas  flow  freely  between humans and technology.
+
+NLP  finds  its  way  into  our  everyday  moments,  making sense of the world's chatter. Please think of how Siri or Alexa lighten up at our words or how chatbots make customer service chats a breeze. NLP works quietly behind the scenes, making these  interactions  smooth  and  natural.  Beyond  that,  NLP  is powering  through  social  media  to  capture  public  sentiment, simplify translations, aid medical professionals, and even steer autonomous vehicles.
+
+As we swim in the sea of information that floods our daily lives,  NLP  has  become  indispensable  for  anyone  looking  to understand it all. For businesses, researchers, and policymakers, it's the key to unlocking the treasure trove of online text, turning data into strategy, and understanding the audience's pulse.
+
+This article dives into the role of NLP in dissecting what students tell us through their feedback. Let's look at what we cover:
+
+Sentiment Analysis: We go beyond the surface to tap into the  emotional  undertones  of  student  feedback.  By  breaking down sentiments, we reach the core of student contentment and where to improve.
+
+Tangible Outcomes: We  unfold how NLP  reshapes academic  strategy.  With  it,  universities  can  smartly  navigate curriculums, enhance learning spaces, and keep the academic spirit thriving.
+
+Tackling Challenges: We face hurdles, like tricky feedback that's  hard  to  label.  But  we  see  these  as  chances  to  fine-tune NLP and sharpen our approach.
+
+Boosting the Learning Journey: We're all about elevating the  student  experience.  With  NLP,  we're  tuning  into  student voices to make their academic path in Engineering and Sciences as rewarding as possible.
+
+As  we  explore  NLP's  role  in  student  feedback  analysis, we're  thrilled  about  its  potential  to  reshape  education  and deepen the bond between universities and their students.
+
+## III. LITERATURE REVIEW
+
+Recent  advancements  in  Natural  Language  Processing (NLP) have significantly impacted educational research, particularly in uncovering the diverse perspectives of engineering  students. Integrating  NLP  into  this field has enabled  researchers  to  delve  deeper  into  the  complexities  of student experiences, revealing insights that enhance our understanding and improve educational practices.
+
+One strand of research has focused on exploring student perspectives on the role of artificial intelligence in education. A comprehensive survey-based analysis found that students from various academic and cultural backgrounds perceive the impact of  AI  on  their  learning  experiences  in  diverse  ways.  These findings underscore the importance of considering demographic factors, as students' responses varied significantly depending  on  their  cultural  and  educational  contexts.  Such nuanced  insights  are  crucial  for  effectively  integrating  AI  in academic settings [2].
+
+Another  significant  area  of  investigation  involves  using NLP  to  analyze student feedback on academic advising services.  By employing sentiment analysis, researchers could quantify  and  evaluate  the  sentiments  expressed  in  student reviews,  providing  valuable  feedback  on  the  effectiveness  of these  services.  This  approach  captured  the  overall  sentiment and  revealed  demographic  influences  on  student  evaluations, demonstrating  how  NLP  can  offer  a  more  comprehensive understanding of student experiences across diverse groups [3].
+
+In addition to sentiment analysis, NLP has been proposed to facilitate and analyze large-scale online discussions, particularly in educational environments. Recent research has highlighted the challenges of managing diverse perspectives in these  discussions,  suggesting  hybrid  human-AI  technologies could more effectively capture and analyze individual values and  opinions.  This multi-layered  approach  to  perspective representation is essential for fostering inclusivity and enhancing the quality of decision-making processes in educational contexts [4].
+
+Furthermore, qualitative studies have explored how culturally diverse learners engage with digital technologies in online learning environments. These investigations have provided insights into the unique challenges different student groups  face,  revealing  the  critical  role  that  cultural  context plays in shaping students' interactions with technology. Understanding these nuances is vital for optimizing digital tools better  to  support  the  educational  needs  of  a  diverse  student population [5].
+
+Research has demonstrated the potential of NLP to serve as a powerful assistive technology in engineering education. By analyzing  student  feedback,  NLP  has  been  shown  to  help educators address specific challenges that engineering students face, such as understanding complex concepts and improving communication skills. These findings suggest that NLP can be crucial in tailoring educational strategies to better meet engineering students' needs, thereby enhancing their learning outcomes [6].
+
+Integrating  NLP  into  educational  research  represents  a significant  step  forward  in  understanding  students'  diverse perspectives, particularly in engineering.  NLP  methodologies are transforming the educational landscape through sentiment analysis, facilitating inclusive discussions, and exploring culturally informed interactions with technology. These recent studies  collectively  highlight  the  potential  of  NLP  to  foster inclusivity  and  improve  academic  outcomes,  offering  new avenues for research and application in engineering education and beyond.
+
+To  effectively  leverage  Natural  Language  Processing (NLP) to understand diverse student perspectives in engineering,  it  is  essential  to  ground  the  analysis  in  robust theoretical frameworks.  Critical  Race  Theory  (CRT),  for instance, provides a lens to examine the intersections of race, racism, and power, particularly in the experiences of underrepresented  racial  minorities  such  as  Asian  Americans, African  Americans,  and  Latinx  students.  Similarly,  Feminist Theory  and  its  variants,  such  as  mujerismo  and  womanism, offer  insights  into  the  gendered  experiences  of  women  in engineering,  highlighting  the  challenges  they  face  within  a male-dominated field. Intersectionality Theory further enriches this analysis by exploring how overlapping social identitieslike  race,  gender,  and  class-create  unique  experiences  of oppression and privilege [7].
+
+In  addition  to  these  frameworks,  Community  Cultural Wealth (CCW) and Funds of Knowledge emphasize the cultural assets and practical knowledge that students from underrepresented backgrounds bring to their educational experiences. CCW shifts the focus from deficits to strengths, particularly  in  Latinx  and  African  American  students.  At  the same time, Funds of Knowledge  explores the practical, culturally  developed  skills  that  first-generation  and  Latinx engineering  students  utilize.  By  applying  NLP  within  these frameworks, researchers can uncover more profound insights into  how  these  social  identities  and  cultural  assets  shape  the educational journeys of diverse students in engineering, ultimately  contributing  to  a  more  inclusive  and  equitable academic environment [7].
+
+Moreover,  in  the  rich  tapestry  of  academic  dialogue, sentiment analysis quickly becomes a central thread, particularly in engineering education. Fueled by the students' words,  this tool  reshapes  how  universities  calibrate  their educational compass. By harnessing student evaluations, educators  are  not  just  listening;  they're  actively  translating feedback into strategic actions that elevate the learning journey.
+
+Consider the work of [8], who peered into the nuances of online  versus  traditional  paper  evaluations,  unraveling  how such formats influence participation and reliability. Then there's the recent inquiry by [9], who  pondered  the timing of assessments  about  finals  and  the  subsequent  echoes  on  the outcomes. Amidst this, a crucial question looms: How do we nudge more students to lend their voices to these evaluations? As [10] suggests, the answer lies in a strategic push to bolster response rates, ensuring a broader and more authentic representation of student sentiment.
+
+Yet,  for  all  the  data  these  evaluations  generate-each comment a strand of insight into teaching efficacy-there's an acknowledgment of imperfection. Debate persists, particularly around evaluation methods, often highlighting a gap in formal pedagogical  training  among  faculty.  But  through  sentiment analysis, we see student experiences in sharper focus, granting us a richer understanding of their educational journey.
+
+As  sentiment  analysis  weaves  its  way  through  various sectors,  its  educational  relevance  shines  brightly.  It  equips educators and administrators with a tool not just to hear but to act on the whispers and shouts of student feedback, turning raw emotion and opinion into concrete steps forward. In the context of teacher evaluations, these insights are not just data pointsthey're  catalysts  for  a  revolution  in  educational  practices, particularly within the precision-driven engineering world.
+
+Embracing  sophisticated algorithms that navigate the complexities  of  language  and  sentiment,  engineering  schools are moving towards a learning ecosystem that pulsates with the vitality of student input. This responsive model ensures that the quest for improvement is not just an ideal but a daily practice deeply ingrained in the institution's fabric.
+
+When  captured  accurately  and  woven  into  a  culture committed  to  excellence,  the  student  voice  can  significantly uplift teaching and learning quality. Moreover, it shines a light on the  path  to  faculty  development.  The  latest  NLP  research offers a glimpse into this future: [11] innovative  NLP applications that interpret descriptive answers with impressive accuracy,  [12]  work  enhancing  the  applicability  of  academic metrics,  [13]  's  exploration  of  NLP-driven  conversational agents to enrich course evaluations, and [14] 's insights into how NLP can boost academic success and comprehension.
+
+Together, these studies form a mosaic that illustrates NLP's transformative  potential  in  student  evaluations,  charting  a course  toward  a  more  connected,  responsive,  and  enriched educational experience.
+
+## IV. RESEARCH METHOD
+
+Understanding how effectively teachers convey knowledge is a cornerstone of educational excellence. This study, therefore,  sought  to  gather  and  interpret  student  feedback meticulously,  particularly  narrative  comments  that  offer  rich qualitative  insights  often  missed  by  numerical  data.  Though informal  and  wide-ranging,  such  statements  can  inform  and transform teaching practices. Our research harnessed sentiment analysis  and  opinion mining,  powerful facets of Natural Language Processing (NLP), to excavate the depths of student evaluations.
+
+Scholars have previously navigated these waters. Works by [15] and [16] applied sentiment analysis to faculty evaluations, pioneering methods to gauge positivity. More recent endeavors, like those by [17] and [18], ventured into machine learning to refine this analysis further, demonstrating NLP's robust capacity to extract actionable insights from student feedback.
+
+## A. Research Project Flowchart (Fig. 1)
+
+Fig. 1. Research Project Flowchart
+
+
+
+Our research unfolded as a journey, charted in Figure 1 as a flowchart illustrating a linear progression from conception to fruition.
+
+Objective  (Fig.  2):  We  began  with  a  clearly  defined objective, setting the stage for our research's trajectory. We aim to enrich the educational milieu and refine teaching methodologies.
+
+## Objective
+
+Figure 2. Objectives of the study.
+
+
+
+Project  Roadmap  (Fig.  3):  The  roadmap  was  our  guide, outlining  the  stepwise  path  and  milestones.  It  was  a  detailed blueprint  for  the  project,  detailing  the  stages  crucial  to  our objectives.
+
+Our toolkit comprises AI innovations selected for their data analysis and process automation prowess, enhancing our research methods with tools like ®Oracle Endeca and ®Lexalytics.  In  this  study,  we  employed  a  comprehensive approach to analyze student feedback on professors and courses within the School of Engineering and Sciences at Tecnológico de Monterrey. The primary objective was to gain a qualitative understanding  of  student  sentiments  through  text  analysis, enhancing the traditionally quantitative approach used in course evaluations. The process began with collecting approximately 69,983 records from the ECOA (Student Course and Professor Evaluation) surveys, spanning the January-May 2019 semester. These records included student responses to open-ended questions that allowed for detailed comments on their experiences with professors and courses.
+
+A thorough cleaning was conducted to ensure the data was suitable for analysis, addressing special characters, null values, and blank spaces. Following this, we defined specific categories to evaluate teaching effectiveness, such as punctuality, communication skills, technological proficiency, and emotional intelligence. A sample of 509 records was manually categorized to  train  the  ®Lexalytics  application,  enabling  it  to  classify comments automatically based on these predefined categories. Once trained, the tool analyzed the entire dataset, allowing us to identify and categorize sentiments effectively. The resulting analysis provided deep insights into student perceptions, contributing  to  a  more  nuanced  understanding  of  teaching quality and areas for improvement.
+
+We crafted  dashboards  using  tools  like  ®Power  BI  and ®Tableau to communicate our findings visually, turning data into a narrative for decision-making. With AI and dashboards, we  distilled  findings,  extracting  meaning  from  the  data.  The research culminated in decisions, summarizing outcomes, and responding to our initial inquiries. We then crafted recommendations,  informed  by  our  findings,  to  guide  future endeavors. Lastly, the research yielded deliverables, encapsulating our insights in various forms, from publications to presentations.
+
+This  methodology  provided  a  structured  framework  and ensured  a  coherent  transition  from  one  phase  to  the  next, embodying the essence of systematic inquiry.
+
+## B. Analyzing the Roadmap (Fig. 3)
+
+## Project Roadmap
+
+Fig 3 Roadmap of the Research Project.
+
+
+
+Our methodological voyage began with the extraction of data, where we carefully sifted through student evaluations to gather the raw, unedited student voice. Transforming this data followed  a  meticulous  cleansing  and  analysis  preparation, ensuring our research foundation's integrity. Sentiment Analysis  was  our  next  landmark,  categorizing  the  emotional undertones of feedback to discern the overall student sentiment. Delving deeper, classification analysis helped us organize this feedback into coherent categories, crafting a structured understanding of the students' voices. Visualization, our final port of call, transformed data into visual narratives via dashboards,  simplifying  the  interpretation  and  enhancing  the analysis.
+
+This  journey  showcased  the  diverse  perspectives  within academia through approximately 70,000 comments from engineering  and  sciences  students.  NLP  was  our  compass, guiding us through the complexity of student feedback to unveil insights  that  would  inform  teaching  practices  and  academic leadership.
+
+## C. Recognizing the Value
+
+While  sentiment  analysis,  a  subset  of  NLP,  has  seen significant strides, it remains a field ripe with challenges and possibilities. Our study contributes to this evolving landscape, recognizing  the  potential  of  NLP  to  revolutionize  student evaluations and balancing the need for deep insights with the ethical considerations of such a powerful tool.
+
+In  sum,  our  research  method  was  a  quest  to  harness  the power  of  NLP,  to  listen  intently  to  the  student's  voice  and respond with actions that could elevate the educational experience for all.
+
+## V. RESULTS
+
+This section comprehensively analyzes student feedback in various teaching aspects within the School of Engineering and Sciences.  By  examining  the  sentiment  distributions  across departments and professor types, valuable insights are gleaned into  areas  of  strength  and  opportunities  for  improvement  in teaching methodologies.
+
+## Analysis of Positive Sentiments (Table 1)
+
+Table 1: Number of Positive Sentiments by Department and Category
+
+|                        | General Teaching Competences   | General Teaching Competences         | General Teaching Competences   | General Teaching Competences   |
+|------------------------|--------------------------------|--------------------------------------|--------------------------------|--------------------------------|
+| Department             | Communication                  | Promotes ethical and civic practices | Assistance and punctuality     | Use of technology              |
+| Bioengineering         | 24                             | 74                                   | 15                             | 6                              |
+| Sciences               | 141                            | 431                                  | 39                             | 14                             |
+| Computer Science       | 86                             | 254                                  | 24                             | 33                             |
+| Industrial Engineering | 69                             | 146                                  | 16                             | 34                             |
+| Mechatronics           | 22                             | 76                                   | 3                              | 10                             |
+
+| Mechanical   |   57 |   146 |   17 |   22 |
+|--------------|------|-------|------|------|
+| Civil        |   43 |   126 |   19 |   11 |
+
+Table 1A. Positive Sentiments by Department and Category
+
+Table 1B. Positive Sentiments by Department and Category
+
+|                        | Emotional Intelligence           | Emotional Intelligence         |
+|------------------------|----------------------------------|--------------------------------|
+| Department             | Classroom environment management | Intergenerational relationship |
+| Bioengineering         | 56                               | 3                              |
+| Sciences               | 316                              | 21                             |
+| Computer Science       | 215                              | 18                             |
+| Industrial Engineering | 171                              | 13                             |
+| Mechatronics           | 44                               | 4                              |
+| Mechanical             | 114                              | 19                             |
+| Civil                  | 109                              | 4                              |
+
+Table 1C. Positive Sentiments by Department and Category
+
+|                        | Knowledge Transfer       | Knowledge Transfer   | Knowledge Transfer   | Knowledge Transfer   | Knowledge Transfer   |
+|------------------------|--------------------------|----------------------|----------------------|----------------------|----------------------|
+| Department             | Subject matter knowledge | Design and structure | Teaching skills      | Evaluation Skills    | Total                |
+| Bioengineering         | 430                      | 125                  | 2170                 | 35                   | 2760                 |
+| Sciences               | 1449                     | 420                  | 11101                | 224                  | 13194                |
+| Computer Science       | 1006                     | 290                  | 6222                 | 154                  | 7672                 |
+| Industrial Engineering | 827                      | 227                  | 4252                 | 104                  | 5410                 |
+| Mechatronics           | 341                      | 105                  | 1759                 | 48                   | 2253                 |
+| Mechanical             | 625                      | 167                  | 3458                 | 106                  | 4356                 |
+| Civil                  | 675                      | 172                  | 3328                 | 97                   | 4272                 |
+
+## A. Positive Sentiment in Engineering and Science Education
+
+The analysis of positive sentiments in the Bioengineering, Sciences, Computing, Industrial Engineering, and Mechatronics departments reveals a substantial engagement in fostering a diverse, equitable, and inclusive future in engineering education. This study, oriented towards understanding the positive aspects of faculty-student interactions  and  teaching  methodologies,  indicates  that  our academic leaders and faculty members are at the forefront of nurturing a Society 5.0.
+
+Key Findings from Table 1:
+
+1. High Engagement in Ethical Practices: A significant number of positive sentiments were observed in the 'Promoting Ethical and Civic Practices' category, especially in the Sciences and Computing departments. This reflects the commitment of the faculty to instill ethical values and civic responsibilities in their students, which is crucial for sustainable engineering.
+2. Effective Knowledge Transfer: The 'Knowledge Transfer' category, particularly in the subcategories' Knowledge of the Subject' and 'Teaching Skills,' has shown an overwhelmingly positive response across all departments. This indicates our educators' high level of expertise and effective teaching methodologies, ensuring that students are wellequipped with the necessary skills and knowledge for their future careers.
+3. Strong Communication Skills: The 'Communicative Skills' subcategory in 'General Competence' highlights the ability of faculty to effectively communicate complex ideas, a skill imperative for collaborative and interdisciplinary work in engineering and sciences.
+4. Enhanced Learning Environment: The departments have also been positively acknowledged for creating engaging and supportive learning environments, as seen in the 'Classroom Environment Management' subcategory. This fosters a learning culture where students feel valued, supported, and motivated.
+
+Implications and Suggestions: This study's results underscore the exemplary role of faculty in shaping the future of engineering education. Their dedication to ethical practices, knowledge transfer, effective communication, and a nurturing learning  environment  are  pivotal  in  preparing  students  for  a diverse and technologically advanced society.
+
+For Faculty: Continue to focus on developing and sharing best  practices  in  pedagogy  and  student  engagement.  The positive feedback on ethical and civic practices and knowledge transfer  suggests  a  strong  foundation  that  can  be  further strengthened with innovative teaching methods and interdisciplinary approaches.
+
+For Academic Leaders: These findings call for continued support  and  recognition  of  faculty efforts.  Investment  in professional development, research in educational methodologies, and creating platforms for sharing best practices will further enhance the quality of education. Encouraging faculty collaborations across departments can also lead to more holistic educational experiences for students.
+
+The enthusiastic and positive student feedback reflects our faculty's success in teaching and inspiring the next generation of  engineers  and  scientists.  This  aligns  seamlessly  with  the theme  of  our  conference,  "Sustainable  Engineering  for  a Diverse,  Equitable,  and  Inclusive  Future  at  the  Service  of Education,  Research,  and  Industry  for  a  Society  5.0."  The dedication  and  expertise  of  our  faculty  members  are  critical drivers  in  transitioning  toward  a  sustainable,  technologically advanced, and inclusive future.
+
+In contrast to the negative feedback, the analysis of positive comments  paints  an  encouraging  picture  of  the  educational environment.  Teaching  Skills  and  Knowledge  of  the  Subject received  the  highest  positive  remarks,  reflecting  the  faculty's competence and effectiveness in these areas.
+
+The  significant  positive  comments  highlight  our  faculty members' exceptional efforts and skills. This positive feedback is a testament to their dedication and proficiency in delivering quality education. Acknowledging and celebrating these achievements  is  essential,  as  they  are  crucial  in  shaping  a positive and conducive learning environment.
+
+Analysis of Negative Sentiments (Table 2)
+
+Table 2: Number of Negative Sentiments by Department and Category
+
+|                        | General Teaching Competences   | General Teaching Competences         | General Teaching Competences   | General Teaching Competences   |
+|------------------------|--------------------------------|--------------------------------------|--------------------------------|--------------------------------|
+| Department             | Communication                  | Promotes ethical and civic practices | Assistance and punctuality     | Use of technology              |
+| Bioengineering         | 48                             | 4                                    | 16                             | 9                              |
+| Sciences               | 281                            | 37                                   | 71                             | 10                             |
+| Computer Science       | 109                            | 24                                   | 37                             | 28                             |
+| Industrial Engineering | 68                             | 11                                   | 22                             | 49                             |
+| Mechatronics           | 23                             | 7                                    | 25                             | 10                             |
+| Mechanical             | 69                             | 8                                    | 26                             | 12                             |
+| Civil                  | 63                             | 14                                   | 25                             | 4                              |
+
+Table 2A. Negative Sentiments by Department and Category
+
+Table 2B. Negative Sentiments by Department and Category
+
+|            | Emotional Intelligence           | Emotional Intelligence         |
+|------------|----------------------------------|--------------------------------|
+| Department | Classroom environment management | Intergenerational relationship |
+
+| Bioengineering         |   40 |   1 |
+|------------------------|------|-----|
+| Sciences               |  161 |  29 |
+| Computer Science       |  108 |  12 |
+| Industrial Engineering |   90 |  13 |
+| Mechatronics           |   22 |   6 |
+| Mechanical             |   57 |   6 |
+| Civil                  |   85 |  10 |
+
+Table 2C. Negative Sentiments by Department and Category
+
+|                        | Knowledge Transfer   | Knowledge Transfer   | Knowledge Transfer       | Knowledge Transfer   | Knowledge Transfer   |
+|------------------------|----------------------|----------------------|--------------------------|----------------------|----------------------|
+| Department             | Design and structure | Evaluation Skills    | Subject matter knowledge | Teaching skills      | Total                |
+| Bioengineering         | 125                  | 41                   | 35                       | 315                  | 634                  |
+| Sciences               | 465                  | 325                  | 108                      | 1888                 | 3375                 |
+| Computer Science       | 324                  | 175                  | 84                       | 1066                 | 1967                 |
+| Industrial Engineering | 271                  | 105                  | 62                       | 715                  | 1406                 |
+| Mechatronics           | 106                  | 41                   | 40                       | 312                  | 592                  |
+| Mechanical             | 164                  | 94                   | 48                       | 555                  | 1039                 |
+| Civil                  | 203                  | 102                  | 50                       | 604                  | 1160                 |
+
+This research delves into analyzing faculty performance in engineering and science departments, focusing on identifying critical areas for enhancement in pedagogical approaches and faculty-student relationships. The  aim  is  to contribute to developing  a  sustainable,  diverse,  equitable,  and  inclusive educational  framework in line  with  the  objectives  of  Society 5.0.
+
+The  structured  dataset  categorizes  negative  sentiments across various engineering and science departments, breaking them into specific categories and subcategories. This granular analysis highlights precise aspects of faculty performance and student experiences.
+
+Key Findings:
+
+1. Prevalence in Teaching Skills and Subject Knowledge Concerns : A noticeable trend of negative sentiments was observed in teaching skills and subject knowledge, particularly in high-tech fields like bioengineering and computer science. This
+
+highlights a need for faculty to enhance their methods of conveying complex concepts and engaging students in these subjects.
+
+2. Strength in Emotional Intelligence and Relational Skills : Lesser negative feedback in categories such as 'Emotional Intelligence' and 'Intergenerational Relationship' suggests that faculty generally maintain a solid empathetic and relational connection with students, an essential component of inclusive education.
+3. Variations Among Departments : Different departments exhibit unique feedback patterns, indicating the need for department-specific strategies in faculty development and training.
+
+Implications for Faculty: These findings suggest a pivotal role for faculty in embracing innovative and diverse teaching methodologies. Faculty members are encouraged to participate in  professional  development  programs  focusing  on  dynamic teaching styles, particularly in areas where negative sentiments are  concentrated.  Embracing  diverse  pedagogical  techniques can significantly enhance student engagement and comprehension, especially in complex technical subjects.
+
+Suggestions for Academic Leaders: For academic leaders, the data advocates for a strategic focus on faculty development programs. Such initiatives  should  not  only  address  identified gaps but also bolster existing strengths. Emphasizing training in modern pedagogical techniques, including digital tools and inclusive teaching practices, can lead to a more engaging and effective learning environment. Furthermore, fostering a culture of open feedback and continuous improvement is vital in aligning educational practices with the evolving needs of a diverse student body.
+
+Integrating these insights into faculty training and academic strategies can transform educational experiences. By addressing  specific  areas  of  improvement  and  building  upon existing strengths, we can contribute significantly to shaping a sustainable,  diverse,  and  inclusive  future  in  engineering  and science  education,  resonating  profoundly  with  the  goals  of Society 5.0.
+
+Our  analysis revealed notable variations in negative sentiments  across  departments.  Several  departments,  notably Sciences and Computer Science, exhibited higher numbers of negative  comments,  particularly  in  categories  like  'General Teaching competencies' and Knowledge Transfer.
+
+## Conclusion
+
+The insights derived from this sentiment analysis provide a nuanced understanding of student perceptions in the School of Engineering and Sciences. By leveraging this data, we can recognize and reinforce our  strengths  and  strategically  target areas for improvement. Enhancing faculty development, particularly in departments and categories with higher negative sentiments, will be pivotal in elevating our educational standards and student satisfaction.
+
+## VI. CONCLUSIONS AND FUTURE WORK
+
+## A. Conclusions
+
+Through  a  meticulous  analysis  of  student  feedback  in engineering and science departments, this study underscores the intricate dynamics of faculty performance and students' perceptions of it. Our findings reveal critical insights, particularly in teaching skills, subject knowledge, and emotional intelligence. It is evident that while faculties excel in empathetic and relational aspects, there is a pronounced need for  enhancement  in  pedagogical  methodologies  and  subject matter delivery.
+
+## Recommendations :
+
+Professional Development : Encourage continuous professional development for faculty, focusing on innovative teaching methodologies and effective communication of complex subjects.
+
+Personalized Training : Implement department-specific training programs that address the unique challenges and feedback patterns observed in different areas of study.
+
+Feedback Mechanisms : Strengthen feedback mechanisms to ensure they are both constructive and comprehensive, enabling faculties to understand and adapt to students' evolving needs.
+
+The role of technology, especially artificial intelligence, in transforming educational practices cannot be overstated. Leveraging AI tools such as Natural Language Processing (NLP) can revolutionize how student feedback is gathered, analyzed, and utilized to enhance teaching methodologies.
+
+## B. Future Work
+
+The future  scope  of  this  research  is  vast  and  promising, particularly  with  the  integration  of  advanced  technologies  in educational settings. Critical areas of future work include:
+
+1. AI-Driven Feedback Analysis : Exploring the application of AI and NLP tools in analyzing student feedback can provide more profound, more nuanced insights. These tools can identify patterns and sentiments in student comments, offering a real-time, comprehensive understanding of student experiences and perceptions.
+
+2. Customized Learning Pathways : Investigating the use of AI to tailor educational content and teaching styles to individual student needs and learning styles.
+3. Longitudinal Studies : Conduct longitudinal studies to assess the long-term impacts of implemented changes and technology integration on faculty performance and student outcomes.
+
+The relevance of AI and NLP in 'hearing' and interpreting student feedback is pivotal. Such technologies streamline the feedback  process  and  bring  objectivity  and  depth  to  the analysis. This, in turn, can significantly contribute to creating a more responsive, adaptive, and inclusive educational environment, aligning with the futuristic vision of Society 5.0.
+
+## ACKNOWLEDGMENT
+
+The  authors  acknowledge  the  financial  and  technical support of Writing Lab, Institute for the Future of Education, Tecnológico  de  Monterrey,  Mexico,  in  producing  this  work. This project owes its success to the dedication and expertise of many  who  contributed  their  time  and  knowledge.  Special gratitude extends to the students Gabriela Estefanía Martínez García,  María  Fernanda  González  Ruiz,  and  Jesús  Alfredo Mejía Gil, whose diligence in data processing and dashboard design was invaluable. Their meticulous attention to detail and innovative approach to data visualization significantly enhanced this study's analytical capabilities.
+
+I  am  particularly  grateful  to  Xochitl  Lyvier  Morales,  the Leader of Architecture and Data Analytics, whose support was instrumental.  Her  assistance  in  providing  access  to  software platforms  and  guiding  the  students'  tasks  enabled  a  seamless and efficient workflow. Her leadership and expertise in navigating complex digital tools were pivotal to our research process.
+
+These collaborative efforts have made this project possible and set a standard for future educational research and development endeavors. Their collective passion for advancing our understanding of the academic  experience  is deeply appreciated.
+
+> [!NOTE]
+> References section has been removed.

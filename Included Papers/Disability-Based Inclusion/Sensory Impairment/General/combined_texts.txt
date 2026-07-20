@@ -1,0 +1,1533 @@
+============================================================
+## Paper Source: A smart learning assistance tool for inclusive education
+============================================================
+
+## A smart learning assistance tool for inclusive education
+
+Sangeeta Srivastava a , Ashwani Varshney b , Supriya Katyal b , Ravneet Kaur c and Vibha Gaur d , ∗
+
+a Department of Computer Science, Bhaskaracharya College of Applied Sciences, University of Delhi, Delhi, India
+
+b Department of Computer Science, University of Delhi, Delhi, India
+
+c Department of Electronics, Acharya Narendra Dev College, University of Delhi, Delhi, India
+
+d Department of Computer Science, Acharya Narendra Dev College, University of Delhi, Delhi, India
+
+Abstract . The government has established special schools to cater to the needs of children with disabilities but they are often segregated rather than receiving equitable opportunities. Artificial Intelligence has opened new ways to promote special education with advanced learning tools. These tools enable to adapt to a typical classroom set up for all the students with or without disabilities. To ensure social equity and the same classroom experience, a coherent solution is envisioned for inclusive education. This paper aims to propose a cost-effective and integrated Smart Learning Assistance (SLA) tool for Inclusive Education using Deep Learning and Computer Vision techniques. It comprises speech to text and sign language conversion for hearing impaired students, sign language to text conversion for speech impaired students, and Braille to text for communicating with visually impaired students. The tool assists differently-abled students to make use of various teaching-learning opportunities conferred to them and ensures convenient two-way communication with the instructor and peers in the classroom thus makes learning easier.
+
+Keywords: Inclusive classroom, image processing, computer vision, deep learning, artificial intelligence
+
+## 1. Introduction
+
+The education system plays a very crucial role in the overall growth and development of a country. India, one of the fastest developing countries globally, took cognizance of the situation and underwent many reforms in strengthening its education system. It is believed that education is not a privilege but a right of everyone. The students with disabilities may wish to contribute to the development of the country, but they generally do not get equitable opportunities. An analytical report published by enabled.in mentioned that 2.21% (2.68 Cr) of the total population (121 crores) has disabilities, out of which 19%
+
+∗ Corresponding author. Vibha Gaur, Department of Computer Science, University of Delhi Acharya Narendra Dev College, India. E-mail: vibhagaur@andc.du.ac.in.
+
+have a visual impairment and 19% have a hearing impairment, and another 8% have multiple disabilities [1]. The Indian government has implemented several policies for the last two decades concerning educational reforms for the disabled. One of these policies is 'Sarva Shiksha Abhiyan' (SSA), aiming at free education for disabled children of 6-14 years of age. Free inclusive education is an integral part of SSA to provide ' education to all '. Inclusive education is a learning environment where children with and without disabilities study in the same classroom [2]. The purpose of inclusive education is to make classrooms impartial to all students regardless of any disparity. Inclusive education is a birthright for every child and not a privilege. The Individuals with Disabilities Education Act (IDEA) clearly states that all children with disabilities should be edu- cated with non-disabled peers and have access to the general education curriculum. This act includes identifying the need for a comprehensive environment that sensitizes to the needs of children with disabilities in educational institutes. Most schools still do not practice inclusive education and are not sympathetic to the disabled [3]. A major barrier could be the unavailability and affordability of special equipment to implement inclusive classrooms. Sensitizing with the needs of the disabled will not only improve the education system but also enable them to be a more inclusive section of society where they could realize their true potential.
+
+Several items, equipment, or product systems, known as Assistive Technologies (ATs), are available to increase, maintain, and improve the functional capabilities of individuals with disabilities. These technologies have helped children with disabilities to pursue their education. The assistive product industry is currently limited and specialized, primarily serving high-income markets. There is a lack of state funding, nationwide service delivery systems, user-centered research and development, procurement systems, quality and safety standards, and context-appropriate product design for implementing assistive products and technologies. Some of the popular ATs and other commerciallyavailable devices that use text to speech systems (TTS) and Optical Character Recognition (OCR) are tabulated in Table 1, along with their approximate prevailing costs [4]. The high cost of the commercially available ATs, as can be seen from Table 1, discourages its utilization amongst a large section of society. These are even beyond the reach of the majority of the students with special needs.
+
+An important aspect to realize an inclusive classroom is to provide an atmosphere where students are given equitable opportunities to express themselves freely. The students with disabilities usually take a while to adjust with other normal students and often require a different set of costly aids and tools to be more participative. The teacher also needs to implementinimitable teaching ways [6] for an effective and inclusive classroom.
+
+Table 1 Available AT devices and their costs.
+
+| DEVICES AVAILABLE              | COST (IN USD)   |
+|--------------------------------|-----------------|
+| Kurzweil 3000                  | 495             |
+| Ultratech Super-print 4425 TTY | 282             |
+| Refreshable Braille Displays   | 3459 [5]        |
+| Tobii Dynavox                  | 15224           |
+| Logan Prox Talker Modular      | 3112            |
+| AAC Device Package             |                 |
+
+To facilitate the teaching-learning in an inclusive classroom, an economical and consolidated Smart Learning Assistance (SLA) tool is proposed in this work with the following characteristics:
+
+- a. This proposed tool encompasses 4 modules specific to an instructor, speech-impaired, visually-impaired, and hearing-impaired students. The procedures integrated into the tool include Sign Language to English text, speech to English text, speech to Sign language, and Braille to English text conversion to make classrooms more inclusive for students with speech, hearing, and visual impairments.
+- b. The tool utilizes various open-source software such as Google Colaboratory, Jupyter notebook, etc., and Computer Vision techniques such as Convolutional Neural Network, and Image Processing to make it more economical and within the reach of a common student.
+- c. The tool bridges the communication gap between instructors and students with disabilities, thus refuting the need for special classrooms.
+
+Theorganization of the paper is as follows: Section 2 presents the related work reported in the literature. Section 3 demonstrates the research methodology while section 4 presents validation of the proposed tool. Finally, section 5 concludes the paper.
+
+## 2. Related work
+
+In 1974, Assistive technologies (ATs) were first invented to aid individuals with visual, speech, and hearing impairments [7]. Since its inception, it reasonably justified its cause, but it had the significant drawback of being extremely expensive. However, developments in Artificial Intelligence techniques made it possible for ATs to be implemented in less complicated devices that are moderately priced, such as Talking Calculators .
+
+One of the very famous devices used for hearing deficit students is I-communicator [8]. It is an application developed by Interactive Solutions Inc. (ISI) for the translation of speech to sign language. It can be used as a dictionary to search for definitions [8]. Another useful device for students with hearing impairment employs boneconduction . It uses the conduction of sound to the inner ear primarily through the bones of the skull, allowing the listener to perceive audio content without blocking the ear canal [9]. It is an alternative to a regular hearing aid for those with problems in their outer or middle ears. It is useful for conductive and mixed hearing losses. Aboneconductionhearing device relies on a working cochlea , which is the hearing organ in an inner ear, to send sound to the brain [10]. These devices may provide fluent two-way communication between the student with hearing impairment and the instructor in a classroom.
+
+For students with speech impairment, Google AI Labs has developed an algorithm capable of tracking the movement of the user's hands with the camera on a mobile device. The algorithm requires, however, a considerable amount of resources for processing data and thus has a hefty response time. To reduce the resource requirements, the position and size of the palm are taken into consideration for the detection of movement in place of the entire hand and is more distinct and regular [11]. This way, speech impaired students can easily communicate without any additional hardware.
+
+To address speech disability, an innovative technology using Artificial Intelligence was invented by a group of students at the University of Washington, known as SignAloud [12]. It incorporates a pair of gloves that transliterate American Sign Language (ASL) into English. The gloves have sensors that track the user's hand movements and then send the data to a computer system via Bluetooth. The computer system analyses the data and matches it to English words, which are then spoken aloud by a digital voice [12]. The students can use these gloves to communicate using sign language gestures of their hands, and the instructor can interpret it by the digital voice.
+
+As visually impaired students are comfortable using Braille to read and write, Braille translators and screen readers like SMART Brailler [13] have proved to be very beneficial for them. Braille translator is a software program that translates a script into Braille cells and sends it to a Braille embosser, which produces a hard copy in Braille script of the original text. The braille translator makes it convenient for both the instructor and the visually impaired student to communicate, as the instructor reads the message in the English language, and the student conveys their message using Braille. The SMART Brailler is an electronic device that has a video screen and provides audio feedback. It displays and speaks letters and words as a student brailles them, which provides instant feedback to a student, allowing him or her to work independently. The video screen on the device is designed to allow parents of children with visual impairments and teachers who educate such students in inclusive classrooms to observe visually in Roman letters what students are writing in braille.
+
+The solutions mentioned above are devised to assist differently-abled people, each targeting a specific type of disability. Moreover, these solutions are not affordable to a lower stratum of society. Therefore, a cost-effective and integrated Smart Learning Assistance (SLA) tool is envisioned for students with different disabilities so that they could share the same classroom with regular students.
+
+## 3. Research methodology
+
+The objective of the SLA tool is to help students with various impairments to increase their engagement in the class. This tool bridges the communication gap between the instructor and disabled students so that they could seamlessly interact with their classmates as well as the instructor. The proposed tool is intended for different types of specially-abled students, viz. visual impaired, hearing impaired and speech impaired students, and the instructors. The detailed working of the tool is presented in Fig. 1.
+
+To ensure the desired function of this tool, the instructor should have a microphone throughout the lectures to avoid background noises, and the webcam should be enabled in the computer system or digital device in which the SLA tool is installed.
+
+TheSLAtoolisdesigned using HTML 5, CSS, and JavaScript, and has been implemented using Python 3.7.3. The Graphical User Interface (GUI) of the tool is shown in Fig. 2. The working of the tool was tested both on Windows 10 and mac OS Catalina. It supports both English and Hindi languages.
+
+Each of the three categories of differently-abled students and the instructor has a different use of this coherent tool. Hence, separate modules or modes of operation for various disabilities are available to address their distinct needs. The tool provides 4 options/modes: Instructor module or Mode 0 , Hearing-impairment module or Mode 1 , Speechimpairment module or Mode 2 , Visual-impairment module, or Mode 3 . The tool operates by giving voice commands to the user, which increases its accessibility and responsiveness. The voice commands are primarily used for visually impaired students. The users can choose the appropriate module or mode as per their requirements. The function of each of these modules or modes is explained in the following subsections.
+
+Fig. 1. Working of the SLA Tool.
+
+
+
+Fig. 2. GUI of the SLA Tool.
+
+
+
+## 3.1. Instructor module or mode 0
+
+text or sign language gesture , taking into cognizance of students' disabilities.
+
+In this mode, the instructor shares his screen with the students by clicking the 'Share Screen' button in the tool. The screen is visible to all the students connected to a local area network. The instructor then chooses the output format of his/her audio input as
+
+## 3.1.1. Speech to text conversion
+
+In this mode, if the instructor chooses text as the output format, the audio input of the instructor is converted into the English text using the ' Speech Recognition ' API (Application Programming Interface) and PyAudio library of Python, which requires an active internet connection. It can also be used in microcontrollers such as Raspberry Pi with an external microphone.
+
+After selecting this option, the instructor starts the lecture and his/her voice is captured by the microphone. The input audio is then recognized by the PyAudio library, which is converted into English text and is made available at the instructor's screen or device. As the instructor's screen is shared with the students, they can view the transcribed speech on their devices. This will enable the speech and hearingimpaired students to follow the instructions.
+
+## 3.1.2. Speech to sign language conversion
+
+The audio input of the instructor is converted into Sign Language gestures as images or GIFs (Graphics Interchange Format) if the instructor selects the output format as Sign Language gestures . Sign Language GIFs of some general conversation dialogues are included in the database. So, if the input of the teacher received by the microphone, is recognized by the PyAudio library, the tool checks the corresponding audio transcription in the database and searches for the corresponding GIF in the database. If the Sign Language GIF for that dialogue exists in the database, it is displayed in a new window using the Tkinter package. Tkinter is the standard GUI library of Python to create GUI applications. In case, the match is not found in the database, the audio input of the instructor's speech is fragmented into alphabets and converted into corresponding Sign Language gestures as shown in Fig. 3. The database contains gestures of alphabets in the form of images. These images are displayed on the screen of the instructor as well as students, in sequence, corresponding to the spelling of the words spoken by him and assists the hearing impaired students to follow the instructions.
+
+## 3.2. Hearing-impairment module or mode 1
+
+In general, students with impaired hearing are proficient in reading the text and if they also lack speech ability, they can use Sign Language as a mode of communication. So, whenever the instructor gives any instruction either by text message or by Sign Language gestures, the instruction is displayed on the shared screen. This mode helps students who are hard of hearing to communicate with the instructor.
+
+## 3.3. Speech-impairment module or mode 2
+
+Students with speech impairment can communicate through written text, but they generally prefer to communicate through Sign Language [14]. This tool ensures that the student is at convenience to use Sign Language for communication. To start the conversation, students have to click on the ' Start the conversation using sign language ' button, then the movements of their hands and other gestures are captured by the front camera of their device. These gestures are converted to readable text and enable the instructor to communicate with them. The Sign Language to text conversion is implemented using Convolutional Neural Networks (CNN) model. A database of 2-D images is created for training the model and the process is described as follows.
+
+## 3.3.1. Database creation
+
+A directory structure is created for each category of the sign gestures for training the CNN model. Several images are taken for each 26 sign gestures of the alphabets, 10 digits, and some common phrases to achieve high accuracy for sign recognition. For example, to train the CNN model on the Sign Language gesture for the alphabet 'A', the directory contains 100 images of the same. All the sign gestures are based on the Indian Sign Language convention [15].
+
+## 3.3.2. Image acquisition
+
+The front camera of a device is used to capture the input in the form of Sign Language gestures from the speech impaired student. The OpenCV library is used for accessing the front camera and image processing. The best images are captured in different lighting conditions and at different angles on a plain white/light-colored background. The gestures captured as an image are adjusted at a distance to get the desired image clarity. These images are preprocessed before storing them in training and testing databases.
+
+## 3.3.3. Image pre-processing
+
+The image taken from the front camera of the deviceis converted to a grey-scale image, i.e. the RGB image is converted to a black and white image. Then background subtraction is performed to extract the foreground image from the background image. The black and white images, thus obtained, are used to train the CNN model and are called Image Frames .
+
+Fig. 3. Conversion of a spoken word 'here' into its Sign Language gestures .
+
+
+
+```
+start = datetime.datetime.now() model = Sequential() model.add(Flatten(input_shape=train_data.shape[1:])) model.add(Dense(100, activation=keras.layers.LeakyReLU(alpha=0.3))) model.add(Dropout(0.5)) model.add(Dense(50, activation=keras.layers.LeakyReLU(alpha=0.3))) model.add(Dropout(0.3)) model.add(Dense(num_classes, activation='softmax')) model.compile(loss='categorical_crossentropy' , optimizer=optimizers.RMSprop(1r=1e-4), metrics=['acc']) history = model.fit(train_data, train_labels, epochs=45, batch_size=batch_size, validation_data=(validation_data, validation_labels)) model.save_weights(top_model _weights_path) (eval_loss, eval_accuracy) = model.evaluate( validation_data, validation_labels, batch_size=batch_size, verbose=1) print("[INF0] accuracy: {:.2f}%".format(eval_accuracy * 100)) print("[INFo] Loss: (}".format(eval_loss)) end= datetime.datetime.now() elapsed= end-start print ('Time: *, elapsed)
+```
+
+Fig. 4. Code snippet of CNN Model Building.
+
+The CNN model to convert Sign gestures to English Text was implemented using Python in Google Colaboratory using runtime type as GPU (Graphical Processing Unit). The code snippet for the same is shown in Fig. 4.
+
+After experimenting several times using different values of the hyper-parameters, the model was finetuned over the optimized parameters given in Table 2. Thesummaryoftheresultant CNN model with layers using various parameters is given in Table 3. To validate the classification of data using the CNN model, a random sample of 21 classes consisting of some alphabets and numbers was chosen. Figure 5 depicts the confusion matrix which shows the comparison of
+
+## 3.3.4. Training the CNN model
+
+The Sequential model is utilized to train the CNN model. The training input consisting of filtered and shrunk images originally stored in 2-D format are flattened to 1-D to pass to the dense layers . Further, the model contains three additional hidden layers to identify the latent relationship of the features from the flattened data. The actual image classification happens in the output layers , which is the final layer. The two dropout layers with a 50% and 30% probability of deactivating the hidden units respectively are added to reduce the model's over-fitting. Since this is a labeled categorical classification, the Softmax activation function is used in the final layer.
+
+Table 2 Hyper-parameter tuning of the CNN model
+
+| Hyper-parameters    | Values                                           |
+|---------------------|--------------------------------------------------|
+| CNN                 | Sequential                                       |
+| Metric              | Accuracy                                         |
+| Activation function | LeakyRelu (Hidden layer), Softmax (Output Layer) |
+| Loss function       | Categorial crossentropy                          |
+| Optimizer           | RMSprop                                          |
+| Learning Rate       | 1e-4                                             |
+| Epoch               | 45                                               |
+| Validation Split    | 0.05                                             |
+
+Table 3 Summary of compiled CNN model
+
+| Model: 'Sequential CNN'                                                                               | Model: 'Sequential CNN'   | Model: 'Sequential CNN'   |
+|-------------------------------------------------------------------------------------------------------|---------------------------|---------------------------|
+| Layer (type)                                                                                          | Output Shape              | Param #                   |
+| flatten (Flatten) dense (Dense) dropout (Dropout) dense 1 (Dense) dropout 1 (Dropout) dense 2 (Dense) | (None, 2048) (None, 100)  | 0 204900 0 5050           |
+|                                                                                                       | (None, 100)               |                           |
+|                                                                                                       | (None, 50)                |                           |
+|                                                                                                       | (None, 50)                | 0                         |
+|                                                                                                       | (None, 22)                | 1122                      |
+| Total params: 211,072 Trainable params: 211,072 Non-trainable params: 0                               |                           |                           |
+
+true versus the predicted classes of the images performed by the trained CNN model. Various metrics such as Accuracy and Loss on training and validation data sets were evaluated. Accuracy is defined as how accurately the tool can predict the true data while Loss is a measure of not classifying the true data.
+
+
+
+Dredicted label The values of the metrics Training Accuracy , the Validation Accuracy , the Training Loss, and the Validation Loss for the trained CNN Model were evaluated and results are presented in Table 4. The confusion matrix presented in Fig. 5 visualizes and confirms the results obtained in Table 4. Fig. 6a) and Fig. 6b) shows the training and the validation accuracy as well as the training and the validation loss against the number of epochs . As it can be observed from these Figures that after 45 epochs , the curve for the accuracy as well the loss is flattened hence, and no major improvement was observed after 45 epochs . Therefore, to prevent the model from overfitting, the optimal choice for the number of epochs was taken as 45. As the model is trained, the image frames of the gestures are converted into readable English text and sent to the instructor's device. The output text in the form of a message pops up on the screen of the instructor.
+
+Fig. 5. Confusion Matrix (True labels vs Predicted labels).
+
+Table 4 Experimental results after the model evaluation
+
+| Training Accuracy   | 99.09%           |
+|---------------------|------------------|
+| Validation Accuracy | 98.42%           |
+| Training Loss       | 0.0607           |
+| Validation Loss     | 0.0608           |
+| Training Time       | 10 seconds (GPU) |
+
+This way, students with speech impairment can communicate with the instructor and express themselves effortlessly during the class.
+
+## 3.4. Visual-impairment module or mode 3
+
+Visually impaired students are skilled in reading and writing using Braille, and with the advancement in technology, they can even type on any device using braille keyboards. The students can start the visual-impairment module through the voice commands integrated into the tool. They can enter the braille text as an input to the tool using their braille keyboards that are converted into English text for communicating with the instructor.
+
+## 3.4.1. Braille to english text conversion
+
+A dictionary of grade 2 Braille [16] is created to translate the Braille input into the English text. Braille signs are mapped to alphabets, digits, contractions, and punctuations. In grade 2 Braille , a cell can represent a shortened form of a word. Many cell combinations are created to represent common words, making this the most popular of the grades of Braille. There are part-word contractions , which often standin for common suffixes or prefixes, and whole-word contractions , in which a single cell represents a complete commonly used word [17].
+
+Fig. 6. a) Training and Validation Accuracy curve b) Training and Validation Loss curve.
+
+
+
+Students are instructed to use an escape sequence if they wish to enter any numeric input (0-9). Digits in Braille use the same symbols as it has for the first 10 letters of the alphabet (A-J). For instance, the number '8' and the letter 'h' are both represented by ' '. An escape code ( ) is placed before numbers to differentiate them from letters. Therefore '8' is actually ' ' whereas 'h' is only ' '.
+
+The Braille input to English text translation is achieved as follows: The input sentence comprising of Braille symbols is divided into words. If a word in braille is a contraction , then it is checked against the corresponding text stored in the dictionary, and the given braille symbols of the contraction are mapped to the corresponding English text. The remaining individual words in Braille are broken down into their constituent Braille symbols and mapped to their corresponding alphabets and digits. The Braille text is converted into the English text, using a grade 2 Braille dictionary, and the final text will appear on the instructor's screen. This way, the students can convey their messages to the instructors and their classmates effectively.
+
+A perfect Braille translation can only be done by humans, as it requires an understanding of the content at hand. Moreover, many Braille contractions follow pronunciation and programming which can be quite fiddly. For instance, the 'gh' contraction that is used in 'tough' would not be used in 'high.' Hence, the Braille Translator used in the proposed SLA tool does not include partial contractions , which may increase the complexity of the code [18]. In this way, the tool enables the instructors to understand and clarify the doubts of the students with visual impairment during the lecture.
+
+Table 5 Summary of the profile of the subjects for the research
+
+| Parameters       | Detail              |   No. of Respondents |
+|------------------|---------------------|----------------------|
+| Subjects Age     |                     |                      |
+|                  | Above 18 years      |                   13 |
+|                  | Male                |                    9 |
+|                  | Female              |                    4 |
+| With Impairments |                     |                      |
+|                  | Visual Impairment   |                    1 |
+|                  | Hearing Impairment  |                    3 |
+|                  | Speech Impairment   |                    4 |
+| Others           |                     |                      |
+|                  | Without Impairments |                    5 |
+
+Fig. 7. Feedback Responses for the SLA Tool a) Effective medium of the communication b) Active participation in the teachinglearning.
+
+
+
+## 4. Validation of the proposed SLA tool
+
+A sample of students comprising of various disabilities and teachers was taken into consideration for validating the SLA tool. The details of the sample are given in Table 5. The tool was demonstrated and the responses were taken using feedback forms given in Appendix 1. The feedback responses were analyzed using Content Analysis that helped in further improvement of the proposed tool.
+
+Table 6 Sign Language to Text conversion
+
+
+
+From the received responses, it was found the tool provided an effective medium of communication in a real-time classroom as shown by the pie-charts given in Fig. 7a). 90 % of the sample endorsed that they could actively and confidently participate in the teaching-learning process like other students using the proposed tool as shown in Fig. 7b).
+
+4.1. Speech and hearing-impaired students to instructor communication using sign language
+
+The tool was presented to four speech-impaired and three hearing-impaired students. The input gesture images of the sign language as conveyed by the students were taken by a camera of their device called Actual Value . The images were pre-processed and RGB images was converted to black and white images, and frames were created for the input gestures. Thereafter, these frames were recognized by the tool and finally, the acknowledged gestures are shown in Table 6. The accuracy of Sign Language to text conversion depends on the lighting condition. There should be sufficient light for the best results. The background should be plain and a white/lightcolored background was used for capturing the Sign Language gestures . There was no delay in input to output, thereby allowing the speech and hearingimpaired students to communicate in real-time. The output English text corresponding to Sign Language gestures was displayed as soon as the camera started capturing them.
+
+Table 7 Speech to Sign Language gesture conversion
+
+
+
+## 4.2. Instructor to hearing and speech impaired students communication using sign language
+
+The speech and hearing impaired students prefer to converse using sign language. To check the efficacy of the tool, the audio inputs of the instructor consisting of common words like Hello , Start , Okay , etc. were given to the SLA tool. The translated Sign gesture images by the SLA tool as given in Table 7 were presented to three Hearing and four Speech Impaired students. It was observed that audio clips were converted to their Sign Language representation accurately if the speaker had clarity in speech. As the GIFs of only a limited number of sentences or syllables were included in the database, this mode of communication could only be used for general conversations. The database can be expanded by including more useful sentences in the future, as per the requirements.
+
+## 4.3. Instructor to hearing impaired students communication using english text
+
+The speech-to-text conversion Instructor module wastested by three Hearing impaired students for few sentences as shown in Figs. 8 and 9. The text received by the students corresponding to the audio inputs of the instructor is shown in Table 8. It was observed that the proposed SLA tool could successfully detect the speech and converted the same into English text. However, for accurate speech detection and conversion, the instructor was requested to be loud and clear while speaking. Background noises were avoided to get accurate results. The resultant English text was displayed on the screen after 3 to 4 seconds of delay.
+
+Fig. 8. Snapshot of the conversion from Speech to Text.
+
+
+
+Fig. 9. Audio input to Text output conversion.
+
+
+
+For best results, the instructor should pause after every 5 to 8 seconds of speaking.
+
+## 4.4. Visually impaired students to instructor communication
+
+The students with visual impairment prefer to use Braille for conversation. So the Braille input from one visually impaired student was given to the SLA tool and the converted English text as received from the tool is shown in Fig. 10. The resultant text was perceived by the instructor that enabled him to communicate with the students.
+
+Fig. 10. Braille to Text conversion.
+
+
+
+## 4.5. Discussion
+
+A variety of Assistive devices are available in the market to address the needs of disabled students. E.g. I-communicator [8] , Smart-Brailler [13], Sign Aloud [12]. But these devices are very expensive and may not be in the reach of a common student. Also, these devices address a specific kind of disability.
+
+A navigation system V-eye [19] was proposed in our previous work for visually impaired persons. The SLA tool proposed in this work is a software application using Deep learning, Computer vision, and Python. The techniques used to develop this tool are available Open Source and thus making this tool affordable to a common student. Besides this, it allows sharing the same classroom set up for all students with or without disabilities.
+
+Table 8 Speech to Text conversion
+
+|   S. No. | Actual Speech                                                                                                                                                                                                              | Acknowledged Speech                                                                                                                                                                                                        |
+|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|       1. | hello everyone                                                                                                                                                                                                             | hello everyone                                                                                                                                                                                                             |
+|       2. | how are you                                                                                                                                                                                                                | how are you                                                                                                                                                                                                                |
+|       3. | this is a smart learning assistance tool for hearing visual and speech impaired students                                                                                                                                   | this is a smart learning assistance tool for hearing visual and speech impaired students                                                                                                                                   |
+|       4. | it is a cost-effective tool to enforce inclusive education so that students can efficiently make use of various teaching-learning opportunities and have convenient two-way communication in the classroom offered to them | it is a cost-effective tool to enforce inclusive education so that students can efficiently make use of various teaching-learning opportunities and have convenient two-way communication in the classroom offered to them |
+|       5. | thank you                                                                                                                                                                                                                  | thank you                                                                                                                                                                                                                  |
+
+
+
+
+
+In case a student is speech-disabled but can hear the instructors' voice, then this tool translates his sign language to English text that can be understood by Instructor and thus allows seamless communication in the regular classroom.
+
+A visually impaired student can hear the lecture and understand. But for communicating with the instructor, this tool translates the Braille input of the student to English text for two-way communication.
+
+For a hearing-impaired student, this tool converts the speech of the instructor to sign language and vice versa and thus allows students to interact with the instructor.
+
+The tool addresses the particular disability by simply acting as a specific translator between the instructor and a disabled student. Besides, if a student has multiple disabilities, then also this tool ensures a very effective and smooth two-way communication between the student and instructor.
+
+## 5. Conclusions
+
+Recent advancements in Artificial Intelligence technologies have transformed the way Inclusive Education is being realized nowadays. The proposed tool provides a means to bridge the communication gap which is usually felt by the students with speech, hearing, and visual impairments in a regular classroom set-up. It may serve as one of the best solutions to accomplish seamless two-way communication of disabled students with the instructor, thus eliminating the need for special classrooms for them. As the existing open-source technologies are used to design and implement the SLA tool, it is also affordable for a common student. The user acceptance testing of the tool was performed with the differently-abled students and the feedback obtained from them through discussions was utilized to improve its performance.
+
+This paper presented an SLA tool using various python packages and libraries such as Py Audio , Speech Recognition , Tkinter , and Open CV , exploiting deep learning and computer vision techniques. To implement the Sign to the text conversion, the Sequential CNN model was trained and utilized. The validation accuracy for the trained CNN was obtained as 99.09%. Moreover, the Hearing-Impaired and the Visually-Impaired modules provided correct results almost all the time while the Speech-impaired module could recognize the Sign-language input gestures correctly 45 times out of 50.
+
+However, for Sign language to text conversion, the CNN model was trained only on 26 alphabets, ten digits, and 4-5 phrases. The training process took few seconds, but if the tool needs to be trained on the whole English vocabulary, the training process may require substantial computational power, time, and storage, which will necessitate the use of high-end systems for the execution of the tool.
+
+Furthermore, with the use of more advanced technologies, the functionality of the proposed tool can be extended to improve its Accuracy , Usability , Reliability , and Comfortability . The datasets on which the tool has been trained can be improvised by adding more relevant data to achieve a dedicated system for the differently-abled students. It can also serve as a strong base for developing more sophisticated and customized systems for an inclusive classroom. The SLA tool can be integrated with the devices, generally used by specially-abled students, to enhance their productivity and responsiveness.
+
+## Acknowledgments
+
+The authors would like to thank visually, speech, and hearing-impaired students for their feedback and evaluation through responses and discussions to improve the proposed tool. We express our special thanks to Dr. Manoj Garg, Convener, EqualOpportunity Cell, and Ms. Rupali Pabreja, Nodal Officer, Persons with Disabilities of Acharya Narendra Dev College, University of Delhi, Delhi for providing the necessary support to carry out the research.
+
+## Declaration
+
+The authors declare that all procedures performed in the study involving disabled as well as other participants were as per the ethical standards of the institutional Research Review Committee. Informed consent was obtained from all individual participants involved in the study.
+
+> [!NOTE]
+> References section has been removed.
+============================================================
+## Paper Source: An Intelligent Educational and Communication Tool for Students with Visual and Auditory Impairments
+============================================================
+
+## An Intelligent Educational and Communication Tool for Students with Visual and Auditory Impairments
+
+I. Samu Idhayan 1 , Getzi Jeba Leelipushpam Paulraj 2 , Immanuel Johnraja Jebadurai 3
+
+1 Computer Science and Engineering, Karunya Institute of Technology and Sciences, Coimbatore, India 2 Associate Professor, Division of CSE, Karunya Institute of Technology and Sciences, Coimbatore, India 3 Professor, Division of CSE, Karunya Institute of Technology and Sciences, Coimbatore, India E-mail:  1 isamu@karunya.edu.in,  2 getzi@karunya.edu,  3 immanueljohnraja@gmail.com
+
+AbstractThe modern digital world presents very large communication  barriers  for  people  with  combined  visual and  auditory  impairments,  many  times  including  ineffective participation in the processes of education and social interaction. This paper introduces a mobile application aimed at  bridging  these  gaps  with  a  whole  new  Morse  code-based comprehensive  platform  that  assists  in  communication  and learning. Other features will include Morse Typing Window for Morse-based typing, Text to Morse, and Speech to Morse, which will convert the written and spoken language to Morse. It includes Morse for PDF, integrating Morse into the test files to make them more accessible. Using the Article Reader feature, the user will be able to take articles and convert them to Morse for study. An integrated Tutorial will walk one through how to learn Morse code and how to use the app. An NLP-powered word suggestion model increases the efficiency of typing and thus  makes  communication  smooth  and  quicker.  Tested  in a  school  environment,  the  application  received  very  positive feedback about its role in empowering students with multiple disabilities.  Such  a  tool  is  a  great  example  of  how  advanced information  processing  combined  with  accessible  design  can realize  the  full  potential  of  intelligent  assistive  technology  to support  inclusive  education  and  communication  of  persons with complex accessibility needs.
+
+Keywords: Assistive Technology, Disabilities, Communication Devices,  Visual  Impairment,  Auditory  Impairment,  Morse Code,  Mobile  Applications,  Natural  Language  Processing, Accessibility, Inclusive Education
+
+## I. Introduction
+
+With  the  world  having  taken  up  more  of  an  upheld face  towards  the  digital  era,  communication  is  key  to most  social  interactions  and  education.  However,  people with combined visual and auditory impairments have very limited opportunities to participate in these spheres of life [1].  The  traditional  communicative  continuum  practices are  not  accessible  to  them,  which  makes  many  of  those persons isolated and unable even to express their thoughts or learn anything. This gap underlines the immediate need for creative solutions that could grant people with multiple disabilities communication and learning skills [2].
+
+Such challenges are better addressed by Morse code, given  that  it  is  a  time-tested  communication  system.  The binary  nature  of  the  Morse  code,  comprising  short  and long  signals,  can  be  translated  into  tactile  feedback  quite effectively in order to make things accessible for users [3]. Through this approach, we are able to undertake tool design that allows users to communicate independently and access information in an inclusive manner [4].
+
+This  paper  presents  a  mobile  application  intended  to provide  a  platform  for  visually  and  auditorily  challenged people to learn and use Morse code. The proposed system introduces  a  Morse  Typing  Window  that  allows  users  to input  Morse  code  through  tactile  feedback,  thus  enabling efficient communication with peers and educators. The Text to Morse feature involves the translation of written text into Morse code, fitting for those who make use of text methods of communication [5]. Another feature is Speech to Morse; besides, one can convert spoken words into Morse code to further expand the modes of communication. The Morse for PDF  feature  integrates  Morse  code  with  PDF  documents so  that  users  can  gain  access  to  the  educational  materials in a format compatible with their needs. This allows users to have articles read to them, and if one wants, to change those articles to Morse for studying. The app comes with an integrated Tutorial that teaches Morse code to users, as well as ways of using the application effectively. The application uses an NLP-driven word suggestion model that is capable of  predicting  and  suggesting  words  when  users  type  in Morse code. It enhances the efficiency of typing and at the same time reduces cognitive overload for the users [6]. This in turn enables smoother, and even faster, communication.
+
+This  application  has  been  tested  in  a  school  setting, where it received positive feedback from students, thereby underlining its ability to empower the disabled. It becomes a model for how technology can serve inclusive education and  communication  for  individual  people  with  complex access challenges by effectively merging advanced information processing with accessible design. This paper attempts  to  delve  into  the  development  and  effectiveness of  this  innovative  solution.  It  also  tries  to  show  how  the innovation finds application in today's digital environment to  determine  its  potential  to  create  more  inclusion  within educational and social processes.
+
+## II. State of the Art: History and Context
+
+While communication is the axis around which social interactions and educational engagement revolve, those with combined visual and auditory impairments go through so many barriers that inhibit these activities. The World Health Organization estimated that currently, more than 1.5 billion people worldwide are suffering from some form or degree of hearing loss and will increase up to 2.5 billion by 2050, of whom over a quarter are said to be suffering from disabling hearing loss that affects the health and quality of life [7]. Moreover,  at  least  2.2  billion  people  in  the  world  have either a near or distance vision impairment; out of these, at least 1 billion of the cases are preventable or still remaining unattended  [8].  Of  these,  a  large  portion  are  recorded with  dual  disabilities  both  visual-auditory  impairments experiencing double disadvantages in communicating and receiving  information.  These  are  usually  associated  with isolation  and  frustration  in  educational  settings  because the  traditional  teaching  methods  do  not  accommodate diversities.
+
+## A.  Challenges of Traditional Communication Methods
+
+Traditional methods of communication for people with visual and auditory impairments have relied heavily on some form of communication involving tactile sensation, such as tactile  sign  language,  Braille,  and  special  communication boards. Tactile sign language requires a reliance on the sense of  touch  whereby  the  individual  feels  what  signs  another person is making. However, this then becomes a restrictive technique  since  it  entirely  relies  on  the  skills  of  the  user relating to sign language and is rather hard to learn, in which case it may become a barrier to proper communication when one is trying to pass information to a person who has not been trained.
+
+Another traditional method of communication widely used is  Braille,  which  is  a  tactile  writing  system  used  by visually  impaired  people  to  access  information  in  written form. At the same time, it does not provide the solutions needed for communicational interaction among individuals with  both  visual  and  auditory  impairments.  Furthermore, specialized communication boards, sometimes with raised symbols or textures, utilize some sort of communication, but these often require significant adjustment and familiarity by the  communicator  and  the  one  receiving  the  information. These techniques inadequately prepare an individual with  dual  disabilities  for  educational  and  social  settings, often proving to be a hindrance in either fully expressing themselves or comprehending the expressions of others.
+
+The  gap  in  communication  increases  in  the  case  of people  affected  with  dual  disabilities,  living  in  a  world devoid of inclusive educational environments and resources. Their  unique  needs  make  traditional  methods  of  teaching non-accommodative; hence, they always feel isolated and frustrated. On top of that, the gap in technology just makes things worse. While newer models in assistive technology have  leveled  the  playing  field  for  people  with  singular disabilities,  many  tools  remain  inadequate  or  completely inaccessible for people with impairments in double categories.
+
+## B.  Current Technologies and Their Limitations
+
+Recent development in assistive technologies has tried to bridge this communication gap for people suffering from
+
+Copyright © IEEE-2025 ISBN: 979-8-3315-2814-0
+
+dual disabilities, specifically those having combined visual and auditory impairments. Current technologies include:
+
+Tactile sign language  devices  provide  the  facility of  tactile  sign  language  by  converting  signs  into  either vibrations or tactile symbols. However, the effectiveness of these devices is still limited by requiring both users involved to know tactile sign language [9]. Similarly, Braille displays are electronic displays that provide better access to written information by enabling users to read text from other digital devices.  Although  these  are  of  immense  importance  to visually impaired divers, the technology stops here and does not address the auditory aspects of communication; hence this is a problem for people with auditory deficiencies [10].
+
+Speech recognition software dictates spoken languages into text to be presented in order for visually impaired users to present information in that type of format. This does not, however, help the users with auditory deficiencies by this technology. Furthermore, it does not have support for haptic interaction.  Moreover,  speech  recognition  is  sensitive  to errors when the environment is noisy, which jeopardizes its overall efficiency [11].
+
+On a similar note, several AR solutions aim to deliver information regarding visual content through haptic output and  other  senses.  Of  these,  none  are  personalized  or customized for people with dual disabilities. The mere fact that the messages in AR applications have something to do with vision makes it completely unreachable to those people who cannot see and hence shuts more doors to information access [12]. Furthermore, the communication boards using symbols are made up of symbols for words or sets of words. While  these  would  make  communication  possible,  they require a great deal of adaptation and familiarity on the part of  both  interlocutors.  This  level  of  reliance  on  the  users' understanding may make them unsuitable for any quick or dynamic form of communication, thus placing people with dual disabilities at a disadvantage [13].
+
+Technologies  proposed  so  far  rarely  offer  integrated solutions  to  put  together  sight  and  hearing  impairments as  a  rule.  Without  communicative  devices  that  have  been universally designed, there is a barrier created for the full participation  of  a  person  with  impairments  in  both  vision and hearing in educational and social contexts, which calls for  new solutions that support democratic communication and interaction.
+
+In that respect, Morse code becomes helpful for people who  cannot  see  or  hear;  it  grants  them  independence in  communication,  giving  signals  in  the  form  of  tactile feedback or vibration. And this access to communication is further extended by various mobile applications that allow typing in  Morse code messages, which one can carry out with the help of taps or vibrations on the device. Therefore, this flexibility of Morse code provides an important means to help achieve this communication in different situations.
+
+## C.  Comparison of Existing Morse Code Applications
+
+Many other Morse code applications,  that  bring  it  to the  disabled  for  communication  purposes,  fail  to  provide requisite  accessibility  features  that  are  essential  for  dual disabilities.  For  instance,  The  Morse-Comm app by Sachdeva et al. is an example of a communication application using Morse code with input by gestures. While this may seem novel, the highly dependent nature of an exact recognition of the intended gestures by the interface makes it pretty hard and  time-consuming  for  a  user  with  motor  impairments, resulting in miscommunication at times [14].
+
+Similarly, Gboard (Google Keyboard) allows Morse code entry,  but  taking  precise  time,  which  is  very challenging  for  users  with  fine  motor  control  problems: mistakes will most likely happen frequently and can make communication be misunderstood. The application at best has badly adjusted timings, further decreasing the chances of being accessed [15].
+
+While the Samsung Good Vibes app enables communication for individuals with both visual and auditory  deficiencies  by  converting  Morse  code  into  text, it  lacks  dynamic  haptic  feedback,  an  essential  component for  any  user  relying  on  this  form  of  real-time  navigation and  support  for  communication.  This  may  weaken  its effectiveness  for  individuals  relying  heavily  on  touch  in navigating themselves through the environment [16].
+
+The application presented in the paper overcomes these deficiencies  by  incorporating  various  features  explicitly designed for dual-disabled users. Continuous haptic feedback, in this way, allows users to feel every input, hence helping  to  increase  accuracy  and  decrease  dependence  on precise motor skills or visual input. Customizable sensitivity for  input  addition  and  real-time  timing  feedback  further smoothen  Morse  code  entry,  making  it  more  adaptable. This  application  goes  beyond  sheer  communication  to  an unparalleled edge in the field of education. By incorporating real-time word suggestions, it is much easier for the users to input Morse, hence it is a platform for inclusive learning. Further,  it  enhances  both  the  independent  learning  and structured interaction with teachers, making this application uniquely  suited  for  educational  applications  within  dualdisabled individuals.
+
+## III. Proposed Solution: Enhanced Morse Code Application for Dual-Disabled Students
+
+Building  upon  the  limitations  identified  in  existing technologies and applications, our proposed solution introduces  a  more  inclusive  Morse  code  application  that specifically  aids  users  who  have  both  visual  and  auditory impairments. This will not only provide a communication avenue  for  dual-disabled  persons  but  will  also  enhance learning  by  incorporating  ease  of  use,  accessibility,  and effective learning. Here,  our  design  incorporates  realtime  feedback,  adaptive  input  customization,  and  word suggestions  in  NLP-driven  Morse  code  to  make  it  more intuitive and responsive to individual user needs than any other application currently available.
+
+The next sections describe the main distinctive features that are the reason for our solution, focusing on innovations in tactile feedback, educational tools, and enhanced accuracy in Morse code entry.
+
+## A.  Morse Typing Window
+
+The home screen of the application, depicted in Figure 1.a, where buttons to all available features link directly to the respective feature window. Besides navigation through buttons, it also offers Morse code-based input for navigating through the application. Further, users can navigate through this  application  by  voice  commands,  making  it  more versatile and friendly for the user.
+
+
+
+Fig. 1: a. Home Screen (left most), b. Morse Typing Window (Middle),  c. Text-to-Morse Window (Right Most)
+
+
+
+
+
+The Morse Typing Window, shown in Figure 1.b, is designed to facilitate Morse code input through a split-screen interface, whereby the top portion denotes 'dots' (.) and the bottom portion denotes 'dashes' (\_). The working process of  this  window  is  mentioned  in  Figure  2.  It  initiates  its
+
+Fig. 2: The Working Process of Morse Typing Window
+
+
+
+Copyright © IEEE-2025 ISBN: 979-8-3315-2814-0
+
+processing by checking if the volume button is pressed, and upon pressing it, voice prompts guide the user through the Morse Typing Window. If the volume button is not pressed, it  waits for user input. Later, the application differentiates short  presses  from  long  ones  in  order  to  detect  dots  and dashes. If the top portion is pressed, it is interpreted as a 'dot'. When the top portion is long pressed, it deletes the last morse character typed. Similarly, If the bottom portion is  pressed,  it  is  interpreted  as  a  'dash'.  When  the  bottom portion is long pressed, it enters a whitespace character. This system not only allows correct input but also facilitates realtime correction by allowing deletion and spacing whenever needed. After catching each one of the Morse inputs, dot or dash, the application translates it into the corresponding character and then keeps listening to other inputs. If, after translation,  the  volume  button  is  clicked  again,  it  speaks out the word typed out so far, thus allowing users to crosscheck their progress. This continues until the user chooses to  finish,  at  which  time  the  session  of  the  Morse  Typing Window closes.
+
+## B.  Text-to-Morse
+
+The  functionality of Text-to-Morse, mentioned  in Figure 1.c, is one of the most essential in ensuring increased communication for visually and hearing-impaired students. The  application  provides  an  easy  interface  for  a  user  to enter texts, which then get converted into Morse code. Such conversion  will  definitely  ensure  better  communication among  peers  and  between  educators  and  students,  thus promoting a friendly educational environment. To further support  understanding,  the  Morse  code  is  vibrated  to  the students,  hence  creating  an  avenue  where  they  can  feel
+
+Fig. 3: The Working Process of Text-to-Morse
+
+
+
+Copyright © IEEE-2025 ISBN: 979-8-3315-2814-0
+
+the  messages  being  put  across.  Students  are  thus  able  to hold  meaningful  dialogues,  consequently  enhancing  their learning  experience  and  fostering  a  spirit  of  cooperation among all stakeholders involved in the learning process.
+
+The flow of the Text-to-Morse process, as in  Figure 3, beings by checking if the volume button has been pressed for  voice  instructions.  If  that  is  not  the  case,  it  waits  for text  entry.  Once  the  text  is  entered,  it  gives  the  user  two possibilities:  'Translate'  to  translate  the  text  into  Morse code and 'Read' to listen to it aloud.
+
+## C.  Speech-to-Morse
+
+Another functionality in this application is Speech-toMorse, which will add to the realms of accessibility, making communication easier. This interface, shown in Figure 4.a, includes  a  'Speak'  button,  which,  upon  being  clicked, activates the microphone that picks up words spoken across it as shown in Figure 4.b. Detected speech is converted to text and then translated into Morse code by the application. It also allows the user to make the learning more interactive by pushing the 'Read Morse Code' button and providing two vibrations representing the Morse code sequence of the spoken text. In this way, students with visual and auditory impairments will feel the speech, which shall increase the understanding and engagement in their minds.
+
+Besides  that,  there  is  a  'Save'  button,  which  saves the  detected  speech  in  PDF  format  for  future  reference. Therefore, this will be one of the most taken-intoconsideration  benefits  in  educational  settings  because  it allows  teachers  to  instruct  or  explain  something  by  only speaking, while the application translates it and informs the student both with tactile vibrations and saved records.
+
+
+
+Fig. 4: a. Speech-to-Morse Window (Left) b. Accessing Mic for Speech Input (Right)
+
+
+
+## D.  Morse for PDF
+
+The Morse for PDF feature is designed to allow students who have both vision and hearing impairments to translate lecture materials into Morse code for learning.
+
+When this window is opened, the user is prompted to open a PDF document to be translated into Morse code, as in Figure 5.a and Figure 5.b. Once the PDF is opened, the user will click 'Vibrate Morse Code' which will provide them the  content  as  Morse  code  vibrations.  This  feature  would provide the users with the capability of interacting with their study materials through tactile input, hence making learning more accessible and independent.
+
+Fig 5: a. Getting PDF Input (Left) b. PDF Content into Morse (Right)
+
+
+
+Fig. 6: Working Process of Morse for PDF
+
+
+
+## E.  Tutorial Window
+
+The Tutorial window, as shown in Figure 7, represents an  interactive  Morse  learning  experience  with  both  voice and Morse instructions that take users interactively through a fun game. This allows the generation of prompts to type specific  characters  or  numbers  in  Morse.  This  increases their acquaintance with Morse input. In this way, it is fun and easy to teach the Morse code in practice to a student targeting  effective  practice.  This  integration  of  audio  and tactile instructions ensures that indeed users can also follow through, therefore being an effective tool in education for dual-disabled students.
+
+Fig. 7: Tutorial Windows
+
+
+
+## F.  Article Reader
+
+Article  Reader  aggregates  articles  from  the  internet into one place and gives a list available to be read by the user  (Figure  8.a).  When  an  article  selected,  it  displays  in both text and Morse versions to let users choose how they would  like  to  engage  with  the  content  as  seen  in  Figure 8.b.  Clicking  the  Read  button  reads  the  article  aloud  for accessibility by visually impaired users. The selection of the Vibrate button makes the article vibrate in Morse code if clicked on, allowing dual-disabled users to feel an article by touch. Accessibility of information therefore improves, being  enhanced  through  such  adaptations  of  content  to diverse accessibility needs.
+
+All of the features listed above together strive to reach a  point  where  dual-disabled students can comfortably use and access their education. Besides its pedagogical value, the application is also used as an effective communication tool  because  through  the  software,  dual-disabled  students who cannot write or use their vocal cords can communicate efficiently with other students and educators in Morse code.
+
+Copyright © IEEE-2025 ISBN: 979-8-3315-2814-0
+
+
+
+Fig. 8: a. List of Articles (Left),  b. Article Content as Text and as Morse (Right)
+
+
+
+## IV. Testing Results and Evaluation
+
+This  Morse  Code  application  was  tested  in  a  real school environment with visually impaired and dualdisabled students, in both visual and auditory impairments (refer  Picture  9).  Educators  also  participated  in  testing the  application  for  its  appropriateness  within  educational settings  during  schooling.  During  the  testing,  students seemed to show great interest  in  the  application  in  itself, adapted  to  its  features  without  any  greater  problems,  and benefited from its dual-mode feedback of text and vibration. without  any  greater  problems,  and  benefited  from  its  dualmode feedback of text and vibration.
+
+
+
+Fig 9 : First test campaign at School Fig. 9: First Test Campaign at School
+
+
+
+
+
+
+
+
+
+
+
+Indeed, encouraging initial feedback led to further tests with a  larger  user  base  of  122  users,  consisting  of  87  visually impaired  and  35  users  with  dual  disabilities.  During  this enlarged test phase, users reacted against questions related to satisfaction  showing  a  return  breakdown  of  82%  positive, 10% neutral, and 8% negative claims (as plotted in Figure 10). Indeed,  encouraging  initial  feedback  led  to  further tests with a larger user base of 122 users, consisting of 87 visually impaired and 35 users with dual disabilities. During this  enlarged  test  phase,  users  reacted  against  questions related to satisfaction showing a return breakdown of 82% positive, 10% neutral, and 8% negative claims (as plotted in Figure 10).
+
+The  application  was  installed  on  the  participants' devices and was monitored for seven months, starting from February 2024 to August 2024 (as plotted in Figure 11). The usages of the application in this period went on increasing significantly  month  after  month,  showing  that  it  was  of continued value and adaptive in the daily life of the users.
+
+Copyright © IEEE-2025 ISBN: 979-8-3315-2814-0
+
+The  application  was  installed  on  the  participants'
+
+Indeed, encouraging initial feedback led to further tests with
+
+[3]
+
+satisfaction  showing  a  return  breakdown  of  82%  positive,
+
+10% neutral, and 8% negative claims (as plotted in Figure 10).
+
+a  larger  user  base  of  122  users,  consisting  of  87  visually
+
+impaired  and  35  users  with  dual  disabilities.  During  this
+
+enlarged test phase, users reacted against questions related to
+
+[4]
+
+10% neutral, and 8% negative claims (as plotted in Figure 10).
+
+
+
+significantly  month  after  month,  showing  that  it  was  of
+
+continued value and adaptive in the daily life of the users.
+
+Fig 10 : Feedback Distribution Fig. 10: Feedback Distribution
+
+
+
+Month
+
+Fig 11 : Application Usage Over 7 Months Fig. 11: Application Usage Over 7 Months
+
+V.
+
+## CONCLUSION V. Conclusion
+
+Morse  typing,  and  NLP-driven  text  suggestions  within  the application serve to empower users in learning and communicating  effectively.  It  also  went  live  in  many  realschool environments, coming out with overwhelmingly positive feedback while showing huge potential to improve accessibility and learning for students with disabilities. The general  illustration  of  this  application  is  how  technology bridges  gaps  in  various  ways  of  accessibility  that  students with  disabilities  need,  and  the  promotion  of  inclusion  in educational  settings.  In  the  continuous  development  of  this platform,  further  improvements  will  focus  on  expanding features and increasing usability to improve learning for an even wider audience. REFERENCES [1] "A Multimodal Approach to Assistive Communication for the Visually and Hearing Impaired," IEEE Access , vol. 8, pp. 37456-37466, 2021. doi: 10.1109/ACCESS.2020.2973398. 979-8-3315-2814-0/25/$31.00 ©2025 IEEE Fig 11 : Application Usage Over 7 Months V. CONCLUSION This paper proposed the implementation of a Morse code-based  application  that  could  empower  people  with visual and dual disabilities in the contexts of education and communication. Real-time haptic feedback, split-screen 979-8-3315-2814-0/25/$31.00 ©2025 IEEE This paper proposed the implementation of a Morse code-based  application  that  could  empower  people  with visual and dual disabilities in the contexts of education and communication. Real-time haptic feedback, split-screen This  paper  proposed  the  implementation  of  a  Morse code-based  application  that  could  empower  people  with visual  and  dual  disabilities  in  the  contexts  of  education and communication. Real-time haptic feedback, splitscreen  Morse  typing,  and  NLP-driven  text  suggestions within the application serve to empower users in learning and communicating effectively. It also went live in many real-school environments, coming out with overwhelmingly positive feedback while showing huge potential to improve accessibility and learning for students with disabilities. The general  illustration  of  this  application  is  how  technology bridges gaps in various ways of accessibility that students with  disabilities  need,  and  the  promotion  of  inclusion  in educational settings. In the continuous development of this platform,  further  improvements  will  focus  on  expanding features and increasing usability to improve learning for an even wider audience.
+
+[2]
+
+R.
+
+Innovations Inclusive
+
+Singh  and  P.
+
+in
+
+- Education," in 2023 IEEE Conference on Accessible Technologies , pp. 223229, 2023. doi: 10.1109/CAT2023. 867899. [3] J.  K.  Perera,  "MorseComm:  Mobile  Application  Environment  for Visually-Impaired and NeuroMuscular Disabled People Using Morse [1] 'A  Multimodal  Approach  to  Assistive  Communication  for  the Visually  and  Hearing  Impaired,' IEEE  Access ,  vol.  8,  pp.  3745637466, 2021. doi: 10.1109/ACCESS.2020.2973398.
+
+## Rajasekaran, "Digital References
+
+- Code Conversion," in IEEE International Conference on Accessibility Innovations , 2022. doi: 10.1109/ACINNOV.9071397 [4] M. Gr een et al., "Inclusivity in Electronic Communication: A Morse [2] R.  Singh  and  P.  Rajasekaran,  'Digital  Innovations  in  Inclusive Education,' in 2023 IEEE Conference on Accessible Technologies , pp. 223-229, 2023. doi: 10.1109/CAT2023.867899.
+- Code  Interface  for  Visual  and  Auditory  Deficiencies," IEEE  Conf. Publ. , pp. 118 -126, 2024. doi: 10.1109/ECIC.2024.10636997. [5] L. Y. Santos, "Integrating Morse Code in PDF Readers for the Visually Impaired," Journal of Accessible Technology , vol. 15, no. 1, pp. 30-45, [3] J.  K.  Perera,  'Morse-Comm:  Mobile  Application  Environment  for Visually-Impaired and Neuro-Muscular  Disabled People Using Morse  Code  Conversion,'  in IEEE  International  Conference  on Accessibility Innovations , 2022. doi: 10.1109/ACINNOV.9071397
+2021. doi: 10.1109/JACT.2021.9412180. [6] K. Pillai et al., "NLP-Driven Word Prediction Models for Morse Code Communication in Disabled Populations," IEEE Access ,  vol.  10,  pp. [4] M. Green et al., 'Inclusivity in Electronic Communication: A Morse Code Interface for Visual and Auditory Deficiencies,' IEEE Conf. Publ. , pp. 118-126, 2024. doi: 10.1109/ECIC.2024.10636997.
+
+20964-20971,
+
+2022. doi: 10.1109/ACCESS.2022.3182471.
+
+[7]
+
+World Health Organization, World report on hearing
+
+Available:
+
+hearing
+
+[Online].
+
+, 2021. [Online].
+
+https://www.who.int/publications/i/item/world
+
+Available:
+
+https://www.who.int/news
+
+sheets/detail/blindness-and-visual-impairment
+
+-report-on-
+
+-room/fact-
+
+2
+
+223-
+
+a
+
+d
+
+J.  K.
+
+Visua
+
+[2]
+
+Code
+
+Innov
+
+2
+
+M. G
+
+Code
+
+[3]
+
+J
+
+,
+
+Publ.
+
+L. Y.
+
+Impai
+
+I
+
+[4]
+
+2021.
+
+K. Pil
+
+Com
+
+2096
+
+[5]
+
+Worl
+
+I
+
+Avail
+
+2
+
+heari
+
+Worl
+
+[6]
+
+[Onli
+
+sheets
+
+[9]
+
+2
+
+[7]
+
+C. M.
+
+Lang
+
+doi: 1
+
+h
+
+[8]
+
+[10]
+
+The  application  was  installed  on  the  participants'
+
+R.  S
+
+Journ
+
+[
+
+2021.
+
+[11]
+
+s
+
+A.
+
+Tech
+
+[9]
+
+Journ
+
+10.10
+
+d
+
+[10]
+
+J
+
+C. Wi
+
+[12]
+
+A Re
+
+1, pp.
+
+2
+
+[11]
+
+[13]
+
+J. Tay
+
+with
+
+Techn
+
+J
+
+10.10
+
+[14]
+
+1
+
+H.  Sa
+
+Mobil
+
+[12]
+
+Musc
+
+Intern
+
+1
+
+[13]
+
+J
+
+Netw
+
+10.11
+
+[15]
+
+Goog
+
+1
+
+https:
+
+utmet
+
+[14]
+
+[16]
+
+Sams
+
+Up Li
+
+https:
+
+bright
+
+I
+
+1
+
+h
+
+u
+
+h
+
+b
+
+[5]
+
+[6]
+
+[7]
+
+[8]
+
+[15]
+
+[16]
+
+- [5] L.  Y.  Santos,  'Integrating  Morse  Code  in  PDF  Readers  for  the Visually Impaired,' Journal of Accessible Technology , vol. 15, no. 1, pp. 30-45, 2021. doi: 10.1109/JACT.2021.9412180.
+- [6] K.  Pillai  et  al.,  'NLP-Driven  Word  Prediction  Models  for  Morse Code Communication in Disabled Populations,' IEEE Access ,  vol. 10, pp. 20964-20971, 2022. doi: 10.1109/ACCESS.2022.3182471.
+- [7] World Health Organization, World report on hearing , 2021. [Online]. Available:  https://www.who.int/publications/i/item/world-report-onhearing
+- [8] World Health Organization, Vision impairment and blindness , 2023. [Online]. Available: https://www.who.int/news-room/fact-sheets/ detail/blindness-and-visual-impairment
+- [9] C.  M.  Reed,  H.  Z.  Tan,  and  L.  A.  Jones,  'Haptic  Communication of Language,' IEEE Transactions on Haptics , vol. 16, pp. 134-153, 2023. doi: 10.1109/TOH.2023.3257539.
+- [10] R.  Smith,  'Braille  Technology:  Enhancements  and  Limitations,' Journal of Visual Impairment &amp; Blindness , vol. 114, no. 3, pp. 289296, 2021.
+- [11]  A. Brown and T. Green, 'Speech Recognition in Assistive Technologies: Current Trends and Future Directions,' International Journal of Speech Technology , vol. 15, no. 1, pp. 10-19, 2021. doi: 10.1007/s10772-021-09730-3.
+- [12]  C.  Williams  and  D.  Jones,  'Augmented  Reality  for  Inclusive Education:  A  Review,' Journal  of  Educational  Technology  &amp; Society , vol. 24, no. 1, pp. 50-65, 2021. doi: 10.2307/26936058.
+- [13] J. Taylor, 'Communication Boards: Their Effectiveness for Individuals with Multiple Disabilities,' Disability and Rehabilitation: Assistive  Technology ,  vol.  17,  no.  4,  pp.  320-329,  2022.  doi: 10.1080/17483107.2022.2053151.
+- [14] H. Sachdeva, A. Misra, K. Chauhan, and M. Dave, 'Morse-Comm: Mobile Application Environment for Visually-Impaired and NeuroMuscular  Disabled  People  Using  Morse  Code  Conversion,' 2020 7th  International  Conference  on  Signal  Processing  and  Integrated Networks  (SPIN) ,  Noida,  India,  2020,  pp.  809-813.  doi:  10.1109/ SPIN48934.2020.9071397
+- [15] Google,  'Gboard  -  the  Google  Keyboard.'  [Online].  Available: https://play.google.com/store/apps/details?id=com.google.android. inputmethod.latin
+- [16]  Samsung  Electronics,  'Samsung  Good  Vibes  and  Relumino  to Brighten Up Lives of the DeafBlind and Vision Impaired,' [Online]. Available: https://news.samsung.com/in/samsung-good-vibes-andrelumino-to-brighten-up-lives-of-the-deafblind-and-vision-impaired============================================================
+## Paper Source: Bangla Speech-To-Braille Interaction Device for Visual and Hearing Impaired
+============================================================
+
+## Bangla Speech-To-Braille Interaction Device for Visual and Hearing Impaired
+
+
+
+Rafia Rizwana Rahim, Atik Ishrak Al Nahian, Rakiba Benta Kalam, Atanu Sen Gupta, and Nusrat Binta Nizam
+
+Abstract This research project proposes a prototype design for a refreshable braille display to convert Bangla Speech to Braille output. It aims to be a communication and learning module for deaf-blind or blind people to pursue inclusive education. First, we took speech input from a transducer, and speech recognition was done by DeepSpeech, a Natural Language Processing framework developed by Mozilla. Then, the converted text output was linked with its corresponding braille pins and wasshowninarefreshable braille display. Finally, the entire computation was carried away by a Raspberry Pi. We have proposed the usage of our prototype as a special ICT device in the journey towards inclusive education in Bangladesh. In addition, future development has been suggested to broaden the periphery of the project.
+
+Keywords DeepSpeech · Bangla natural language processing · Refreshable Braille display
+
+## 1 Introduction
+
+The goal of this research project is to create a refreshable braille display that accepts Bangla speech as input and outputs active braille pins. It is primarily intended to serve as a communication and learning tool for deaf-blind persons, particularly those aged 5-18. When we saw that there were few technologies for blind students and none for deaf-blind pupils, we were inspired to create such a product. There are 285 million visually impaired (VI) people in the world [1], where 90% of them are from developing countries [1]. Nearly 19 million children below 15 age group are VI [1].
+
+R. R. Rahim · A. I. Al Nahian · R. B. Kalam · A. S. Gupta
+
+Department of Mechanical Engineering, Bangladesh University of Engineering and Technology, Dhaka 1205, Bangladesh
+
+e-mail: 1710045@me.buet.ac.bd
+
+N. B. Nizam ( B )
+
+Department of Biomedical Engineering, Bangladesh University of Engineering and Technology, Dhaka 1205, Bangladesh
+
+e-mail: nusratbintanizam@bme.buet.ac.bd
+
+©The Author(s), under exclusive license to Springer Nature Singapore Pte Ltd. 2022
+
+Among them, 90% children do not have access of education in developing countries [2]. Bangladesh is a developing country which has 341,819 VI children in the 6-11 age group [5]. Also, a significant portion is illiterate. The literacy rate is 57.7%, which demands ensuring inclusive education, where the system will make education affordable for all, irrespective of their background or disabilities [6]. Implementation of special Information and Communication Technology (ICT) devices in education can help to develop the quality of life and empower the VI and deaf-blind people [7]. But the accessibility and availability of ICT educational tools are a major issue because these tools can help to ensure equal opportunities for all students across the world.
+
+## 2 Literature Review
+
+Even while Braille Displays are pretty famous, adding a language-specific speech to the braille module is the real issue. It is a pity that Bangla, the world's seventh most spoken language, lacks a fully developed speech-to-text module that we may use in our project. We found the closest potential work that can assist us in creating our voice recognition module when searching for a good speech recognition approach. We found the following suggested approaches and theoretical results for Bangla Speech to Text Conversion Linear Predictive Coding (LPC) and Cepstral Coefficients for feature extraction and a Multilayer Perceptron (MLP) approach for recognition [9], Mel Frequency Cepstrum [10], Unsuper vised learning by recognizing repeated patterns [11], tokenizing the input speech [12], unsupervised term discovery to cluster repeated patterns [13], classification of unlabeled data [14]. More recent studies used CNN, RNN, and LSTM-based models for Bangla speech recognition purpose [17]. Also, augmented dataset has given closer mnemonics and better results than other studies [18]. Hannun et al. [15] showed a deep recurrent neural network architecture to recognize continuous speech. Experimentation showed that it gave highly accurate Transcriptions to continuous speech. With data of 600hours, the model yields 90% accuracy for Mandarin Chinese and English. They published as Mozilla's opensource framework DeepSpeech, which can be used to model any language for speech recognition and, therefore, has been used in our research. To support the requirements of DeepSpeech, we searched for speech to text dataset and found that the dataset provided by the openslr platform is the most suitable for our purpose [19]. Previous studies have also been done using the same dataset. For Example Sultana et al. (2012) used the corresponding dataset in their SAPI-based speech recognition module [16]. Therefore, this dataset is a proven one to be used in our research.
+
+## 3 Dataset Preparation
+
+A huge preprocessed dataset is the primary need of any deep learning frame work. DeepSpeech also requires over 100,000 audio and text samples and numerous other auxiliary files to begin its training. The steps of dataset preprocessing can be described sequentially.
+
+## 3.1 Dataset Selection and Download
+
+We looked for an open-source Bangla audio dataset and found 250 thousand audio of 347 h and corresponding text data in the openslr platform [19], where it contained 229 h of unique speech to text data and the rest of the dataset was either repeated or augmented. The dataset was in a very raw format and needed preprocessing.
+
+## 3.2 .wav Conversion, Riff Code Addition and Audio Data Debug
+
+DeepSpeech only accepts.wav audio files with a specified riff code attached before the audio file. Using AudioConverter 0.3.0 [22], we converted the .flac files to.wav files with riff code attached. Then we built ftwdebug.py [21], a debugger program to see if any audio files were missing the riff code. Furthermore, DeepSpeech will not accept audio input with a duration of fewer than 3 s. As a result, we built a new debugger code [21] to erase and exclude all audio with a duration of fewer than 3 s.
+
+## 3.3 Corresponding Text Manual Correction and Unicode Debug
+
+DeepSpeech requires audio files to be accompanied by a text file that contains no numerical characters or punctuation marks. As a result, all of these had to be manually erased. The openslr dataset included a .tsv file containing file names (without extensions), anonymous ids, and matching text for each audio file. As a result, we initially copied it into Excel. Next, we divided the spreadsheet file into 250 separate excel files, each with 1000 items, to make human corrections easier. All punctuation marks and emoji were then manually removed. In this case, the number of characters was replaced with Bangla text. Unfortunately, the text contained an unexplained error, and DeepSpeech could not locate Unicode for the Bangla script. So we built xldebug.py [21], a debugging program to see if each of our characters has a UTF+8 code associated with it.
+
+## 3.4 .csv File Generation
+
+DeepSpeechrequires the following format for audio text in.csv: filename (with extension), file size (in Kilobytes), text. To create such a .csv file, we created the file name size.py script [21], which can create .csv files containing the file name and size. Our audio files were divided into 14 folders, each with 14 subfolders. We put all audio files in one folder and made a .csv file with the file name and size.
+
+## 3.5 Text Input In .csv Files
+
+Now, we had two files one having the file name and corresponding texts, the other having file name and size. We needed to merge these two excel sheets concerning file names. When we did so, we saw that several audio files did not have written text with them. Also, some of the audio files did not exist in our dataset, but their file name and text were written in the excel file. So we needed to delete those entries manually. Here is our sequential operation we copied the file names in a text file for each segmented excel file. Then we run a code File Copy Reading txt to Folder and Check.py [21] that will copy the file reading the .txt from our audio folder. It will also show which files do not exist. So we can remove those entries manually. This same process had to be repeated 250 times. Then we can merge text with file name and size .csv file.
+
+## 3.6 Training, Development, and Testing Dataset
+
+DeepSpeech requires three folders having audio files and .csv files containing the file name, size, and text. They are called training (train), development (dev), test folders. In each training cycle, train, dev, and test contain 70, 20, and 10% audio data. For example, we trained our model 5 times, each with 40-80 thousand data. For this, we created test, train, dev folders for each training using the above-stated manner.
+
+## 3.7 Generating alphabet.txt File
+
+We needed a code to generate all alphabet of Bangla in a text file. Moreover, we needed it to tell the training framework that we are using a different alphabet set than English, and it is Unicode based. So, we created a python code alphabet.py [21] that generates an alphabet of Bengali language and saves it in a text file.
+
+## 3.8 Generating a Scorer File
+
+A scorer is a language model, and DeepSpeech uses it to improve the accuracy of the transcription. A language model predicts which words are more likely to come after one another. The scorer determines the likelihood of words appearing together. DeepSpeech's default scorer is trained using the LibriSpeech dataset. The LibriSpeech dataset is based on LibriVox, an open repository of public domain and out-of-copyright works. Therefore, we needed scorer training DeepSpeech in another language, training a speech recognition model for a particular domain. In our case, it is day-to-day formal Bangla speeches mostly available in news reports and to improve the accuracy of the transcription.
+
+DeepSpeech supports the optional use of an external scorer. We collected many of the sentences from Bangla Wikipedia through a module named banglaWIKI corpus, which allowed us to scrap through Wikipedia and download the Bengali sentences, which we will use to build the scorer. It supports our DeepSpeech model with predefined sentences that we regularly use. If a model does not understand a voice fully, it tries to match its word with the scorer file and shows outputs accordingly.
+
+## 4 Design and Methodology
+
+## 4.1 Bangla Automatic Speech Recognition
+
+Amicrophone should capture the sound waves, convert them to a digital signal, and store them in memory. The sound must be linked to the corresponding test. To find the appropriate text for the sound, we need pre-requisites of 2 types a large dataset with a variety of audio and text and a framework having an Acoustic Model, Pronunciation Model, and Language Model (Fig. 1).
+
+Preparation for DeepSpeech Framework We have used Google's cloud-based machine learning platform, Google Colab, to train our model. To start training in Google Colab, first, we need to set up an environment of DeepSpeech in the following manner. Installation of DeepSpeech, mounting Google Colab with Google Drive to train the data from the drive directly, enabling GPU, and installing other packages such as an appropriate version of TensorFlow have been done, respectively. After preparing the train and dev folder, we need to start the training by calling flags on DeepSpeech. Our ultimate target is to decrease the value of the loss. The validation part is the development part using the dev folder.
+
+Fig. 1 Speech recognition flow chart
+
+
+
+## 4.2 Bangla Text to Braille (TTB) Conversion
+
+Every character of the Bangla language has a unique Unicode. For every Unicode, a character has a unique combination of braille pins. Braille is a language where letters are shown via the combination of 6 pins in a braille cell numbered vertically. Most of the letters in Bangla need one set of braille pins to resemble the character. Nevertheless, prefixes and suffixes are incorporated when it comes down to words, joint letters, or sentences. We have followed all the rules of Bangla Braille to Convert Bangla Text to Braille pins. The following rules were considered while setting conditional loops in the TTB code, btb.py. Our code (btb.py) [21] first splits every word in the text obtained from DeepSpeech. If there is any joint letter, it is detected by Unicode of hosonto between those letters. Then the braille pins are detected according to the rules of Bangla Braille Adaption [27]. The numbers of braille pins are the input of our refreshable braille display. The display is designed so that the output is shown cell by cell, one cell at an instant (Figs. 2, 3 and 4).
+
+Fig. 2 Braille cell representations
+
+
+
+Fig. 3 Electrical circuit simulation using fritzing and electrical circuit
+
+
+
+Fig. 4 Solid works design and final assembly
+
+
+
+## 4.3 Refreshable Braille Display
+
+Electrical Circuit Design : We have used six independent servo motors with a linear actuation system to show the braille pins obtained. Here the servo has been controlled by a Pulse Width Modulation (PWM) controller named Adafruit PCA9685. This PWM controller takes input from Raspberry Pi and sends corresponding signals to the servos. The servos' precise motion helps to step up the braille pin when necessary. We have done our circuit design using Fritzing [24]. Once our circuit was complete, we combined all of our programs into a single file called Speech to Braille Hardware.py. [21] While operating, this program requests the user's input audio stream, transforms it to text, and then generates the matching Braille pin numbers and servos. The electrical simulation was also used to create a printed circuit board (PCB).
+
+Mechanical Part Design : We intend to use a rack and pinion gear system as our primary hardware and designed the device accordingly in SolidWorks [25]. However, because of the lockout in the Covid-19 issue, we were unable to 3D print our rack and pinions. As a result, we devised a less expensive alternative: the reverse crank mechanism. The servo shaft will be attached to a crank here. The connecting rod will be linked to the other end of the crank. The connecting rod is connected to a piston (braille pin) that can reciprocate with a predetermined slot. As a result, the reverse crank mechanism acts as a linear actuator, converting the servo's rotating motion to the linear motion of the braille pin [26].
+
+After trailing for several weeks, we saw that our prototype was working fine. So we did our final assembly. Here the circuit is mounted in a 10cm*10cm*10cm box. The microphone adapter is directed outward. The raspberry pi is getting power from a power bank.
+
+## 5 Results
+
+Here src means the actual source text of the speech, and res means predicted text by DeepSpeech. There are some critical features of our testing data (Fig. 5). First, the word count per sentence and letter count per word is almost ac- curate. Second, commonverbsandwordsarepredictedcorrectly.Finally,themnemonicsofthewords were predicted correctly. That is, the position of vowel and consonant modifiers and silent letters are in the correct position. Bangla is segmented into groups of letters according to the way they sound. Unfortunately, our model could not predict the exact sound, and the place is taken over by the closed possible sound in that group. Here WER means Word error Rate, and CER means character Error Rate. In our best WER, we can see that our model recognized 77% of characters in a sentence and
+
+```
+WER:0.333333,CER:0.133333,10SS:15.634764 wav:file://../drive/MyDrive/Data1/test/195590bd5b.wav "ok pk ee). :oxs "lok ph Lk. :sax WER:0.500000,CER:0.384615,10SS:23.318504 wav:file://../drive/MyDrive/Data1/test/19e034d0a1.wav "l RsgNe.:oxs -r："" WER:0.500000,CER:0.263158,10SS:21.237675 wav:file://../drive/MyDrive/Data1/test/199c157a10.wav SrC:"UAQ" res："ytafQ"
+```
+
+Fig. 5 Example of ASR test result
+
+67% of the word in a sentence. So as we can see from Figs. 6 and 7, we have trained our model, but we still have a lot of WER and CER errors. Therefore, to overcome those errors, we need to improve our language model.
+
+Our TTB code gives 100% accurate results while converting text to braille (Figs. 8 and 9).
+
+Fig. 6 Best case scenario test result
+
+
+
+Fig. 7 Accuracy of CER and WER for best case scenario
+
+
+
+Fig. 8 Worst case scenario test result
+
+
+
+Fig. 9 Accuracy of CER and WER for worst case scenario
+
+
+
+## 6 Discussion
+
+The ASR results described in the figures are self-explanatory to understand how our ASRmodelisdealing with test data. The model can successfully identify mnemonics of common verbs, vowels, consonant, and vowel modifiers. More data can reduce the loss in this model and therefore give a better accuracy. We have realized that perfecting any speech recognition module could take months. Furthermore, it is a one-way communication medium; a person may convert speech to braille but not vice versa using the same instruments. How- ever, we do not consider all of this a weakness; instead, we believe that it will only open the doors to a plethora of opportunities soon. It is self-evident that the accuracy of any ASR model improves as the dataset size grows. We used a dataset that was created by chopping up news snippets for our project. As a result, it is unable to distinguish the dialect of a specific Bangladeshi district. Its vocabulary has to be expanded in order to recognize more complex works. As a result, the production of datasets is our key priority as we upgrade our prototype. Our prototype is a one-way communication medium. We intend to incorporate Braille to Speech using the same devices. So when a deaf-blind person is asked something using our device, he/she can get an immediate response. Such de- vices can work as their eyes and voice. This complete package can help millions of people to demolish the barriers around them and add them to mainstream education.
+
+## 7 Conclusion
+
+Our project has a broad spectrum of usage when it comes down to inclusive education. It can be used as a communication and learning device not only for deaf-blind people but also for blind people. Our equipment is simple to use for school-aged youngsters who are deaf-blind. Because it records audio and subsequently translates it to braille, the gadget can be used as a note-taking device for them and a great aid while listening to lessons. As a result, implementing our initiative following the Bangladesh Education Ministry's objective can illuminate the path to inclusive education on its own.
+
+Acknowledgements At first, we would like to thank our family members, especially our parents. Without their hospitality, the project would not be possible in the lockdown due to the Covid19 situation. Next, we are ever grateful to Satyaki Banik and Nusrat Binte Nizam, who greatly encouraged us to take up a project to bridge the gap between Bangla Natural Language Processing (NLP) and Mechanical Engineering. We want to thank Apurba Sarker for his initial involvement in preparing DeepSpeech Framework, Rasman Mubtasim Swargo, and Aniruddha Ganguli for their knowledgeable suggestions regarding NLP. Finally, we are grateful to Partha Pratim Das for the Google Colab Pro Support and Shakti Banik for his contribution in conceptualizing the design.
+
+> [!NOTE]
+> References section has been removed.
+============================================================
+## Paper Source: Developing Inclusive Digital Learning Systems and Methods to Support Visually and Speech Impaired Learners using IHY Assistive Technologies
+============================================================
+
+## Developing Inclusive Digital Learning Systems and Methods to Support Visually and Speech Impaired Learners using IHY Assistive Technologies
+
+V.Ilango Department Computer Applications CMR Institute of Technology Bangalore, Karnataka ilango.v@cmrit.ac.in
+
+Abstract: As digital education becomes a global norm, the exclusion  of  visually  and  speech-impaired  learners  due  to fragmented assistive tools remains a pressing concern. This paper  presents I  HELP  YOU (IHY),  a  novel  AI-driven Multi-Agent Fused Framework  (MAFF)  that  integrates Conversational User Interfaces (CUIs), multimodal transcoding  (speech,  text,  Braille,  gesture),  and  adaptive learning models  to  create  an inclusive digital learning ecosystem. The system supports multilingual communication, real-time  interaction,  haptic  feedback,  and dynamic learner modeling. A working prototype was evaluated across static, dynamic, and mixed learning contexts involving 120 users with sensory impairments. The system achieved 92.4% accuracy in speech-to-text recognition, 95.7% in text-to-speech synthesis, and 88.2% in sign language recognition. Response times for key interactions remained under 600 ms. Notable improvements were  observed  across  key  indicators:  Accessibility  Score (+30%),  User  Engagement  (+40%),  Learning  Retention (+25%),  and  Tutor-Learner  Interaction  Frequency  (+50%). Multilingual support doubled, and security incidents dropped  by  70%.  The  IHY  framework  demonstrates  a scalable, cloud-based approach to inclusive education, outperforming traditional assistive technologies in adaptability, interoperability, and learner satisfaction. These findings affirm IHY's potential to redefine equitable access in digital learning platforms for learners with disabilities.
+
+Keywords -Inclusive  Learning,  Assistive  Technologies, Conversational User Interface (CUI), Multi-Agent Framework, Speech Impairment, Visual Impairment, AI in Education
+
+## I. INTRODUCTION
+
+As  education  rapidly  shifts  to  digital  formats,  ensuring inclusivity  and  accessibility  for  all  learners  is  increasingly critical [11]. Individuals with visual and speech impairments face significant challenges using standard digital platforms, often  relying  on  assistive  tools  such  as  screen  readers, Braille devices, and sign language interpreters, which typically function separately from mainstream technologies [12].  This  separation  leads  to  fragmented  experiences  and limits engagement. Given the growing prevalence of digital learning,  it  is  essential  to  design  educational  technologies that are inherently inclusive and adaptable to diverse needs. Traditional assistive solutions, while valuable, often lack the K.Rajalakshmi Department Computer Applications CMR Institute of Technology Bangalore, Karnataka
+
+rajalakshmi.k@cmrit.ac.in
+
+interactivity and contextual relevance required for effective digital education [13] . To address this, this paper presents 'I HELP  YOU'  (IHY),  an  AI -powered  assistive learning framework tailored for visually and speech-impaired users. Utilizing artificial intelligence, natural language processing, machine  learning,  and  haptic  feedback,  IHY  offers  an integrated, accessible learning environment where inclusivity is a core feature [14]. The central innovation of this research lies in the development of a Multiagent Fused Framework, which integrates Conversational User Interfaces (CUIs), transcoding engines, and linguistic adaptation tools [15].  These  components  work  collaboratively  to  create  a seamless  and  intelligent  user  experience  that  empowers learners  with  impairments  to  access,  engage  with,  and benefit  from  digital  educational  content  on  par  with  their peers [16]. This  paper  outlines the architecture of the proposed framework, details the development of a working prototype, and  presents findings from  preliminary  user evaluations [17]. The objective is to demonstrate the feasibility and impact of integrated assistive technologies in promoting equitable access to education for all -regardless of sensory or communicative limitations.
+
+## II. LITERATURE REVIEW
+
+Recent advancements in assistive technologies have significantly contributed to enhancing the educational experiences  of  visually  and  speech-impaired  learners  in digital  environments.  The  scope  of  development  spans screen readers, Braille learning tools, speech-to-text systems,  haptic  interfaces,  adaptive  user  interfaces,  sign language recognition, emotion-aware systems, conversational AI, integrated assistive  frameworks,  and immersive learning platforms such as AR/VR. These innovations  collectively  aim  to  establish  an  AI-powered, multimodal  assistive  framework  for  inclusive  learning.  [1] evaluated  screen  readers  like  JAWS  and  NVDA,  which convert text into speech for visually impaired users. Though effective  for  static  content,  they  struggle  with  dynamic educational elements like mathematical notations and interactive  media.  The  authors  suggested  enhancing  these tools through AI-based semantic analysis to improve contextual comprehension. [2] examined refreshable Braille displays and embossers, noting their limitations due to poor integration  with  Learning  Management  Systems  (LMS). They  proposed  dynamic  AI-based  Braille  converters  to transform digital  content  into  tactile  form  in  real  time.  [3] studied  speech-to-text  engines  based  on  recurrent  neural networks  (RNNs)  and  transformers,  which  demonstrated high  transcription  accuracy.  However,  dialectal  variations, ambient  noise,  and  contextual  errors  hinder  performance. Domain-specific  multilingual  datasets  were  recommended to address these challenges. [4] investigated haptic feedback systems, revealing that learners achieved a 30% improvement  in  comprehension  when  tactile  cues  were combined  with  audio  support.  Their  study  highlighted  the potential of wearable haptic interfaces for delivering context-sensitive feedback. [5] analyzed AI-driven adaptive UI/UX  designs  that  adjust  font  sizes,  contrast  modes,  and interface elements based on user preferences. Their findings indicated improved engagement and reduced cognitive load and  emphasized  the  role  of  deep  learning  in  dynamic personalization. [6] explored sign language recognition (SLR) systems using convolutional neural networks (CNNs) and  transformers  to  interpret  gestures  into  text  or  speech with 88%  accuracy. They advocated embedding  SLR modules into educational platforms to foster real-time classroom  participation  for  speech-impaired  learners.  [7] demonstrated  that  integrating  emotion  recognition  through computer vision techniques could enhance learner engagement by 35% when content delivery was adapted to facial  expressions.  They  suggested  a  multimodal  approach combining voice modulation, emotion AI, and haptic feedback. [8] examined conversational AI bots that leveraged natural language processing (NLP) to assist learners with real-time  queries  and  content  summaries. While effective in basic support tasks, limitations in handling  complex  queries  were  noted,  and  reinforcement learning was recommended for improved contextual understanding. [9]  compared various assistive  technologies and  identified  a  lack  of  interoperability,  noting  that  most tools function in isolation. They recommended a unified AI framework that integrates multiple assistive modalities. [10] evaluated AR  and VR  applications, including Braille conversion through AR and gesture communication via VR. Although effective in enhancing engagement through multisensory immersion, device cost and infrastructure challenges were significant barriers. A scalable, cloud-based approach  was  suggested  for  broad  accessibility.  Despite notable  advancements,  the  review  identifies  gaps  in  realtime  adaptability  and  cross-modal  integration.  To  bridge these  gaps,  this  study  proposes  the  'I  HELP  YOU'  (IHY) framework -an  AI-enabled,  multimodal,  and  interoperable ecosystem  combining  screen  reading,  Braille  conversion, sign language interpretation, adaptive UI, emotion sensing, and conversational AI to create an inclusive digital learning environment for visually and speech-impaired learners.
+
+## III. PROPOSED SYSTEM
+
+The proposed system introduces an AI-driven Multi-Agent Fused  Framework (MAFF) designed to foster an inclusive and adaptive digital learning environment  for Visually Impaired  Persons  (VIPs)  and  Speech  Impaired  Persons (SIPs). This framework integrates Conversational User
+
+Fig3AIbasedfusedFramwork forinteractive leaming for VIPs and Speech Impaired
+
+
+
+## Fig 1. AI based fused framework for interactive learning for VIPs and Speech Impaired
+
+Interfaces  (CUIs),  intelligent  transcoding  mechanisms,  and multilingual  linguistic  tools  to  ensure  real-time,  structured, and personalized learning experiences tailored to the unique needs of differently abled learners. The system architecture is  based  on  a  modular  design  known  as  'I  HELP  YOU' (IHY), which blends intelligent agents with adaptive learning models to enable seamless two-way communication between tutors and learners with disabilities. Key components of the system include the Conversational User Interface (CUI), which facilitates interaction through multiple channels such as voice commands, chatbots, Natural Language Processing (NLP), and video-based outputs.  This  interface  enhances  accessibility  by  allowing users to interact using their preferred mode. Another critical component  is  the  Transcoder,  which  acts  as  a  dynamic bridge between various modalities -such as speech-to-text, text-to-Braille,  and  video-to-sign-language -ensuring  that content is appropriately transformed for each learner's input and output requirements. Additionally, the system incorporates  linguistic  and  multilingual  support  tools  that cater  to  Indian  and  foreign  languages,  enabling  content localization and wider reach. The  IHY  architecture is supported by Figure 1 that illustrate the internal workflow, data  flow  of  the  system  and  IHY  System  Information Transmission Flow and AI-Driven Multi-Agent Fused Framework.
+
+Figure  1  illustrates  how  the  multi-agent  support  system incorporates  the  student,  the  VIP  or  SIP,  and  the  human, who may be the host or instructor. There are two ways that education can be delivered: in real time, or dynamic mode, or on a recorded basis, or static mode. After that, it saves its contents whether static or dynamic in knowledge repositories.  The  student  accesses  the  content  that  the  host or instructor shares in the knowledge  repository. The knowledge repositories act as intermediation for the exchange of knowledge between the tutor and the learner. It should  be  noted  that  the  Tutor  could  also  modify  subject content  in  the  static  mode  according  to  the  learner.  The Tutor  can  withdraw  the  content  from  the  repository  and modify it according to the learners and post it back.   This assistive technology will enable and help a visually impaired person to feel comfortable and will help in getting educated without any difficulties.
+
+It  also  helps  the  tutor  to  know  the  expectations  from  the learner.  Hence  normal  and  abnormal  people  both  being  in the same learning environment can witness education without any disparity, which is facilitated with the assistive help of Artificial Intelligence.
+
+Conversational User Interface is of different varieties, which can  be  chosen  by  the  host,  and  the  learner  based  on  their comfort. If the learner uses one interface and if the host uses another  different  interface,  then  transcoder  is  used  in  the conversion process to mutualize and understand the expectations.
+
+Thus, tutors  and  learners  both  learn  and  understand.  If  the learner is VIP, then audio will be the best resource, which will be automatically chosen. The  learner can choose different assistive tools like web-based, Personal development assistant, Chabot's etc., which can be customized and modernized.
+
+## IV. EVALUATION METHODOLOGY
+
+The AI-driven assistive learning system is developed through  five  key  steps  to  ensure  accessibility,  efficiency, and  engagement.  First,  diverse  datasets  from  VIPs,  SIPs, and  multilingual  users  are  collected  and  pre-processed  for accurate model  training. Next, advanced  deep  learning models like Transformers, CNNs, and GANs are trained to support language, speech, and sign interpretation with supervised and reinforcement learning. Then, the AI models are deployed on cloud platforms featuring adaptive UI and secure  communication.  Extensive  user  testing  refines  the system  based  on  feedback.  Finally,  continuous  monitoring and  updates  maintain  performance,  scalability,  and  data security.
+
+## Steps for AI Driven Multi agent fused framework
+
+Step 1: The Multi-agent Assistance system provides centralized support for both learners and educators.
+
+Step  2: Tutor/Host/Presenter/Teacher/Professor  acts  as  the primary knowledge provider and guide within the framework.
+
+Step 3: Knowledge  Repositories  store content in  two formats:
+
+Step  4: Static  content  includes  subject  materials  such  as videos, texts, audios, and animations. Dynamic content supports online teaching, delivery, learning, and webinars. The Dialogue Recognizer/Transcoder converts content between  multiple  formats,  such  as  speech-to-text,  text-tospeech, text-to-video, image-to-animation, and more.
+
+Step 5: Linguistic Tools enhance  language processing through resources  like  the  Polyglossia  dictionary  and  NLP tools such as Poly AI and Rasa.
+
+Step 6: The AI-Based Computing Module leverages advanced computational techniques, including GANs, CNNs,  and  RNNs,  while  supporting  AI-driven  processes like segmentation, classification, and prediction.
+
+Step  7: The  Collaborative  Feedback  mechanism  provides feedback  loops  between  learners  and  the  system  to  ensure continuous improvement.
+
+Step  8: The  framework  accommodates  learners,  including those  with  visual  or  speech  impairments,  through  features like voice and text interaction.
+
+Step 9: Conversational User Interfaces enable natural, seamless interaction between learners and the system.
+
+Step  10: The  Cloud-Based  Network  acts  as  the  backbone for centralized data and resource management.
+
+Step  11: The Learners Model detects learners' limitations, evaluates their performance, and identifies their preferences for learning (e.g., text, image, audio, or video).
+
+To validate the effectiveness, scalability, and inclusivity of the proposed AI-driven Multiagent Fused Framework (IHY), a comprehensive evaluation methodology was employed, combining both quantitative and qualitative approaches.  User-centric  testing  was  conducted  with  120 diverse participants, including visually and speech impaired individuals, categorized by age, language, and prior experience with assistive technologies. The evaluation utilized  key  performance  indicators  such  as  accuracy  of speech-to-text and sign language recognition, response time of the conversational interface, user engagement  rates, content  accessibility,  and  satisfaction  scores  collected  via Likert-scale  surveys.  Testing  was  carried  out  across  three environments -Static  Mode,  Dynamic  Mode,  and  Mixed Mode -to simulate varied digital learning contexts. Comparative  benchmarking  was  also  performed  against existing assistive learning models, demonstrating the superiority of IHY in accessibility and adaptability. Finally, the system underwent rigorous security and reliability testing  through  stress  scenarios  and  anomaly  detection  to ensure robustness and data integrity.
+
+## V. RESULT AND ANALYSIS
+
+Table 1. Evaluation Metrics
+
+| Metric                       | Description                                      | Evaluation Criteria     |
+|------------------------------|--------------------------------------------------|-------------------------|
+| Speech-to-Text Accuracy      | Percentage of correctly recognized speech        | > 90% accuracy for VIPs |
+| Sign Language Interpretation | Accuracy of gesture to text conversion           | > 85% recognition rate  |
+| Chatbot Responsiveness       | Average response time to user queries            | < 1 second              |
+| User Engagement              | Measured by session duration and feedback scores | > 80% positive feedback |
+
+Table 1 presents the key evaluation metrics used to assess the  effectiveness  of  the  inclusive  digital  learning  system. The  Speech-to-Text  Accuracy  metric  ensures  that  voice inputs are accurately transcribed, with a target of over 90% accuracy, specifically for visually impaired persons (VIPs). Sign Language Interpretation measures the system's ability to  convert  gestures  into  text,  aiming  for  a  recognition  rate exceeding 85%. Chatbot Responsiveness evaluates the efficiency of automated support, with an expected response time  of  less  than  one  second.  Lastly,  User  Engagement  is gauged through session duration and feedback scores, targeting over 80%  positive feedback to reflect user satisfaction and sustained interaction with the platform The effectiveness of the proposed AI-driven assistive learning  system  is  evaluated  using  a  comprehensive  set  of performance metrics designed to measure inclusivity, usability, engagement, and security are described in Table.2 and Table.3. The Accessibility Score indicates how effectively  users  with  visual  or  speech  impairments  can interact with and benefit from the learning materials provided  by  the  platform.  The  User  Engagement  Rate captures the average duration that learners actively spend on the  system,  reflecting  its  ability  to  maintain  user  attention and facilitate meaningful learning experiences. The Learning Retention Rate represents the percentage of educational  content  retained  by  learners  over  a  specified period, serving as a key indicator of knowledge absorption and  instructional  effectiveness.  The  Multilingual  Support Coverage  measures  the  number  of  supported  languages, demonstrating the system's capacity to serve diverse linguistic  populations  and  promote  wider  inclusivity.  In terms  of  data  privacy  and  system  integrity,  the  Security Incidents metric reports the number of breaches or privacy violations per 1,000 user interactions, highlighting the platform's  commitment  to  secure  learning  environments. The  Tutor-Learner  Interaction Frequency  quantifies the average number of interactions between tutors and learners on a weekly basis, which reflects the system's support for personalized and responsive instruction. The Digital Literacy Level Improvement captures the self-reported growth in learners' pr oficiency with digital tools, illustrating the  system's  role  in  enhancing  digital  competence.  Lastly, the  Global  Accessibility  Reach  denotes  the  number  of countries  in  which  the  platform  is  actively  deployed  and used, underscoring its scalability and international applicability. This Figure.2 illustrates the anticipated enhancements across eight critical performance dimensions following  the  implementation  of  the  IHY  system.  The highest improvement is observed in Tutor-Learner Interaction (85%), reflecting increased communication frequency  and  engagement  between  stakeholders.  Fig.  2 shows  the  Projected  improvement  percentages  across  key metrics.
+
+Table 2. Outcome Description
+
+|   S.No. | Outcome                  | Description                                                                                                    | Impact                                                         |
+|---------|--------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+|       1 | Enhanced Accessibility   | Multimodal interaction: voice, natural language, sign language recognition, haptic feedback for VIPs and SIPs. | Removes educational barriers; enables inclusive participation. |
+|       2 | Improved User Engagement | Real-time interaction via multi-agent system; personalized dynamic learning at the user level.                 | Increases learner motivation and active involvement.           |
+|       3 | Individualized Learning  | Learners control pace and style with adaptive, personalized content and resources.                             | Leads to better knowledge retention and learner satisfaction.  |
+|       4 | Multilingual Support     | AI-driven translation and linguistic tools support multiple                                                    | Broadens reach to diverse linguistic populations;              |
+
+|    |                                | languages and dialects.                                                                                         | promotes equity.                                                |
+|----|--------------------------------|-----------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|
+|  5 | Increased Security             | Encrypted communication, multi-factor authentication, privacy protocols compliant with standards (e.g., GDPR).  | Ensures data privacy and secure interactions; builds trust.     |
+|  6 | Reduced Distance Barriers      | Real-time feedback and dynamic content adaptation enable seamless tutor-learner interaction across geographies. | Facilitates high- quality remote learning experiences.          |
+|  7 | Higher Digital Literacy        | Continuous AI optimization and user feedback improve digital skills progressively.                              | Empowers impaired learners with essential digital competencies. |
+|  8 | Global Accessibility Framework | Cloud-based, scalable platform accessible worldwide, supporting learners regardless of impairments or location. | Democratizes education; creates a level playing field.          |
+
+Fig 2. Projected improvement percentages across key metrics
+
+
+
+Accessibility Improvement follows closely at 80%, indicating the system's effectiveness in supporting multimodal inputs for users with sensory impairments. User Engagement (75%) and Learning Retention (70%) highlight the platform's capability to sustain user interest and improve knowledge retention through personalized, adaptive content delivery. Multilingual  Support and Security  Enhancement show improvements of 70% and 65%, respectively, indicating  expanded  language  support  and  strengthened privacy  measures. Digital  Literacy demonstrates  a  72% increase, suggesting enhanced user proficiency with digital tools, while Global Accessibility reaches a 68%  gain, signifying broader international reach through scalable cloud-based deployment. These metrics collectively validate the transformative impact of the IHY framework on inclusive digital learning.
+
+Table 3. Accuracy Metrics
+
+| Functionality             | Model Used           | Accuracy (%)   |
+|---------------------------|----------------------|----------------|
+| Speech-to-Text (STT)      | RNN + Transformer    | 92.4%          |
+| Text-to-Speech (TTS)      | Tacotron-2 + WaveNet | 95.7%          |
+| Sign Language Recognition | CNN + GAN            | 88.2%          |
+| Gesture Recognition       | CNN + Optical Flow   | 89.6%          |
+
+Table-4 Response Time (Real-Time Performance)
+
+| Task          | Average Latency (ms)   |
+|---------------|------------------------|
+| Chatbot Query | 230 ms                 |
+
+| Response              |        |
+|-----------------------|--------|
+| Audio Playback        | 310 ms |
+| Sign Language to Text | 540 ms |
+
+The  IHY  system  demonstrated  strong  accuracy  across  its core functionalities, with the Speech-to-Text (STT) module, powered by an RNN + Transformer architecture, achieving 92.4%  accuracy,  while  the  Text-to-Speech  (TTS)  system using Tacotron-2 + WaveNet reached 95.7%. Sign Language  Recognition,  implemented  through  a  CNN  + GAN model, recorded  an  accuracy  of  88.2%,  and  Gesture Recognition, using CNN  with  Optical Flow, achieved 89.6%.  These  accuracies  were  measured  based  on  the percentage  of  correctly  interpreted  inputs  across  diverse acoustic and visual conditions. In terms of real-time performance,  the  system  maintained  low  response  times, with  chatbot  queries  averaging  230  ms,  audio  playback generation at 310 ms, and sign language to text conversion at 540 ms -all within the acceptable threshold of 600 ms for seamless user interaction.  A  comparative analysis  was conducted between the proposed IHY  framework and existing assistive learning systems such as:
+
+Table 5. A Comparative Analysis
+
+| Feature / System                                               | JAWS Screen Reader   | AI Chatbots   | Braille Display   | Proposed IHY Framework   |
+|----------------------------------------------------------------|----------------------|---------------|-------------------|--------------------------|
+| Real-time Conversational Interface (CUI)                       | -                    | ✓             | -                 | ✓✓                       |
+| Multimodal Transcoding (Text ↔ Speech ↔ Gesture)               | -                    | -             | -                 | ✓✓✓                      |
+| Multilingual Support                                           | Limited              | Partial       | Limited           | Extensive                |
+| Adaptive Feedback Loop                                         | -                    | Partial       | -                 | ✓✓                       |
+| Integrated AI Models (GAN, CNN, RNN)                           | -                    | ✓             | -                 | ✓✓✓                      |
+| Cross-device Cloud Support                                     | -                    | ✓             | -                 | ✓                        |
+| Inclusive Multiagent Interaction                               | -                    | -             | -                 | ✓✓✓                      |
+| Security Mechanisms (End-to-End Encryption, Anomaly Detection) | -                    | Partial       | -                 | ✓✓✓                      |
+
+Legend: ✓ = Partial Support ✓✓ = Full Support ✓✓✓ = Advanced/Enhanced Support
+
+The IHY Framework surpasses traditional assistive tools by offering real-time conversational interfaces, multimodal transcoding,  multilingual  support,  adaptive  feedback,  AI integration,  and  cloud  accessibility.  It  uniquely  enables inclusive multiagent interaction and robust security, creating a scalable, intelligent, and accessible digital learning environment for visually and speech-impaired learners.
+
+## VI. CONCLUSION
+
+This study presents a comprehensive and innovative solution  to  a  longstanding  challenge  in  digital  education ensuring equitable  access  for  visually  and  speech-impaired learners.  The  proposed  'I  HELP  YOU'  (IHY)  framework, built on an AI-driven Multi-Agent Fused Framework (MAFF), successfully integrates advanced technologies such as Conversational User Interfaces (CUIs), multimodal transcoding,  haptic  feedback,  adaptive  feedback  loops,  and multilingual  linguistic  tools.  Through  a  carefully  designed system architecture, the IHY  framework  addresses  the limitations  of  existing  assistive  tools  that  often  function  in isolation and  lack  interoperability.  Empirical  evaluation involving 120 diverse participants demonstrated the effectiveness  of  the  system  across  multiple  dimensions, including accessibility, accuracy, user engagement, personalization,  and  security.  The  system  achieved  high accuracy  rates in speech-to-text (92.4%),  text-to-speech (95.7%),  and  sign  language  recognition  (88.2%),  while maintaining real-time responsiveness. It also recorded significant improvements in learning retention, tutor-learner interaction, multilingual support, and digital literacy development. These outcomes validate the practical feasibility  and  impact  of  IHY  as  a  transformative  tool  for inclusive  education.  Moreover,  the  IHY  framework  proves to  be  scalable  and  adaptable,  supporting  both  static  and dynamic modes of instruction and enabling real-time, context-aware content delivery. Its cloud-based deployment and cross-device compatibility extend its reach across geographies  and  learning  environments,  promoting  global accessibility. The incorporation of robust security protocols, including  end-to-end  encryption  and  anomaly  detection, ensures a safe and trustworthy platform for sensitive learner data.  In  essence,  this  research  redefines  the  paradigm  of assistive digital learning by moving from isolated tools to an integrated, intelligent, and learner-centric system. The IHY framework  not  only  bridges  the  digital  divide  for  learners with disabilities but also sets a foundation for future advancements in inclusive education through artificial intelligence. Future work may focus on longitudinal studies, integration  with  national  digital  learning  platforms,  and expansion  into  additional  disability  categories  to  further generalize and enhance the model's applicability.
+
+> [!NOTE]
+> References section has been removed.
+============================================================
+## Paper Source: Edge-IoT and MLLMs for Education and Scene Understanding Assisting Vision and Hearing-Impaired Individuals
+============================================================
+
+## Edge-IoT and MLLMs for Education and Scene Understanding: Assisting Vision and Hearing-Impaired Individuals
+
+Mourad Raif, Hasna Chaibi, Nordine Quadar, Abdessamad El Rharras, and Rachid Saadane
+
+## AbstrAct
+
+The rapid advancement of IoT and edge computing technologies has opened new horizons for creating assistive solutions tailored to individuals with sensory impairments, particularly those with hearing and vision disabilities. This article presents a novel edge-IoT-based framework that integrates multimodal  large  language  models  (MLLMs), multi-object tracking, and scene understanding to develop real-time, responsive assistance for impaired  individuals.  Our  proposed  system  is designed to enhance accessibility and quality of life by providing educational tools and entertainment options that cater specifically to the needs of this community. The proposed solution leverages the computational power of edge devices to process data locally, ensuring low latency and high responsiveness, which are critical for realtime applications. Furthermore, we explore the potential of generative AI models in improving autonomy, with a particular focus on real-time transcription services for the hearing impaired and scene description services for the visually impaired. This work demonstrates the feasibility and effectiveness of using edge-IoT technologies combined with advanced AI techniques to create inclusive environments that empower disabled individuals, ensuring that technological advancements are leveraged to foster accessibility and independence.
+
+## IntroductIon
+
+The integration of Artificial Intelligence (AI) and the Internet of Things (IoT) is transforming the technological landscape, creating unprecedented opportunities for innovation. AI's ability to process vast amounts of data and generate insights, coupled with IoT's capability to collect real-time data from a multitude of sources, is revolutionizing various industries.
+
+This convergence is facilitating smarter environments that can anticipate and respond to needs with  remarkable  precision.  However,  despite these advancements, the value of human-based skills cannot be overstated. While AI and IoT systems excel in data processing and operational efficiency, human intuition, creativity, and empathy remain irreplaceable. The nuanced understanding and emotional intelligence that humans bring to problem-solving and decision-making are critical for areas where technology alone falls short.
+
+For example, in education, Generative-AI is a tool to foster deep connection between educators and learners who suffer from hearing impairment. Also, scene understanding AI-tools, support autonomy, emotional and cognitive growth of the people with visual impairment, towards their surroundings.
+
+The  key  to  maximizing  the  benefits  of  AI and IoT lies in harmonizing these technologies with human-based skills. This balanced approach ensures that while we leverage AI for efficiency and IoT for connectivity, human judgment and adaptability remain at the core of innovation. The future of technological progress depends on this synergy, fostering environments where AI and IoT enhance, rather than replace human expertise.
+
+Based on this fact, holistic and human-based frameworks are crucial to align research development  with  a  good  public  understanding  of opportunities, empower people, and pursue equity access in general, especially for people with disabilities.
+
+Most industry solutions are intended for people without disabilities; our article on access control and intrusion detection is an example [1], the motivation behind our study is to deliver two use-cases of Generative AI usage specifically tailored for this population.
+
+The main contributions of this study can be summarized into two aspects:
+
+Technical: Over  the  years,  research  efforts have focused on adapting IoT physical systems, using the power of blockchain for optimal security in solution design. However, to our knowledge, a  formal  edge-IoT  framework  compliant  with Industry 5.0 has yet to be designed in academic research. Through a use case, this article explores the potential of edge IoT-based technologies to efficiently implement the principles and components of Industry 5.0 at a low cost. We will briefly introduce the latest cutting-edge techniques in the field of generative AI and discover the recent ways it is used in multi-object tracking tasks and
+
+Mourad Raif, Abdessamad El Rharras, and Rachid Saadane are with Hassania School of Public Works, Morocco; Hasna Chaibi is with Polydisciplinary Faculty, Errachidia, Molay Ismail University Morocco, Morocco; Nordine Quadar is with Royal Military College of Canada, Canada.
+
+Digital Object Identifier: 10.1109/IOTM.001.2400202
+
+scenes understanding, audio, and text processing. All these techniques and algorithms will be blended into one solution ready to scale up.
+
+Social awareness: Anticipating the future, the primary challenge for Edge-IoT-based products and services will be the development of practical solutions, fostering collaboration, and ensuring user-friendly assistance. This is particularly crucial for people with disabilities. According to the World Health Organization (WHO), by 2050, there will be 700 million individuals with hearing disabilities, with 80% living in low-income countries [2].
+
+Furthermore, 25% of people over 60 years of age have hearing loss. According to Georgetown University, 18% of the 65+ US population suff  er from visual impairment that cannot be corrected with ordinary glasses, contact lenses, medical or surgery [3]. There are many solutions based on phone speech, sign language, or tactile signing, designed to help individuals with impaired vision and hearing to have a maximum of autonomy. Through this work, we seek to raise awareness among  the  public  that  new  technologies  are opening new horizons for this community, providing a more active experience, and providing affordable technologies for retention or scene understanding.
+
+Most solutions focus on digital accessibility; as can be witnessed in the Harvard accessibility policy, retention is not part of the process. We provide a solution and an opportunity for educational institutions, assistive services, and cinema production companies to take their products and services to the next level.
+
+The structure of this article is as follows: We delve into the literature of Edge-IoT applications for individuals with disabilities, particularly those with vision and hearing impairments. Also, this section examines the recent developments regarding the use of Multi-Modal LLMs in education and entertainment. We introduce our use case, presents the results, and discusses the developed solution. We cover the discussion and limitations. We conclude the article and outlines future work.
+
+## relAted worK
+
+## multImodAl llms In educAtIon And entertAInment
+
+The  integration  of  Large  Multimodal  Models (LMMs)  in  education  and  entertainment  represents a transformative shift in accessibility, particularly for individuals with disabilities. Recent models, such as Kosmos-2 and Flamingo have demonstrated signifi  cant improvements in video captions, for people with hearing impairment, with  high  performance  of  ChatGPT  regarding baseline evaluation systems. For instance, Fathallah et al. [4] achieve a BLEU (Bilingual Evaluation Understudy, to calculate the number of correct predictions of the model, compared to a ground truth captions) score of 67% on YouTube-ASR, 68% on Llama2-13B, and 85% on ChatGPT, opening the fi  eld for more research improvements. The benefi  ts of LLMs extend beyond hearing accessibility, signifi  cantly enhancing scene understanding and real-time processing for visually impaired individuals. Kondandaram et al. [5] demonstrate how LLMs improve interaction with complex digital interfaces for blind users. Their system, Savant, enables users to control graphical user interfaces (GUIs) via natural language commands, eliminating the reliance on cumbersome screen reader navigation. Their study leverages the power of LLMs, by increasing x4 times the task completion speed. Also, LLM-assisted vision accessibility achieves a BLEU score of 89% compared to 64% with OCR-based methods, while improving object detection precision from 72% to 91%.
+
+FIGURE 1. From transformer models to LLMs and MLLMs.
+
+
+
+Figure 1 represents a walkthrough of the entire process, involving the usage of transformer-based algorithms, toward conversational results, regarding text, speech and image processing.
+
+We can clearly see the transformative power of transformer-based architectures in Generative AI. It enables scalable learning, effi cient text generation, and advanced vision-language alignment for real-world applications.
+
+The application of MLLM  in  education, especially for people with disabilities, is still an emerging fi  eld. Bewersdorff et al. [6] explore the potential of MLLMs to revolutionize education by providing personalized learning experiences. The study emphasizes the importance of integrating MLLMs into educational systems without overshadowing the role of educators, suggesting a balanced approach where MLLMs serve as assistive tools rather than replacements for human teachers. This is particularly relevant for students with disabilities, as these models can adapt content to various needs, off  ering alternative explanations or formats that are more accessible.
+
+Wang et al. [7] provide a detailed examination of the reasoning capabilities of MLLM, highlighting their potential to improve learning experiences for disabled people. The study discusses how instruction tuning, prompt design, and using external tools such as Python can enhance MLLMs' reasoning abilities. For visually impaired individuals, these models can off  er detailed descriptions and explanations of visual content, making educational materials more accessible.
+
+In the context of entertainment, Argaw et al. [8]  and Liu et  al. [9]  address  the  challenge of scene understanding in videos, which is crucial for creating accessible content for visually impaired audiences. They focus on leveraging MLLMs to process and interpret long-form video content, providing a more immersive experience for visually impaired viewers. Their work builds on the By reducing dependency on centralized cloud services, edge computing allows for more personalized and adaptive responses from assistive technologies.
+
+temporal segments-of-interest approach, allowing for a nuanced understanding of complex visual narratives in movies and TV shows.
+
+Fan et al. [10] introduce VideoAgent, a multimodal agent designed to improve video understanding without extensive training data. This tool is particularly useful for visually impaired people as it can generate detailed and accessible summaries of video content. By applying such technologies, entertainment providers can offer a more inclusive experience for visually impaired viewers.
+
+In  another  study,  Yang et  al. [11]  present VIAssist, a system specifically designed for visually  impaired  users.  VIAssist  adapts  MLLMs  to the unique needs of visually impaired individuals by providing reliable visual-question answering (VQA) capabilities. The system guides users through capturing better-quality images and accurately answers their queries. This approach significantly improves the usability of MLLMs for visually impaired users, allowing them to interact more effectively with visual content in both educational and entertainment settings.
+
+## AdvAncements In Iot And edge computIng for dIsAbled IndIvIduAls
+
+The incorporation of IoT and edge computing technologies into assistive systems for disabled individuals represents a major leap forward in enhancing their autonomy, and hence their quality of life. By processing data locally at the edge, these systems significantly reduce latency, bolster security, and offer real-time responsiveness, an essential component in assistive technologies.
+
+Real-Time Processing and Secure Communication: Edge computing enables real-time processing, which is a cornerstone of modern assistive technologies.  For  example,  in  communication assistance for people with severe disabilities, such as those who are paralyzed, the ability to interpret and transmit neural signals quickly and accurately is paramount.
+
+Rajesh et  al. [12]  demonstrated  that  edge computing can facilitate secure brain-brain communication by processing the electroencephalography signals (EEG) at the edge, thus ensuring that sensitive data are transmitted securely and promptly between the patient and the caregiver. This approach enhances the efficiency of these assistive systems and ensures that critical communication occurs without delays, which could compromise the user's safety and well-being.
+
+Security is another crucial advantage provided by edge computing. By handling data encryption  and  decryption  locally,  edge  computing minimizes the risks of transmitting sensitive information over potentially insecure networks. This is particularly important for assistive devices, as these devices often handle personal and sensitive data. Rajesh et al. [12] highlighted how their proposed Novel Tiny Symmetric Algorithm (NTSA) efficiently encrypts data at the edge, ensuring secure communication in IoT-enabled assistive systems.
+
+Accessibility  and  Quality  of  Life  Enhancement: Edge computing also plays a pivotal role in improving accessibility and ensuring a higher quality of life for disabled individuals. Rathee et al. [13] emphasized the importance of designing edge computing systems that prioritize accessibil- ity and are designed to meet the unique needs of disabled users. Their research focused on creating trusted edge computing frameworks that not only enhance the functionality of assistive devices but also ensure that these systems are user friendly and accessible to all, regardless of the user's specific impairments.
+
+By reducing dependency on centralized cloud services, edge computing allows for more personalized and adaptive responses from assistive technologies. For example, wearable devices that assist visually impaired people can take advantage of edge computing to process real-time video data, providing immediate and contextually relevant feedback. This enhances the user's situational awareness and autonomy, allowing them to navigate their environment more effectively.
+
+Energy Efficiency and Portability: Energy efficiency is another critical factor in deploying IoT and edge computing in assistive technologies. These devices, often portable and used in various environments, require efficient energy management to function effectively over extended periods. By processing data locally, Edge computing frameworks reduce the need for constant communication with cloud servers, thereby conserving energy and extending battery life.
+
+Rathee et  al. [13]  also  discussed  how  edge computing can be optimized for low-power devices, making these technologies more viable for daily use by disabled individuals. This focus on energy efficiency enhances the usability of these devices and ensures that they remain operational in situations where access to power sources is limited.
+
+Advances  in  IoT  and  edge  computing  are transforming assistive technologies for disabled individuals, making them more secure, responsive, and energy efficient. By enabling real-time processing, improving data security, and improving energy management, these technologies significantly improve the quality of life for disabled users. As research in this field progresses, it will be crucial to optimize these systems further to meet the specific needs of disabled individuals, ensuring that the full potential of IoT and edge computing is realized in creating more inclusive and accessible environments.
+
+## use cAse: edge-enAbled generAtIve AI for dIsAbled people AssIstAnce
+
+## overvIew of the solutIon
+
+In our solution, Fig. 2a and Fig. 2b we will address hearing and vision impairment due to aging or health deterioration, ensuring that people's brains have all vision and hearing abilities and that our solution will assist them in maintaining them. This has the advantage of keeping elderly people and people with deteriorated vision and hearing sharp and in good control of their lives. We suppose that  a  person  suffers  from  only  one  disability, hearing or vision.
+
+For impaired hearing individuals, we produce a transcription and multiple-choice generation to assist them in getting a good understanding of educational content. For individuals with impaired vision, we provide a framework that entertainment production companies can use to offer a new cinema experience to this population.
+
+## methodologIes, ArchItecture, And mAterIAl
+
+## Methodology:
+
+Data:
+
+-  For impaired hearing individuals, we simulated an inspirational speech made by Chris Anderson, the founder of TED Talks, about the  key  points  for  delivering  high-impact public  presentations.  For  evaluations,  we used the CommonVoice-fr dataset.
+-  For impaired vision individuals, we took a sequence from the movie "Casablanca" for the proof of concept.
+- Theoretical and practical tools:
+- Large  language  models  (LLMs): these  are frameworks  based  on  training  of  large deep-learning neural networks. Their main contribution is their ability to substantially promote conversational systems, based on the enormous volume of training data used.
+- Multimodal Large Language Models (MLLMs): These  are  models  which  scaled  up  LLMs from Natural Language Processing (NLP) to image and video processing. In our solution, we used:
+- -Whisper: a large language model from openAI responsible for speech transcription into text. We use its distilled versions: tiny, small and base;
+- -Mixtral: it is the cornerstone LLM from the French  AI  company  Mistral,  responsible for compiling text and reading Quizzes for retention and understanding purposes.
+-  Transformers: They represent the backbone of  large  language  models  based  on  the notion of tokenization, for models long term memory retention.
+- Haggingface: this is a collaborative platform, filled with available models to use, ranging from speech to text, text to speech, image to image and any use case possible through large models.
+- Object detection and multi-object-tracking techniques: these are techniques responsible for detecting and fallowing objects through frames, for scenes understanding.
+- Moviepy: A  Python  library  for  automated video edition.
+
+Solution Architecture: Figure 2a and Fig. 2b represent the pipelines, incorporating individuals with hearing and vision impairments in our solution.
+
+For a population with vision disabilities, the biggest challenge is to apprehend the surrounding context and video content. Our solution has many applications, including interactive scene understanding and movie description. For example, in public spaces, people can choose when to record a video and pass it to the pipeline for processing. The audio will be directed to one ear. The video fl  ow description will be directed to the other ear after applying a specialized LLM such as Kosmos2 and then transcribed using another text-to-speech LLM, the FastSpeech2 model. We will provide a more specifi  c schema for movie processing Fig. 4 and Fig. 5.
+
+For impaired Hearing, let's imagine a classroom  with  students  with  hearing  impairment. While the teacher presents his content, many points might raise comprehension concerns for them, resulting in discomfort and confusion, leading to school drawbacks.
+
+
+
+FIGURE 2. a) Conceptual solution design for impaired vision persons; b) conceptual solution design for impaired hearing persons.
+
+TABLE 1. Solution results vs. Llama2 and ChatGPT.
+
+| Our solution   | Model   | Parameter count   |   BLEU |   WER |
+|----------------|---------|-------------------|--------|-------|
+| Our solution   | Tiny    |  39 million      |  42.13 |  0.42 |
+| Our solution   | Base    |  74 million      |  57.12 |  0.29 |
+| Our solution   | Small   |  244 million     |  73.17 |  0.17 |
+| [4]            | Llama2  | 13B               |  67.00 |  0.24 |
+| [4]            | ChatGPT | 175B              |  85.00 | 0.098 |
+
+TABLE 2. Energy consumption on the edge and cloud.
+
+| Device              | Tiny     | Base     | Small    |
+|---------------------|----------|----------|----------|
+| AWS instance (A10G) |  180 Wh |  200 Wh |  250 Wh |
+| Jetson nano B01     |  10Wh   |  12 Wh  |  15 Wh  |
+
+Our solution provides the teacher with a button  to  choose  the  important  sections  that  his microphone  will  record  and  send  to  whisper model for transcription. Then, a multiple-choice questionnaire will be generated with Mixtral LLM to test student retention. The teacher has a dashboard to check students' comprehension for further help Fig. 2b.
+
+Our solution and previous analysis provide a new opportunity for this population, which can be scaled up. With further development we can provide a prototype with acceptable dimensions. Considering the amount of computing large language models need, a GPU-based architecture is necessary. We opt for an Amazon Web Service machine with 1 Nvidia A10G GPU and 8CPUs. The jetson nano B01 role is to off  load heavy processing to the AWS instance.
+
+FIGURE 3. The result for speech understanding assistance
+
+
+
+## results for ImpAIred heArIng solutIon
+
+Figure 3 presents the output of our fi  nal solution, following its application to a video input for multiple-choice understanding tests. We selected the Flask framework for the end user due to its ease of implementation. For future iterations, Django or another advanced framework would provide a more robust interface for development.
+
+Our small ASR model achieves state-of-theart BLEU and WER compared to Llama2, while being much smaller and more efficient. Against, ChatGPT our model provides 86% of its BLEU performance with less than 1% of its parameter count, providing the effi ciency of domain-specifi  c ASR models.
+
+Also, the energy effi ciency of our Edge deployment is 20 times more energy-effi cient than AWS.
+
+## results for ImpAIred vIsIon solutIon
+
+In  this  section,  we  delve  into  the  intricacies  of scenes under supervised conditions during movie production. Further steps are required to achieve automation Figure 4, including integrating post-production cut-scene files, which can be processed using the Python library MoviePy and then fed into the processing pipeline shown in Figure 2a. The end-user solution will feature stereo output for individuals with hearing impairments. The strength of this solution lies in its ability to process large volumes of archival information at a lower cost.
+
+However, the system described above, using Kosmos2 for scene description, is only partially self-suffi cient, as illustrated in Figure 5.
+
+The MLLM responds to the question: "What is/ are the actor(s)/actress(es) doing in this picture?.'
+
+To enhance this, our approach involves using supervised learning for object detection and tracking before submitting the results to Kosmos2. We can employ lightweight face detection algorithms like HOG or Eigenface, but challenges will persist for scenes with adverse weather conditions, such as rain or snow, as highlighted in [1], which reported a 30% drop of accuracy under severe weather conditions.
+
+Figure  5  shows  that  despite  the  innovative focus  of  new  MLLMs  on  image  processing, like  Kosmos2,  many  challenges  can  still  arise. The combination of these new techniques with well-established algorithms, like face recognition and multi-object tracking, can have a tremendous impact on future works.
+
+We intend to investigate in depth the parameters which result in some actors' automatic recognition and others only with face recognition.
+
+## dIscussIon And future worK
+
+The integration of IoT and edge computing has shown  tremendous  potential  in  transforming assistive technologies for people with disabilities, particularly those with hearing and vision impairments. Our research demonstrates that leveraging an edge-IoT-based framework incorporating MLLMs, multi-object tracking, and scene understanding can significantly enhance accessibility and quality of life for this population. Processing data locally at the edge ensures low latency and high responsiveness, which are crucial for realtime assistance and empowering user autonomy.
+
+However, the current system is not without challenges. A notable limitation we encountered was the processing bottleneck when processing whisper-medium or large. But the good news is the competitive transcription accuracy with BLEU scores of 42.13 (Tiny), 57.12 (Base), and 73.17 (small) and corresponding WER values of, 0.42, 0.29, and 0.17 respectively. Compared to large state-of-the-art models like Llama2 (67 Bleu, 0.24 WER) and ChatGPT (85 BLEU, 0.098 WER), our lightweight models achieve competitive accuracy while requiring signifi  cantly fewer computational resources.
+
+The bottleneck computation highlights the need for further optimization, in architecture, resources or algorithmic choices, as real-time applications demand more effi cient processing. Addressing this issue requires a combination of more powerful hardware, refined algorithms, and software optimized for edge computing environments.
+
+Energy efficiency remains a challenge, particularly  given  the  computational  demands  of AI  models  integrated  into  portable  devices. Although edge computing reduces reliance on cloud communication, the energy required to run these models can be substantial, 250Wh on AWS against 15Wh on Jetson Nano for the Whisper small model, for example. Future efforts should focus on refi  ning these models to operate eff  ectively within the constraints of edge devices, by developing  lightweight  versions  that  maintain functionality while consuming less energy.
+
+Despite these hurdles, the potential benefi  ts of this technology are substantial. Real-time transcription for impaired hearing people and scene descriptions  for  the  visually  impaired  people off  er signifi  cant advances in accessibility, particularly in educational and entertainment contexts. In addition, the framework we developed could be extended to support other types of impairments, providing new tools for navigation, learning, and more.
+
+Future research should focus on addressing these limitations by developing more efficient algorithms, enhancing hardware capabilities, and further optimizing the system for real-time applications. It will also be crucial to expand use cases to cover a broader spectrum of disabilities and to adapt technology to diverse environments, particularly those with limited resources, to ensure widespread adoption.
+
+## conclusIon
+
+In conclusion, while our system demonstrates the transformative potential of IoT and edge computing in the realm of assistive technologies, it also underscores the need for continuous optimization in energy efficiency, computational cost, and real-time processing. Our approach achieves state-of-the-art transcription accuracy with signifi  cantly reduced computational demands, proving that smaller, domain-specifi  c AI models can rival large-scale models while operating effi ciently on low-power devices. By eff  ectively addressing and overcoming the current technical challenges, we can propel these technologies forward, fostering the creation of more inclusive and empowering solutions specifi  cally tailored for impaired individuals. This advancement will significantly contribute to enhance their independence and overall quality of life, making technology an even more powerful tool for societal improvement.
+
+> [!NOTE]
+> References section has been removed.
+============================================================
+## Paper Source: EmpowerED - Revolutionizing E-Learning for Diverse Abilities through AI/ML
+============================================================
+
+## EmpowerED - Revolutionizing E-Learning for Diverse Abilities through AI/ML
+
+Nithya M
+
+Dept of CSE(5year Integrated) Sri Sai Ram Engineering College
+
+Chennai, Tamil Nadu nithya.cse@sairam.edu.in Shahana Devi V
+
+Dept of CSE(5year Integrated) Sri Sai Ram Engineering College
+
+Chennai, Tamil Nadu
+
+sec21cj021@sairamtap.edu.in
+
+Abstract -To find ways to enhance the e-learning experiences for students with hearing impairments (HI) and visual impairments(VI), this paper investigates the integration of AI/ML technologies. With the objective to transform education, the study looks into integrating sign language, interactive communication technologies, text adaptation, user-friendly interfaces, and adaptable approaches to teaching. The proposed system incorporates advanced AI/ML techniques to enhance accessibility, including real-time transcription of spoken content using deep neural networks (DNN) for HI users. Additionally, a Speech-to-Hand Signs process is developed using Recurrent Neural Networks (RNN) and Natural Language Processing (NLP) to convert spoken language into sign language. For VI users, an advanced Text-to-Speech (TTS) module, powered by algorithms like RNN, is implemented to generate natural-sounding audio from written educational materials. The system further includes an adaptive teaching approach, dynamically adjusting to individual learning styles using NLP and RNN-based models to offer personalized learning pathways, adaptive assessments, and feedback. This AI/ML-driven platform aims to create an inclusive, adaptive, and efficient e-learning environment for students with hearing, visual, and mobility impairments.
+
+Index Terms -Hearing Impairments (HI), Visual Impairments (VI), Speech Recognition, Deep Neural Networks (DNN), Natural Language Processing (NLP), Recurrent Neural Networks (RNN), Speech-to-Hand Signs, Text-to-Speech (TTS), Accessible E-learning, Adaptive Learning
+
+## I. INTRODUCTION
+
+## A. Overview of the issues with traditional e-learning for students with varying abilities:
+
+The conventional e-learning systems have played a pivotal role in broadening the access to education; however, they frequently fall short in adequately catering to the requirements of individuals with diverse abilities. The presence of accessibility barriers poses significant challenges for learners with disabilities, erecting hurdles that impede their educational journeys. Content that is inaccessible, such as images lacking proper tags or documents with incorrect formatting, can make course materials unusable for individuals who depend on screen readers or other assistive technologies. Furthermore, the lack of support for assistive technologies, like speech recognition software or alternative input mechanisms, further restricts accessibility for these users.[11] Moreover, the absence of adaptive features implies that learners with varying abilities may encounter difficulties in navigating course materials or interacting with dynamic elements, leading to feelings of frustration and disengagement. These accessibility hurdles not only obstruct the educational achievements of individuals with disabilities but also sustain disparities in educational access.
+
+## B. The significance of utilizing AI/ML technology to promote inclusive learning via the web:
+
+The integration of machine learning (ML) and artificial intelligence (AI) technologies presents a revolutionary chance to tackle the accessibility issues Shrivani R
+
+Dept of CSE(5year Integrated) Sri Sai Ram Engineering College
+
+Chennai, Tamil Nadu sec21cj046@sairamtap.edu.in Nivetha D
+
+Dept of CSE(5year Integrated) Sri Sai Ram Engineering College
+
+Chennai, Tamil Nadu sec21cj064@sairamtap.edu.in
+
+associated with conventional e-learning platforms. AI/ML techniques, like Natural Language Processing (NLP) models, Long Short-Term Memory (LSTM) networks, and Convolutional Neural Networks (CNNs), may dynamically modify content, interfaces, and interactions to satisfy the various needs of users with varying skills. Through the use of predictive analysis techniques such as Support Vector Machines (SVMs)[3] and Decision Trees, the system is able to evaluate user data and offer tailored learning experiences, adaptive content distribution, and personalized suggestions.Speech-to-Text (STT) and Recurrent Neural Networks (RNN)[2] based on deep learning can translate spoken text into captions or sign language in real-time for students with hearing impairments. Text-to-Speech (TTS) algorithms, improved by natural language processing (NLP), allow the system to translate text-based materials into natural, understandable audio for learners who are visually impaired.
+
+## C. Project goals and parameters for developing a digital platform:
+
+The primary objective of the proposed website development initiative is to establish an AI/ML-based e-learning platform that addresses the accessibility requisites of individuals with varied abilities. To realize this objective, the project will concentrate on designing, crafting, and implementing a usercentric platform that places importance on accessibility, user-friendliness, and engagement. Fundamental attributes of the platform will encompass personalized learning recommendations grounded on individual learning profiles, adaptive content delivery that adapts to the user's preferences and capacities, and comprehensive support for assistive technologies such as screen readers, voice recognition software, and alternative input modalities.[8] Furthermore, the project will underscore the significance of adhering to accessibility standards, such as the Web Content Accessibility Guidelines (WCAG), to ascertain that the platform is accessible to all users. Throughout the developmental phase, user testing and feedback iterations will be carried out to refine the platform's user-friendliness and efficiency. Collaboration with stakeholders, including educators, disability advocacy organizations, and technology specialists, will be pivotal to guarantee that the platform aligns with the diverse requirements of its users. Ultimately, the project aims to enable individuals of all abilities to effectively pursue their educational aspirations by furnishing an inclusive and accessible e-learning setting.
+
+## II. AI/ML TECHNOLOGIES FOR ACCESSIBILITY:
+
+AI and Machine Learning (ML) technologies have indeed brought about a significant revolution in the realm of accessibility within the domain of electronic learning (e-learning), proffering novel and ingenious solutions aimed at catering to the diverse requirements of learners grappling with various forms of disabilities. These cutting-edge technologies not only serve to amplify the accessibility of content but also lend support to adaptive learning methodologies and cultivate user engagement, thereby engendering the establishment of all-encompassing learning environments that are welcoming to individuals from all walks of life.
+
+## A. A comprehensive examination of the applications of AI and ML in tackling the challenges associated with accessibility in the realm of e-learning unveils several key facets:
+
+- 1) The domain of Text-to-Speech (TTS) and Speech-to-Text (STT) Conversion stands out as a pivotal arena where AI-driven systems have made notable strides, furnishing users with speech output that is
+
+remarkably natural-sounding and aids in comprehension for individuals contending with visual impairments or reading impediments. On the other hand, Speech-to-Text (STT) technology facilitates seamless communication and interaction by transcribing verbal discourse into written form, thereby empowering users grappling with motor impairments or restricted dexterity to effectively traverse e-learning platforms.
+
+- 2) The realm of Image Recognition and Description marks another critical juncture where AI showcases its prowess through the deployment of sophisticated algorithms that can dissect visual content and generate descriptive textual representations, thereby facilitating access to and comprehension of images, diagrams, and other visual components commonly embedded within educational resources for users contending with visual impairments.
+- 3) Natural Language Processing (NLP) emerges as a transformative force in enhancing the accessibility of text-based content by enabling a spectrum of features such as voice-activated commands, language translation services, and sentiment analysis tools. These functionalities not only serve to enrich communication and interaction capabilities but also cater to the needs of language learners and users grappling with cognitive or language-related challenges.
+- 4) Personalized Recommendations and Adaptive Learning represent a realm where ML algorithms play a pivotal role in delivering tailored learning experiences customized to individual predilections, capabilities, and learning modalities. By scrutinizing user data and behavioral patterns, these algorithms can proffer pertinent learning resources, finetune content delivery based on user proficiency levels, and administer adaptive assessments aimed at optimizing learning outcomes.
+
+Role of AI/ML in Enhancing Content Accessibility, Adaptive Learning, and User Engagement:
+
+- The provision of Alternative Formats for Content Consumption stands out as a hallmark achievement facilitated by AI and ML technologies, enabling the translation of educational materials into alternative formats such as audio descriptions, transcripts, and braille, thereby ensuring that learners with distinct requirements can seamlessly access and engage with the content.
+- Interactive Features and Personalized Feedback mechanisms are brought into play by adaptive learning platforms harnessing the power of AI and ML to offer an array of interactive elements such as quizzes, simulations, and virtual laboratories, thereby affording hands-on learning experiences and personalized feedback aimed at fostering active engagement and skill refinement.
+- The ethos of Continuous Optimization and Improvement takes center stage as AI and ML algorithms delve into the realms of user interactions, learning behaviors, and performance metrics, perpetually finetuning content delivery mechanisms, bolstering accessibility features, and amplifying user engagement levels. These iterative enhancements are instrumental in ensuring that e-learning platforms remain attuned to the evolving needs and preferences of users hailing from diverse backgrounds.
+
+In a nutshell, the transformative impact of AI and ML technologies on the accessibility landscape within the realm of e-learning cannot be overstated, as they offer a plethora of solutions geared towards empowering learners with disabilities and fashioning learning environments that are truly inclusive. As these technologies continue to evolve and progress, they hold within them the potential to revolutionize the very fabric of educational content delivery, access, and consumption, thereby engendering a state of affairs marked by heightened equity and accessibility in the domain of digital learning.
+
+## III. LITERATURE REVIEW
+
+## A. Overview of Existing AI/ML Applications in E-Learning
+
+The literature extensively discusses the increasing significance of AI/ML applications in addressing accessibility challenges in e-learning environments for individuals with diverse abilities. Various research studies have highlighted the effectiveness of AI/ML algorithms in improving content accessibility, encouraging adaptive learning experiences, and boosting user engagement. Noteworthy applications include personalized recommendation systems that excel in customizing content based on individual learning preferences and styles.[1] Furthermore, techniques in natural language processing have facilitated tasks like text-to-speech conversion and language translation, catering specifically to users with visual impairments or language barriers. The utilization of machine learning models has played a crucial role in analyzing user interactions and preferences, thus enabling the real-time adjustment of content and interfaces to accommodate diverse abilities effectively.[3] These AI/ML-driven solutions serve as essential tools in promoting inclusivity and accessibility in e-learning environments
+
+## B. Review of relevant studies and technologies in accessible web design:
+
+A thorough examination of pertinent research and technologies in the realm of accessible web design reveals a growing emphasis on design principles that prioritize the needs of users with diverse abilities.[4] Key accessibility standards such as the Web Content Accessibility Guidelines (WCAG) provide detailed guidance and methodologies for creating accessible web content. Critical technologies such as screen readers, voice recognition software, and alternative input devices play a crucial role in facilitating access to online content for individuals with disabilities. Furthermore, advancements in web development frameworks and tools have empowered developers to design responsive, accessible, and inclusive web experiences for users with varying abilities. Despite these advancements, challenges persist in implementing and embracing accessible design strategies, thereby emphasizing the necessity for further research and innovation in this field.
+
+## C. Identification of gaps and opportunities for website development in this context:
+
+A meticulous analysis of existing literature reveals numerous gaps and prospects for progress in website development concerning accessible elearning for individuals with diverse capabilities. While current AI/ML applications offer promising solutions for enhancing accessibility and inclusivity, there exists a noticeable lack of research and advancement in areas such as tailored adaptation, real-time feedback mechanisms, and multi-sensory interaction. Moreover, enhanced collaboration among researchers, educators, developers, and end-users is crucial to ensure the seamless integration of accessibility considerations throughout the website development process. By addressing these gaps and seizing emerging opportunities, initiatives in website development can significantly advance in establishing inclusive elearning environments that facilitate effective access and interaction with educational materials for individuals with diverse abilities.
+
+## IV. DESIGN AND DEVELOPMENT OF EMPOWERED WEBSITE
+
+## A. Integration of AI/ML features to support diverse learners:
+
+The use of AI/ML in e-learning is crucial for supporting diverse learners. These technologies provide personalized learning experiences based on individual needs. AI/ML algorithms analyze learner data to recommend suitable courses and resources. Adaptive content delivery methods, like textto-speech, enhance accessibility. Real-time feedback from AI/ML models aids in immediate assessment and personalized recommendations. Assistive technologies on the platform improve engagement for users with disabilities. Predictive analytics help educators anticipate challenges and ensure equitable learning opportunities.
+
+Table 1 - Outlining features and their descriptions for an e-learning platform,where each feature enhances the overall learning experience, promotes engagement, and supports learners with diverse abilities and preferences.
+
+## B. Website architecture and technical specifications:
+
+The architectural design and technical specifications of the EmpowerED website have been meticulously developed to prioritize accessibility and scalability. The streamlined architecture is carefully crafted with responsive design principles in mind, ensuring smooth navigation on various devices and screen sizes. The back-end infrastructure is robust, supported by secure data storage and efficient processing capabilities, establishing a solid foundation for the integration of advanced AI/ML features. ++
+
+Fig 1: The Architectural Diagram presents a comprehensive visual depiction of the fundamental framework and elements comprising a particular system or application. When examining an AI/ML-powered electronic learning platform designed to cater to a wide range of abilities, the architectural diagram serves as a tool to showcase the intricate interactions among various modules, services, and technologies that collectively work towards providing the desired functionality.
+
+Fig 2: The User Interface Design for Accessibility, as depicted in the UML diagram, is fundamentally centered around the concept of an individual user engaging with a website. This design approach specifically aims at developing interfaces that are not only user-friendly but also accessible to those with visual impairments, ensuring inclusivity and equal access to online resources.
+
+TABLE I FEATURES AND DESCRIPTIONS
+
+| Feature                                 |                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|-----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Sign Language Integration               | Description Pioneering sign language integration, which utilizes cutting-edge AI technology to recognize and generate sign language gestures. This innovation is particularly beneficial for users with hearing impairments, as it provides textual or graphical representations for those who do not use sign language, promoting                                                                                 |
+| Interactive Communication Tools         | inclusivity and understanding. EmpowerED offers interactive communication tools like state-of-the-art chat rooms and video conferencing features to facilitate real-time collaboration. These tools, powered by advanced NLP and speech recognition technologies, cater to diverse communication preferences and accessibility needs, creating an engaging and inclusive learning environment                      |
+| Text Adaptation,Readability enhancement | AI algorithms are employed to enhance text adaptation and readability. These algorithms work behind the scenes to analyze and improve textual content, ensuring readability and comprehension for users with cognitive disabilities or language barriers. Techniques such as text simplification, summarization, and translation are utilized to dynamically adapt content to individual preferences and abilities |
+| User-Friendly Interfaces                | The user interfaces of EmpowerED are designed with accessibility in mind, featuring high contrast color schemes, resizable fonts, and keyboard navigation support. AI algorithms analyze user interactions and preferences to dynamically adjust interface elements, ensuring an intuitive and user-friendly experience for all users.                                                                             |
+| Knowledge Databases and Tools           | EmpowerED utilizes AI-driven recommendation systems to create personalized learning experiences for each user. By analyzing user data and learning patterns, the platform suggests relevant resources, courses, and learning pathways tailored to individual needs and preferences, empowering learners to maximize their potential.[10]                                                                           |
+| Real-time Feedback and Assessment       | AI/ML models offer instantaneous feedback on the performance and understanding of learners. The algorithms of Natural Language Processing (NLP) examine the answers provided in quizzes and evaluations, providing prompt feedback and personalized suggestions for additional learning, taking into account the unique strengths and weaknesses of each individual.                                               |
+
+Fig. 1. User Interface design for accessibility
+
+
+
+## C. Implementation strategies and methodologies:
+
+Our implementation strategies and methodologies follow an agile approach, focusing on iterative development, collaboration, and continuous improvement. Cross-functional teams work closely together to prioritize features, define user stories, and implement solutions that meet the diverse needs of our users. Continuous feedback loops are in place to continuously optimize the website's functionality and usability, while thorough testing and validation procedures ensure reliability, performance, and accessibility across the board.
+
+## V. WORKING OF THE SYSTEM
+
+A comprehensive examination of a functional framework for an e-learning platform utilizing Artificial Intelligence and Machine Learning to cater to a wide range of physical abilities would entail the integration of the subsequent elements:
+
+- User Interface: The design of the platform must encompass a userfriendly interface that caters to individuals with varying abilities. This includes the incorporation of features such as customizable font sizes, high contrast modes, keyboard navigation, and compatibility with screen readers, all aimed at enhancing accessibility and usability for diverse users.
+- Authentication and User Profiles: Users should have the capability to create secure accounts and log in safely. The platform should facilitate the establishment of user profiles where individuals can input details regarding their preferences, accessibility requirements, and educational objectives, fostering a personalized and tailored user experience.
+- Content Management System (CMS):** The implementation of a CMS empowers administrators to upload and oversee educational content such as lectures, videos, documents, and interactive exercises. Content should be enriched with metadata to streamline search functionalities and content organization, thereby enhancing the overall user experience.
+- AI/ML Algorithms:The platform should harness the power of AI/ML algorithms for a myriad of purposes, including but not limited to: -Personalized Learning: By analyzing user data to suggest pertinent courses, modules, and resources based on individual learning styles and preferences. -Adaptive Learning: By dynamically adjusting the difficulty level and pace of learning activities in real-time in response to user performance and feedback. -Accessibility Support: Through the utilization of image recognition, natural language processing, and other AI techniques to amplify accessibility features like text-to-speech, speech-to-text, and image descriptions. - User Engagement: By scrutinizing user interactions and behaviors to offer tailored feedback, gamified elements, and interactive learning environments, thereby enhancing user engagement and motivation.
+- Assessment and Progress Tracking:The platform should encompass tools for administering assessments, quizzes, and assignments to evaluate learners' comprehension and advancement. Results should be meticulously monitored and stored in user profiles, affording learners the ability to track their progress over time and make informed decisions regarding their learning journey.
+- Communication and Collaboration Tools: Features such as discussion forums, chat rooms, and video conferencing facilities foster interaction
+
+among learners, instructors, and peers, enabling the exchange of ideas, collaborative projects, and knowledge sharing.
+
+- Accessibility Features:In addition to AI/ML-driven accessibility enhancements, the platform should include standard accessibility features like text alternatives for images, keyboard navigation, and compatibility with assistive technologies, ensuring inclusivity and usability for all users.
+- Feedback Mechanisms: Users should be empowered to provide feedback on aspects such as platform usability, accessibility features, and content quality. Administrators can leverage this feedback to implement enhancements and updates, thereby enhancing the overall user experience.
+- Security and Privacy:Stringent security protocols should be in place to safeguard user data, prevent unauthorized access, and ensure compliance with data protection regulations such as GDPR and HIPAA, thereby fostering trust and confidentiality among users.
+- Continuous Improvement: The platform should undergo regular updates and refinements based on user feedback, technological advancements, and evolving educational methodologies, ensuring that it remains at the forefront of delivering an accessible, personalized, and engaging learning experience for all users.
+
+## VI. EVALUATION AND TESTING
+
+## A. Usability testing and assessment methodology design:
+
+Our approach to usability testing and evaluation encompasses a wide range of methodologies aimed at providing a thorough and comprehensive assessment of website usability. Through the integration of both qualitative and quantitative techniques, we ensure a holistic evaluation process. The utilization of heuristic evaluation allows us to pinpoint potential usability issues by adhering to established principles and guidelines. In addition, taskbased testing enables us to gain valuable insights into user interactions with the website while they perform specific tasks, shedding light on usability and navigation aspects. User interviews play a crucial role in providing qualitative feedback on user experiences, preferences, and challenges encountered during their interactions with the website. Furthermore, the incorporation of the System Usability Scale (SUS) surveys aids in quantitatively measuring user satisfaction and overall usability. By amalgamating these diverse techniques, we are able to comprehensively evaluate various facets of the website, encompassing aspects such as user satisfaction, accessibility, content comprehension, and navigation, which in turn inform iterative enhancements.
+
+## B. Recruiting and involving various user groups (with HI students among them):
+
+We use focused recruitment techniques to make sure that a variety of user groups-including hearing-impaired pupils (HI)-are represented. We reach out to possible participants through partnerships with educational institutions, internet communities, and disability organizations. To promote involvement and feedback from people with a variety of backgrounds and skills, we also offer a variety of interaction channels, including email invitations, social media outreach, and online forums.
+
+## C. Examination of user input and iterative design enhancements:
+
+In order to ensure a diverse representation of user groups in our testing processes, we prioritize the implementation of inclusive recruitment strategies. This entails collaborating with educational institutions, online communities, and disability organizations to engage participants from various backgrounds and abilities, including students with hearing impairments (HI). Tailoring our outreach efforts to specifically target HI students, we utilize accessible communication channels such as email invitations, social media platforms, and online forums. By actively involving HI students and other user groups in our testing procedures, we strive to gain valuable insights into their distinct needs, challenges, and preferences, thereby guaranteeing that the website caters to the requirements of all users effectively.
+
+## VII. CASE STUDIES AND RESULTS
+
+## A. Presentation of the website in practical educational environments:
+
+Presentation of the website in practical educational environments: The significance of user input in steering iterative design improvements cannot be overstated, and as such, we adopt a systematic approach to collect, analyze, and integrate user feedback into the developmental trajectory of the website. Leveraging qualitative coding techniques and sentiment analysis tools, we are able to prioritize and categorize user comments, facilitating the identification of common themes and problematic areas. Thematic analysis further aids in uncovering recurring patterns and insights derived from user feedback. Subsequent to these revelations, we embark on an iterative process of refining the website's functionality, design, and content to align more closely with the needs and preferences of users. By consistently refining the website based on user input, we ensure its responsiveness to the evolving demands of its diverse user base, which includes HI students and other user groups.
+
+## B. Assessment of the website's efficacy in accommodating diverse capabilities:
+
+The implementation and testing phases of the EmpowerED website were conducted in conjunction with educational institutions and organizations, yielding valuable insights into its efficacy within real-world educational contexts. Through case studies, the website's ability to cater to a wide array of learner requirements, particularly benefiting students with disabilities, was exemplified. One such case study conducted at a university illustrated how the AI/ML features of EmpowerED supported visually impaired students through the provision of adaptive content and personalized learning paths tailored to their specific needs
+
+## C. Examination in relation to traditional e-learning platforms and other AI/ML-driven solutions:
+
+An assessment was carried out to compare the effectiveness and advantages of the EmpowerED website against traditional e-learning platforms and other AI/ML-driven solutions. This comparative analysis emphasized EmpowerED's superiority over traditional platforms in terms of accessibility, customization, and engagement. Furthermore, EmpowerED showcased competitive advantages over other AI/ML-driven solutions by offering a comprehensive range of features tailored to support diverse capabilities, including the integration of sign language[2], adaptive content delivery, and real-time feedback mechanisms. These comparisons underscored the unique value proposition of the EmpowerED website.
+
+## VIII. ETHICAL CONSIDERATIONS
+
+- Privacy Protection: The safeguarding of user data and the assurance of respecting privacy rights are fundamental. Elearning platforms need to establish robust data protection measures and transparent privacy policies to educate users about data collection, storage, and utilization practices.
+- Fairness and Equity: E-learning platforms should aim to uphold principles of fairness and equity by ensuring that AI/ML-driven recommendations and evaluations are unbiased and offer equal opportunities to all learners, irrespective of their background, identity, or capabilities.
+- Educational Equity and Accessibility: Ethical considerations encompass the assurance of educational equity and
+
+accessibility for all learners. E-learning platforms need to prioritize accessibility features and inclusive design strategies to cater to diverse abilities and guarantee equal access to educational opportunities.
+
+- Transparency and Explainable: It is essential for AI/ML algorithms to be transparent and explainable, enabling users to comprehend decision-making processes and providing avenues for recourse in case of inaccuracies. Transparency fosters trust and accountability within the e-learning environment.
+- Accountability and Oversight: Mechanisms should be in place to ensure that developers and stakeholders are responsible for the ethical consequences of AI/ML-enabled e-learning platforms. Oversight mechanisms, ethical review boards, and regulatory frameworks can aid in upholding compliance with ethical standards and directives.
+- Bias Mitigation: In the realm of AI/ML, it has been recognized that algorithms have the potential to inadvertently perpetuate biases that exist within the data used for their training. To address this issue, developers are advised to take proactive measures to mitigate bias by utilizing a wide range of diverse datasets, incorporating fairnessaware algorithms into their models, and conducting regular audits and monitoring activities to detect and rectify bias in the decision-making processes of AI systems.
+- Informed Consent: A fundamental principle in the ethical use of AI/ML technologies is the concept of informed consent, which asserts that users should have the autonomy to make knowledgeable decisions regarding the collection and utilization of their data for AI/ML applications. This principle should be upheld by e-learning platforms, which are encouraged to provide transparent and easily understandable information about how user data is utilized, and to seek explicit consent from users prior to gathering or processing their data.
+
+## IX. CHALLENGES AND INSIGHTS ACQUIRED FROM THE DEVELOPMENT
+
+## A. Technical Challenges
+
+-Algorithm Accuracy: Ensuring the accuracy of speech recognition, text-to-speech, and speech-to-sign language algorithms posed significant challenges. Continuous refinement and testing were necessary to achieve acceptable performance levels.
+
+- Integration Complexity: Integrating various AI/ML technologies into a cohesive platform required careful planning and execution. Balancing functionality with user-friendliness was a key focus.
+
+## B. User-Centered Design
+
+- Diverse User Needs: Addressing the diverse needs of users with different disabilities required a deep understanding of their unique challenges. User feedback and testing played a crucial role in shaping the platform's features and interface.
+
+-Accessibility Standards: Adhering to accessibility standards was essential to ensure the platform was usable by all users. This required ongoing evaluation and adjustments to meet compliance.
+
+## C. Scalability and Performance
+
+- System Scalability: Ensuring the platform could handle a growing number of users without compromising performance was a significant challenge. Implementing efficient backend systems and scalable infrastructure was critical. - Data Security: Protecting user data and ensuring privacy was paramount. Implementing robust security measures and complying with data protection regulations were key priorities.
+
+## D. Educational Impact
+
+- Measuring Effectiveness: Evaluating the educational impact of the platform on disabled learners involved collecting and analyzing extensive user data. Continuous assessment helped in identifying areas for improvement and validating the platform's efficacy.
+
+-Adaptive Learning: Developing adaptive learning algorithms that could dynamically adjust to individual user needs required extensive research and testing. The insights gained from user interactions informed the development of more personalized learning experiences.
+
+## X. SUGGESTIONS AND FUTURE STUDIES
+
+A. Challenges and Insights Acquired from the Development and Execution of a Website:
+
+- -Technical Obstacles: The resolution of technical challenges in the integration of sophisticated AI/ML functionalities, while ensuring compatibility and scalability, proved to be quite demanding.
+- Considerations for Accessibility: The task of addressing varied accessibility requirements and ensuring adherence to accessibility standards presented notable difficulties, yet yielded valuable insights into the principles of inclusive design.
+
+-Engagement of Users: To engage a diverse set of user segments and obtain substantial feedback, proactive outreach strategies and continuous communication channels were necessary.
+
+## B. Opportunities for Website Development and Enhancement:
+
+-Enhancement of Features: A continuous enhancement of the website can be achieved through the addition of new AI/ML-powered features, such as virtual reality simulations or personalized learning aids.
+
+-Global Expansion: To broaden the reach, content can be translated into various languages and resources can be customized to suit diverse cultural settings.
+
+-Formation of Community: The establishment of an online community comprising learners, educators, and advocates for accessibility can facilitate the exchange of resources, dissemination of best practices, and mutual support in their learning endeavors.
+
+## XI. CONCLUSION
+
+In conclusion, the development of an AI/ML-based elearning platform tailored to individuals with a diverse range of abilities signifies a significant advancement in promoting inclusivity, accessibility, and efficacy within the realm of online education. Through the integration of AI/ML tools, such a platform has the potential to effectively address the accessibility challenges encountered by learners with disabilities, personalize learning experiences to cater to individual needs, and optimize learning outcomes for all users.
+
+The review of existing literature highlights the increasing significance of AI/ML applications within the domain of elearning, alongside the progress made in the realm of accessible web design and the identification of new prospects for website enhancement. These findings underscore the transformative potential of AI/ML technologies in surmounting barriers to accessibility and enhancing the overall usability of e-learning platforms for individuals with diverse capabilities. Moreover, they point to the need for ongoing research and innovation to ensure that e-learning platforms remain adaptable and responsive to the evolving needs of learners with disabilities.
+
+The depiction of the platform's architecture and the design of its user interface with a focus on accessibility offer a visual elucidation of how the various components of the platform interact with each other, and how accessibility features are seamlessly integrated into the user interface. These design aspects play a pivotal role in ensuring that the platform is easy to navigate and accessible to all learners, irrespective of their abilities. The thoughtful incorporation of features such as speech-to-text, text-to-speech, adaptive learning algorithms, and haptic feedback devices demonstrates a commitment to creating an inclusive educational environment that can accommodate a wide range of learning preferences and requirements.
+
+Furthermore, the platform's ability to provide real-time transcription of spoken content, convert written materials into audio formats, and adapt to individual learning styles highlights the versatility and power of AI/ML technologies in enhancing educational accessibility. For instance, the use of deep neural networks (DNN) and convolutional neural networks (CNN) for speech recognition, combined with natural language processing (NLP) and recurrent neural networks (RNN) for speech-to-hand signs conversion, illustrates how advanced algorithms can be leveraged to create a more inclusive learning experience. Similarly, the integration of text-to-speech (TTS) modules using WaveNet and Long Short-Term Memory (LSTM) networks ensures that visually impaired learners can access written content with ease.
+
+The platform's adaptive learning components, powered by machine learning models such as decision trees and clustering algorithms, offer personalized learning paths, assessments, and feedback, further enhancing the educational journey for each user. By analyzing user preferences and learning behaviors, the platform can dynamically adjust content delivery to meet the unique needs of each learner. This level of personalization is particularly beneficial for learners with disabilities, who may require tailored support and accommodations to succeed academically.
+
+Therefore, the development of an AI/ML-driven e-learning platform holds great promise in creating learning environments that are not only inclusive but also accessible, thereby empowering individuals with diverse abilities to effectively pursue their educational objectives. By harnessing the potential of AI/ML technologies, incorporating features that enhance accessibility, and adhering to design principles that prioritize the user experience, such a platform has the capacity to revolutionize online education and facilitate equal access to learning opportunities for everyone. This project underscores the importance of continuous innovation and collaboration in the field of educational technology, as we strive to build a more inclusive and equitable future for all learners. The commitment to accessibility and inclusivity reflected in this platform serves as a model for future developments in the field, demonstrating how technology can be used to break down barriers and create opportunities for all.
+
+## ACKNOWLEDGEMENT
+
+The author would like to thank Dr. M. Nithya for her wise counsel and perceptive remarks over the course of the study. The authors suggest that the concepts and ideas found in this book were developed on their own initiative. However, they would want to thank everyone who took part in this research.
+
+> [!NOTE]
+> References section has been removed.

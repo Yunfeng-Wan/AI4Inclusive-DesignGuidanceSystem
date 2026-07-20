@@ -1,0 +1,395 @@
+============================================================
+## Paper Source: From feedback to Insight: Uncovering gender bias in STEM evaluations through NLP
+============================================================
+
+
+
+## From feedback to Insight: Uncovering gender bias in STEM evaluations through NLP ☆
+
+Enrique Diaz de Leon Lopez
+
+*
+
+Tecnologico de Monterrey, Escuela de Ingeniería y Ciencias, Monterrey, Mexico
+
+## A R T I C L E  I N F O
+
+Keywords: Educational innovation Higher education NLP Sentiment analysis
+
+STEM
+
+## 1. Introduction
+
+While  NLP  enables  large-scale  analysis,  it  remains  limited  in capturing deeper contextual nuances. Future research should incorporate longitudinal and cross-disciplinary data to enhance bias detection and mitigation. Our study contributes empirical, data-driven insights to support the design of more equitable evaluation systems and to inform broader reforms in faculty assessment practices (see Table 3).
+
+Our study uses NLP to investigate gender bias in student evaluations. We analyze 70,000 evaluations from a private STEM university in Latin America  to  understand  how  gender  perceptions  influence  evaluative language. The dataset includes comments in both Spanish and English. Our  methodology  accounts  for  this  linguistic  diversity  to  ensure  a comprehensive analysis.
+
+Recent  research  shows  that  machine  learning  effectively  detects sentiment  in  large  datasets.  For  example,  Bangyal  et  al.  (2023) compared different models using COVID-19 Twitter data, demonstrating the effectiveness of ensemble approaches. Zamir et al. (2024) demonstrated  that  combining  traditional  classifiers  with  robust  text  preprocessing enhances the detection of misinformation.
+
+Researchers have documented gender bias in student evaluations,
+
+## A B S T R A C T
+
+Gender bias in faculty evaluations threatens equity in higher education. Our study uses Natural Language Processing (NLP) to analyze 70,000 student evaluations from a Latin American STEM university, revealing statistically significant disparities in how students assess male and female professors and exposing implicit bias in qualitative feedback. To achieve this, we developed a framework that combines sentiment analysis, thematic extraction, and stratified sampling to control for demographic differences. Results show significant differences in language and sentiment between male and female faculty evaluations, with additional variation by contract type and  department,  highlighting  the  complex  interaction  between  structural  and  perceptual  factors  in  student feedback. While NLP offers powerful tools for analyzing large datasets, it may overlook subtle contextual details; therefore, we incorporate cross-disciplinary methods to enhance bias detection. Ultimately, our study provides data-driven insights to inform the design of more equitable faculty evaluation systems.
+
+especially in social sciences. However, few studies use NLP to examine STEM contexts. Most existing research compares numerical ratings but misses subtle patterns in qualitative feedback. Our study fills that gap by using sentiment analysis and machine learning to reveal gendered disparities in STEM course evaluations, with particular attention to how gender intersects with departmental affiliation and contract type.
+
+Our study makes three key contributions to understanding gender bias in student evaluations. First, we combine sentiment analysis with numerical scoring to capture both emotional and evaluative aspects of feedback. Second, we design a mixed-methods framework that identifies patterns of bias across departments, contract types, and faculty gender, integrating NLP tools from computer science with theoretical perspectives from gender studies and educational assessment. Third, we provide empirical evidence and actionable recommendations that support the development of equity-oriented institutional reforms. We also propose a dashboard system to help universities monitor and improve evaluation practices. This work exemplifies interdisciplinary innovation and contributes  to  broader  academic  and  policy  conversations  on  fairness, accountability,  and  methodological transparency  in  STEM education. We presented some preliminary findings from this research at the 2025 IFE  Conference  (Díaz  de  Le ´ on &amp; Salazar,  2025).  The  present  article
+
+☆ I appreciate your consideration of my work and am looking forward to the possibility of contributing to the scholarly discussions facilitated by your esteemed journal. Please do not hesitate to contact me for further information or clarification.
+
+* 2501 Eugenio Garza Sada Ave., Monterrey, Nuevo Le ´ on, 64700, Mexico. E-mail address: ediazdeleon@tec.mx.
+
+Contents lists available at ScienceDirect
+
+## Social Sciences &amp; Humanities Open
+
+journal homepage: www.sciencedirect.com/journal/social-sciences-and-humanities-open
+
+
+
+E. Diaz de Leon Lopez
+
+builds upon that foundation by introducing a refined focus on gender bias  and  significantly  expanding  the  statistical  and  methodological analysis.
+
+To contextualize these contributions and highlight the relevance of our approach, we begin by reviewing the literature on student evaluation bias and the use of NLP techniques in educational research.
+
+## 2. Literature review and theoretical foundation
+
+## 2.1. Student evaluations, bias, and language in education
+
+Higher  education  institutions  widely  use  student  evaluations  to assess  the  effectiveness  of  their  teaching.  Nevertheless,  growing  evidence suggests these evaluations may contain implicit biases that distort results. Research acknowledges both the practical value and limitations of student evaluations, particularly concerning gender and institutional influences (Kidd &amp; Latif, 2004; Mart, 2017; Simpson &amp; Siguaw, 2000; Spooren et al., 2013).
+
+More recent studies offer strong evidence of persistent gender bias in student evaluations. Stoesz et al. (2023) and Iatrellis et al. (2024) report consistent bias favoring male instructors, particularly among male students.  These  findings  align  with  those  of  Mengel  et  al.  (2019),  who demonstrated consistent disparities in the evaluation of male and female faculty across various academic settings. Our results mirror this pattern, reinforcing the view that evaluative practices deeply embed such biases rather than treating them as isolated incidents. These consistent findings highlight the urgent need to reexamine evaluation systems to promote equity, especially in STEM education, where bias remains understudied.
+
+Scholars are increasingly scrutinizing the influence of gender bias in student evaluations, particularly concerning the systematic disadvantages  that  female  and  minority  faculty  members  experience.  Kharusi (2023), for example, applied the Mann-Whitney U test to reveal significant differences in perception between students and faculty regarding teaching quality, providing evidence of gender disparities.
+
+In STEM-specific contexts, Zheng et al. (2023) found that students more  frequently  described  male  professors  using  terms  related  to competence  and  authority.  In  contrast,  they  evaluated  female  instructors based on personality traits and interpersonal characteristics. These findings align with those of Stoesz et al. (2023), who also observed persistent evaluative biases favoring male faculty, particularly among male students. Collectively, this body of work highlights the systematic and language-based nature of bias in academic evaluations, reinforcing the imperative to reform current assessment practices.
+
+These  findings  highlight  the  need  for  methodologically  rigorous approaches  that  can  guide  institutional  decision-making.  Our  study builds on recent scholarship by applying large-scale analysis to a STEM context in Latin America, where research on evaluative bias remains limited. By integrating NLP techniques with a contextualized research design, we offer clearer and more applicable insights into how gender dynamics shape academic assessment. Ultimately, this work supports the development of data-driven evaluation models that promote fairness, accountability, and institutional equity.
+
+Existing studies have highlighted gender bias in student evaluations and explored the potential of NLP in educational settings. However, few researchers have integrated these threads into a unified, robust analytical approach that can guide institutional decision-making. Moreover, most  prior  work  has  focused  on  English-speaking  or  Western  higher education systems, leaving a gap in culturally and structurally diverse contexts. Our study addresses that gap by applying sentiment analysis to student  evaluations  in  a  Latin  American  STEM  university,  providing analytical depth with regional relevance. In doing so, it contributes to ongoing academic debates around algorithmic fairness, faculty equity, and the role of AI in shaping educational policy.
+
+Building on these calls for algorithmic fairness, recent advances in NLP  provide  promising  avenues.  Recent  advances  in  NLP  offer  new methods for detecting bias in educational evaluations. Caratozzolo et al.
+
+(2022) and T. Shaik et al. (2022) demonstrate how NLP effectively reveals  implicit  biases  in  student  comments,  revealing  patterns  that traditional metrics often miss.
+
+Other  studies,  including  those  by  Rodriguez-Ruiz  et  al.  (2021), Outman et al. (2024, pp. 267 -274), and T. B. Shaik et al. (2023), have shown that  artificial  intelligence  and  linguistic  analysis  can  uncover subtle gendered language in academic assessments. These findings underscore  NLP ' s  capacity  to  detect  patterns  that  are  often  invisible through numerical scoring alone. Furthermore, Roscoe (2022) and T. B. Shaik  et  al.  (2023) argue  that  values-driven  approaches,  when  integrated  with  NLP,  can  promote  more  equitable  teaching  practices, particularly in STEM contexts where structural inequities often persist. Together,  these  studies  highlight  the  untapped  potential  of  NLP  to inform the design of fairer, data-driven evaluation systems in higher education.
+
+Although recent methodological advancements have improved the ability to detect implicit bias, findings across studies remain inconsistent and often depend on institutional context. For example, Bhanvadia et al. (2024) report  considerable  variability  in  how  gender  bias  manifests across universities, in contrast to the more consistent patterns observed by Zheng et al. (2023) and Outman et al. (2024, pp. 267 -274). These divergences underscore the complexity of evaluating teaching performance and suggest that student feedback is shaped not only by individual instructor characteristics but also by broader organizational and disciplinary cultures.
+
+## 3. Research objectives and questions
+
+How can researchers use Natural Language Processing (NLP) on largescale  student  evaluations  in  STEM  to  uncover  implicit  gender  biases  that traditional assessment methods often overlook?
+
+This  central  research  question  frames  the  study ' s  objective:  to explore  the  intersection  of  language,  perception,  and  institutional evaluation  practices  to  promote  more  equitable  assessment  systems. Understanding how evaluative language encodes implicit attitudes is crucial for developing fairer and more inclusive frameworks for faculty evaluation.
+
+Our study builds on prior research in educational equity and algorithmic ethics. It uses NLP to uncover intersectional patterns of evaluative bias -particularly those related to contract status and disciplinary context -that often remain hidden in conventional analyses. By adopting a gender-sensitive lens, the study contributes both empirical findings and methodological advancements for integrating NLP in higher education contexts. The study challenges the overreliance on quantitative metrics. These metrics often obscure evaluative nuance, mainly when influenced by unconscious bias. In doing so, it aligns with global efforts to apply AI responsibly in academic settings and to foster more inclusive, context-aware decision-making processes.
+
+## 4. Method
+
+Our study employs a structured, multi-phase methodology to identify gender-related  sentiment  patterns  in  student  evaluations,  utilizing advanced  NLP  techniques.  The  approach  integrates  qualitative  and quantitative  methods  to  ensure  analytical  rigor  while  incorporating demographic  and  contextual  dimensions.  As  shown  in  Fig.  1,  the methodology  comprises  four  interrelated  components  that  together support a transparent and replicable framework for identifying intersectional bias.
+
+To enhance clarity and transparency, Fig. 1 provides a visual summary of the methodological framework guiding this study. The process begins  with  data  collection  and  demographic  stratification,  ensuring adequate representation across gender, department, and contract type. This  foundation  enables  the  research  design  to  target  key  analytical objectives, such as identifying bias patterns and sentiment disparities. Implementation tools, including NLP algorithms, lemmatization E. Diaz de Leon Lopez
+
+## Visual Framework of the Methodological Approach
+
+## StudentEvaluationData
+
+Fig. 1. Visual framework of the methodological approach.
+
+
+
+processes, and classifier models, operationalize the research strategy. Finally,  statistical  validation  ensures  methodological  rigor  through cross-validation, effect size estimation, and interaction testing. These four components, together, form a cohesive and replicable framework that institutions can adapt for use in other contexts to detect bias in academic evaluations.
+
+## 4.1. Data collection and demographic diversity
+
+Our  study  analyzes  70,000  anonymized  student  evaluations.  The university collected these evaluations during a single academic semester in 2019 at a private Latin American institution with a strong focus on STEM education. The dataset comprises undergraduate responses from seven  engineering  departments,  including  feedback  on  both  general education and discipline-specific technical courses.
+
+The university collected student feedback through its standardized end-of-semester  evaluation  system  during  Fall  2019.  The  university invited all undergraduate students enrolled in the participating courses to complete an online evaluation form, which included both a quantitative  section  with  Likert-scale  items  and  an  open-ended  qualitative section for written comments. The system is accessible in Spanish and English to accommodate  the  institution ' s bilingual environment. Participation  is  voluntary  and  anonymous, with a  two-week  window provided  for  responses.  The  university ' s  Institutional  Review  Board approves the use of anonymized data for research purposes (IRB-2020087).
+
+At the time of data collection, male instructors comprised 76 % of the faculty, while female instructors made up the remaining 24 %. Full-time faculty accounted for 34 % of the teaching staff, while 66 % held parttime or adjunct positions. Gender representation also varied by discipline:  male  faculty  predominated  in  mechanical  and  electrical  engineering,  whereas  departments  such  as  bioengineering  and  computer science demonstrated a more balanced gender distribution.
+
+To mitigate gender imbalance and ensure valid intergroup comparisons, we applied an under-sampling procedure to the male subgroup, reducing  their  records  from  48,671  to  21,312,  which  matches  the number  of  evaluations  associated  with  female  faculty.  While  this adjustment facilitated balanced analysis, it also introduced a trade-off: reduced variability in instructional contexts for male instructors and a slight decrease in statistical power.
+
+We applied stratified sampling to maintain proportional representation across key variables, including academic department and faculty contract type. Our analysis focused on sentiment classification (positive, neutral, negative), recommendation score (REC, on a 1 -10 scale), faculty gender, department affiliation, and contract status. We extracted REC  values  from  student  responses  to  the  question, ' Would  you recommend this professor to a friend? ' and then computed faculty-level averages. For sentiment classification, we employed a hybrid approach that  combined  automated  machine-learning  techniques  with  a  validated, rules-based annotation process to enhance accuracy.
+
+These structural characteristics not only described the dataset but also informed the design of the analytical model and strengthened its interpretive validity. By correcting demographic imbalances while preserving institutional diversity, we developed analytical frameworks that support generalizability and promote equity-aware insights.
+
+## 4.2. NLP workflow and preprocessing
+
+We obtained access to a university-wide dataset of student evaluations. The institution ' s Academic Services Office collected these evaluations  anonymously  through  a  secure digital platform. Students completed these evaluations confidentially at the end of each academic term  as  part  of  a  formal  university-wide  quality  assurance  process. Although the dataset did not include personally identifiable information,  it  retained  essential  metadata.  This  metadata  included  the department, contract type, and gender of each instructor evaluated.
+
+To  prepare  the  qualitative  responses  for  sentiment  analysis,  we processed the student comments using Lexalytics ® , a commercial NLP engine.  We  tokenized,  cleaned,  and  lemmatized  each  entry  to  standardize the input and reduce linguistic noise. To address data quality, we implemented a two-step validation protocol to identify and exclude unreadable  or  incoherent  responses.  First,  two  researchers  independently flagged responses as ' noise ' if  they were unintelligible or offtopic. Then, a second independent pair of researchers reviewed these classifications  to  ensure  consistency  and  reliability.  This  validation process resulted in the exclusion of approximately 16 % of all comments due to irreparable noise.
+
+We used Lexalytics as the sole NLP tool in this study. It provided both sentiment polarity classifications (positive,  neutral, negative)  and intensity scores. We did not apply deep learning classifiers, such as BERT, or rule-based systems, such as VADER. This choice favored interpretability  and  consistency  across  the  dataset.  We  further  validated  the system ' s sentiment predictions by spot-checking and comparing them with manually labeled data, which enhanced the overall reliability of the sentiment extraction process.
+
+## 4.3. Research design
+
+We employed a mixed-methods framework to examine gender bias in student evaluations of STEM faculty. This design combined the interpretive depth of qualitative analysis with the scalability and statistical rigor of quantitative modeling. Through advanced NLP techniques -particularly  sentiment  analysis  and  opinion  mining -we  processed  a  large  corpus  of  student  feedback.  We  identified  evaluative trends that traditional manual reviews often overlook.
+
+The study pursued three interrelated objectives.
+
+- (1)  to detect patterns in student sentiment using NLP techniques.
+- (2)  to compare recommendation scores across structural dimensions such as gender, department, and contract type; and
+- (3)  to develop predictive and visual tools that support data-driven faculty assessment.
+
+Our research design enabled a multidimensional analysis of evaluation bias in STEM instruction. The resulting methodology achieved both analytical robustness and practical applicability for implementation in institutional assessment frameworks.
+
+E. Diaz de Leon Lopez
+
+## 4.4. Implementation details
+
+We conducted all data preprocessing, statistical analysis, and machine learning model development using commercial and open-source tools. The study used Oracle Endeca for text cleaning and preparation. At the same time, Lexalytics processed sentiment analysis and phrase detection through a lexicon-based NLP engine.
+
+We performed Statistical analyses using Python (SciPy, StatsModels) and SPSS. We applied non-parametric and parametric tests, including the  Mann-Whitney  U,  Chi-square,  two-sample t -test  with  Levene ' s correction, and one-way ANOVA. We selected these variables based on their nature and distributional assumptions, which allowed us to test for differences  in  sentiment  and  recommendation  scores  across  gender, department, and contract type.
+
+Sentiment served as both an outcome variable in classification tasks and an explanatory variable in regression models. We treated it as categorical (positive, neutral, negative) for classification and continuous for  comparative  statistical  tests.  The  study  treated  recommendation scores as continuous variables.
+
+We  trained  two  ensemble  learning  models -Random  Forest  and Gradient Boosting Machines (GBM) -to classify sentiment and examine structural predictors of bias. We implemented both models using stratified training sets to preserve demographic balance. We optimized the hyperparameters using grid search with cross-validation to maximize accuracy and generalizability. GBM consistently outperformed Random Forest in sensitivity and accuracy for less frequent sentiment categories.
+
+We conducted the study on a workstation equipped with an Intel Core i7 processor, 32 GB of RAM, and an NVIDIA GeForce RTX 3060 graphics processing unit (GPU). This configuration enabled complete processing of the whole dataset and model training in under 6 h.
+
+## 4.5. Statistical testing and evaluation metrics
+
+To rigorously assess gender bias in student evaluations, we combined stratified  sampling  with  inferential  statistical  testing  and  predictive modeling.  We  designed  this  framework  to  ensure  validity,  interpretability, and replicability across diverse institutional contexts.
+
+We selected statistical tests based on the scale and distribution of each  variable.  We  applied  the  Mann-Whitney U test  to  compare  the sentiment scores of male and female faculty members without assuming normality. The Chi-square test examined whether the distributions of sentiment categories (positive, neutral, negative) differed significantly by  gender.  For  recommendation  scores  (REC),  we  employed  a  twosample t -test. Levene ' s test for equality of variances indicated heterogeneity (p &lt; 0.001), so we applied Welch ' s correction to adjust the test accordingly (Levene, 1960; Keselman et al., 2004).
+
+To  explore  multivariate  relationships,  we  conducted  multinomial logistic regression to model the influence of gender, department, contract type, and campus on student sentiment. This approach provided interpretable estimates of categorical predictors  across  sentiment categories.
+
+We trained Random Forest and GBM models using sentiment as the outcome variable to complement inferential tests with predictive analytics.  Both  models  demonstrated  strong  classification  performance, with GBM yielding superior accuracy. Inspired by methodologies used by Bangyal et al. (2023) and Zamir et al. (2024), we compare the performance of multiple classifiers and employ standard evaluation metrics (precision, recall, F1-score) to assess model effectiveness. While their work focuses on social media data, our approach extends these techniques  to  academic  feedback  analysis.  These  models  helped  validate patterns found through statistical testing and supported the generalizability of the findings.
+
+The study delivered explanatory and predictive power by integrating statistical inference with machine learning. This multifaceted approach revealed  statistically  significant  and  generalizable  disparities  in  how students  evaluate  male  and  female  faculty  regarding  sentiment  and recommendation scores.
+
+## 4.6. Methodological rigor and interdisciplinary integration
+
+Our study presents a rigorous and scalable methodology for detecting gender bias in STEM faculty evaluations rooted in both computational precision and social insight. By integrating advanced NLP tools with demographic stratification and score normalization, the approach addresses both perceptual and structural forms of bias. The framework stands  out  for  its  transparency  and  replicability.  We  followed  standardized protocols for data preprocessing, including tokenization and lemmatization.  We  then  validated  sentiment  classification  through  a two-phase review conducted by independent expert coders. This dual validation  minimized  annotation  bias  and  ensured  reliability  while structured  under-sampling  balanced  gender  representation  without compromising  institutional  diversity.  Importantly,  the  methodology bridges  disciplines  by  combining  techniques  from  machine  learning, educational measurement, and gender equity research to produce insights that are both technically robust and socially meaningful. Building on this structured methodology, the following section presents the key findings  derived  from  sentiment  analysis,  demographic  stratification, and statistical validation, offering empirical insights into the intersectional patterns of bias in student evaluations.
+
+## 5. Results
+
+This section presents the outcomes of our statistical tests, regression models, and machine learning classifiers applied to student evaluations. The results reveal statistically significant gender differences in numerical scores and narrative sentiment across multiple academic and structural  variables.  These  findings  support  the  hypothesis  that  gender influences how students evaluate faculty in STEM education.
+
+## 5.1. Overview of evaluative patterns
+
+Our analysis of recommendation scores (REC) and sentiment distributions shows subtle yet persistent gender disparities. Male professors received an average REC score of 8.64, compared to 8.57 for female professors.  Although  the  difference  appears  modest,  it  is  consistent across departments and statistically significant.
+
+Sentiment analysis revealed additional layers of disparity. Student comments about male professors were 67.6 % positive, 16.4 % neutral, and 16.0 % negative. Female professors received 66.4 % positive, 17.0 % neutral,  and  16.6  %  negative  feedback.  While  both  groups  received predominantly positive evaluations, female faculty experienced slightly more neutral and negative feedback.
+
+These patterns suggest that gender subtly influences how students frame feedback, particularly in the narrative dimension of evaluations. Departments with a historically higher gender imbalance, such as mechanical  and  electrical  engineering,  exhibited  more  pronounced  disparities than fields with more balanced demographics, like bioengineering and computer science.
+
+## 5.2. Sentiment and score disparities by gender
+
+We conducted a two-sample t -test to compare REC scores by gender. Levene ' s test confirmed heterogeneity of variance (p = 3.55 × 10 7 ), leading us to apply Welch ' s correction. The test yielded a t-statistic of 7.228 and a p-value of 4.98 × 10 13 , indicating a statistically significant difference in mean recommendation scores.
+
+A Chi-square test assessed whether sentiment distributions varied significantly by gender. Results confirmed a significant association ( χ 2 = 6.82, p = 0.033), suggesting that gender affects numerical scores and influences the tone of student comments.
+
+Together, these findings support the presence of gender bias in student evaluations. Even in a balanced sample, male faculty received more E. Diaz de Leon Lopez favorable numerical and narrative feedback.
+
+## 5.3. Intersectional patterns: gender, department, and contract type
+
+We  analyzed  sentiment  and  REC  score  distributions  across  departments to assess how disciplinary context shapes student evaluations. Bioengineering received the highest average REC score (8.73) and the most  favorable  sentiment  (69.5  %  positive).  Departments  with  more traditionally male-dominated cultures, such as mechanical and mechatronics engineering, displayed wider variability in student sentiment.
+
+Departments  with  lower  sentiment  and  REC  scores  may  reflect contextual influences such as course difficulty, instructional style, or faculty-student  interaction  dynamics.  A  Pearson  correlation  of  0.933 between  REC  scores  and  positive  sentiment  supports  the  association between numerical ratings and evaluative language.
+
+We  evaluated  how  faculty  contract  type  (full-time  vs.  part-time/ adjunct)  affects  student  evaluations.  Full-time  faculty  received  an average REC score of 8.74, compared to 8.59 for part-time instructors. They also received a slightly higher share of positive sentiment (68.1 % vs. 66.95 %) and marginally less neutral feedback.
+
+Although both groups received similar levels of negative feedback, the results suggest that students perceive full-time faculty more favorably, possibly due to greater accessibility, continuity, or institutional presence.  These  findings  highlight  the  importance  of  contextualizing evaluations by contract status and ensuring fair assessment practices across employment categories.
+
+We conducted a one-way ANOVA to examine how gender, department, and contract type independently and interactively affect student sentiment. The analysis revealed statistically significant main effects for department (p = 0.001) and gender (p &lt; 0.001), as well as interaction terms for department × gender (p &lt; 0.001) and contract type × gender (p &lt; 0.001).
+
+These results confirm that gender bias does not operate uniformly across the institution. Instead, it interacts with the academic environment and employment status to shape evaluation results. The significant interaction effects between gender, departmental affiliation, and contract type underscore the need for context-aware evaluation systems that account for intersectional dynamics in faculty assessment. To further validate the reliability of our sentiment analysis model and ensure its suitability  for  institutional  use,  we  conducted  two diagnostic  evaluations. Fig. 2 presents the ROC curves, which assess the model ' s ability to
+
+
+
+False Positive Rate distinguish between positive, neutral, and negative sentiments. Fig. 3 displays  the  confusion  matrix,  which  compares  the  predicted  and manually coded classifications. Practitioners widely use these tools in applied machine learning. Researchers are increasingly adopting these tools  in  educational  research  to  assess  classifier  performance  and interpretability (Zawacki-Richter et al., 2019). Their inclusion strengthens the methodological transparency of our study. It provides a robust foundation for integrating NLP-based evaluations into policy-oriented faculty assessment frameworks.
+
+Fig. 2. ROC curves for sentiment classification using the Lexalytics model. The model demonstrates high discriminative  performance across  three  sentiment classes:  Positive  (AUC = 0.95),  Neutral  (AUC = 0.83),  and  Negative  (AUC = 1.00).
+
+Fig. 2 presents the Receiver Operating Characteristic (ROC) curves for the sentiment classifier, highlighting the model ' s ability to distinguish  between  Positive,  Neutral,  and  Negative  categories.  The  ROC curve for the Positive class shows excellent performance (AUC = 0.95), while  the  Neutral  class  also  demonstrates  strong  separation  (AUC = 0.83). Interestingly, the Negative class achieves an AUC of 1.00. However,  this  result  requires  cautious  interpretation  because  the  manual coding process lacked any human-labeled instances of negative sentiment.  This  visualization  confirms  the  model ' s  ability  to  accurately identify sentiment types, thereby supporting its validity as a diagnostic tool in evaluation analysis.
+
+Fig. 3 displays the confusion matrix comparing the predicted sentiment categories from the Lexalytics model to the manual labels assigned by human coders. The model accurately classifies Positive sentiments, although it occasionally misclassifies Neutral comments as Positive and vice versa. This matrix provides evidence of the model ' s precision. It highlights  the  challenges  of  distinguishing  between  closely  related sentiment  expressions,  especially  in  subjective  student  feedback  (see Table 4).
+
+To  illustrate  these  intersectional  dynamics  more  clearly,  Table  5 presents  the  key  statistically  significant  interaction  effects  detected through factorial ANOVA.
+
+To better understand how gender bias interacts with institutional structures, we designed Table 1to summarize the key interaction effects between faculty  gender,  academic  department,  and  contract  type  on student  evaluation  sentiment.  We  employed  a  factorial  analysis  of variance (ANOVA) framework to investigate the factors contributing to disparities in sentiment scores. Our analysis shows that gender alone does not account for these differences; instead, they emerge significantly through interactions with other institutional variables. Instead, these E. Diaz de Leon Lopez Evaluation outcomes by faculty contract type.
+
+Fig. 3. Confusion matrix comparing predicted and manually labeled sentiment classes. The matrix reveals high classification accuracy for the Positive class, with minor confusion between Neutral and Positive categories.
+
+
+
+Table 1 Summary of general statistical results.
+
+| Metric                       | Value                 |
+|------------------------------|-----------------------|
+| Average REC Score - Female   | 8.57                  |
+| Average REC Score - Male     | 8.64                  |
+| t -Test P-Value (REC Scores) | 4.98 × 10 13          |
+| Chi-Squared Test (Sentiment) | χ 2 = 6.82, p = 0.033 |
+
+Table 2 REC scores and sentiment distribution by Department.
+
+Table 3
+
+| Department             |   Average REC Score |   Positive sentiment (%) |   Neutral sentiment (%) |   Negative sentiment (%) |
+|------------------------|---------------------|--------------------------|-------------------------|--------------------------|
+| Bioengineering         |                8.73 |                    69.54 |                   15.11 |                    15.36 |
+| Science                |                8.62 |                    66.85 |                   17.21 |                    15.94 |
+| Computing Engineering  |                8.63 |                    67.66 |                   15.97 |                    16.38 |
+| Industrial Engineering |                8.60 |                    66.75 |                   17.20 |                    16.05 |
+| Mechatronics           |                8.57 |                    66.99 |                   15.88 |                    17.13 |
+| Mechanical Engineering |                8.65 |                    68.09 |                   16.49 |                    15.42 |
+| Sustainable and Civil  |                8.57 |                    65.95 |                   17.48 |                    16.57 |
+
+Table 4
+
+| Contract Type   |   Avg. REC |   Positive (%) |   Neutral (%) |   Negative (%) |
+|-----------------|------------|----------------|---------------|----------------|
+| Full-time       |       8.74 |          68.10 |         15.86 |          16.04 |
+| Part-time       |       8.59 |          66.95 |         16.96 |          16.09 |
+
+ANOVA results -sentiment scores.
+
+Table 5
+
+| Factor                |   Sum of Squares |   DF |   F-Statistic |   p-Value |
+|-----------------------|------------------|------|---------------|-----------|
+| Department            |            1.864 |    6 |         3.617 |    0.0014 |
+| Faculty Contract Type |            0.068 |    1 |         0.797 |     0.372 |
+| Gender                |            1.924 |    1 |        22.400 |  0.000002 |
+| Dept × Gender         |            2.168 |    6 |         4.208 |    0.0003 |
+| Contract × Gender     |            1.233 |    1 |        14.357 |    0.0002 |
+
+Key  Interaction  Effects  Between  Gender,  Department,  and  Contract  Type  on Student Evaluation Scores.
+
+This table summarizes the statistically significant interaction terms identified through factorial analysis of variance (ANOVA). It includes F-statistics, degrees of freedom (df), p-values, and partial eta squared ( η 2) as a measure of effect size. These results show that evaluation sentiment toward faculty is influenced not only  by  gender  but  also  by  departmental  affiliation  and  employment  status. Note. We conducted all analyses using analysis of variance (ANOVA) and reported effect sizes as partial eta-squared values.
+
+| Interaction Term                    | Effect Type           |   F- value | p- value   |   Partial Eta Squared ( η 2 ) |
+|-------------------------------------|-----------------------|------------|------------|-------------------------------|
+| Gender × Department                 | Two-way interaction   |       7.12 | < 0.01     |                         0.043 |
+| Gender × Contract Type              | Two-way interaction   |       5.88 | < 0.05     |                         0.038 |
+| Department × Contract Type          | Two-way interaction   |       4.95 | < 0.05     |                         0.032 |
+| Gender × Department × Contract Type | Three-way interaction |       6.45 | < 0.01     |                         0.041 |
+
+disparities emerge significantly when gender interacts with other institutional variables. The table presents the F-values and corresponding pvalues  for  each  interaction,  along  with  partial  eta  squared  ( η 2 )  to estimate effect size. These metrics indicate not only statistical significance but also the strength of the interaction in practical terms. For instance, the interaction between gender and contract type exhibits a substantial and statistically significant effect (p &lt; 0.001, η 2 = 0.071), suggesting that female faculty in temporary positions face more pronounced disparities  in  evaluative  sentiment.  Similarly,  the  gender × department interaction highlights discipline-specific biases, reinforcing the  need  for  localized  policy  interventions.  This  table  helps  distill complex  statistical  relationships  into  an  accessible  format,  enabling decision-makers  and  scholars  to  understand  how  intersectional  dynamics influence student evaluations (see Table 2).
+
+## 5.4. Predictive modeling and classification accuracy
+
+We  trained  a  multinomial  logistic  regression  model  to  predict sentiment  analysis  based  on  gender,  department,  contract  type,  and campus location. The model revealed that gender significantly influenced the likelihood of receiving positive or negative sentiment, even after controlling for institutional and disciplinary variables.
+
+The model formula is expressed as:
+
+
+
+Where Y represents  the  sentiment  classification,  j  denotes  sentiment categories, and the coefficients ( β ) measure the impact of each predictor on sentiment classification relative to a reference category.
+
+The model accurately classified positive sentiments but performed less reliably with negative or unclear comments. This area highlights the need for nuanced and actionable sentiment classification algorithms.
+
+We trained Random Forest and Gradient Boosting Machine (GBM) classifiers to complement regression modeling. GBM achieved slightly higher accuracy (77.67 %) than Random Forest (76.57 %). Both models performed well in identifying positive sentiments but struggled more with ambiguous or negative categories.
+
+These results support the robustness of the statistical analysis and confirm that gender, department, and contract type predict how students frame their evaluations. Machine learning techniques add interpretive depth by revealing hidden patterns that statistical tests may not detect.
+
+To complement these statistical findings, Fig. 3 presents a heatmap summarizing sentiment distributions across the intersection of gender, contract type, and department.
+
+To  better  understand  how  sentiment  bias  manifests  in  specific institutional settings, we generated a heatmap based on the Monterrey campus. This location accounts for over 30 % of all student evaluations and is statistically representative of broader patterns within the dataset. Fig. 4 visualizes the intersection of gender, contract type, and department in shaping sentiment classifications (positive, neutral, negative). We chose to focus on this subset to enhance visual clarity and interpretability.  Plotting  the  full  dataset  (70,000  records)  would  have introduced  excessive  categorical  combinations,  reducing  readability without  significantly  altering  the  interpretive  insights.  The  patterns revealed -such as fewer positive sentiments for female adjunct faculty in  technical  fields -align  with  statistical  trends  identified  across  the broader sample, reinforcing the structural and perceptual dynamics of bias. This subset thus serves as a reliable proxy to illustrate the complex, intersectional nature of evaluative disparities in a more accessible visual format.
+
+Together, the statistical models, interaction effects, and visual analyses presented in this section reveal that gender bias in student evaluations  is  not  isolated  but  consistently  amplified  through  institutional structures such as department affiliation and employment type. These findings offer strong empirical support for our central research question, highlighting how computational tools can uncover nuanced, intersectional patterns of evaluative bias. In the next section, we discuss the E. Diaz de Leon Lopez Intersectional Category(GenderxContractType×Sentiment)
+
+
+
+Fig. 4. Sentiment Distribution by Gender, Contract Type, and Department (Monterrey Campus Only).
+
+This heatmap visualizes the number of faculty evaluations classified by sentiment (positive, neutral, negative) across gender, contract type, and department at the Monterrey campus -one of the most significant locations in the university system, representing approximately 30.75 % of the full dataset. The chart offers an illustrative view of intersectional disparities in evaluative sentiment.
+
+broader implications of these results and how they inform both future research and institutional policy reform.
+
+## 6. Discussion
+
+Our study analyzed 70,000 student comments using a combined NLP and statistical modeling approach to investigate gender bias in STEM faculty  evaluations.  The  results  uncovered  consistent  disparities  in sentiment  and  recommendation  scores  influenced  by  gender,  departmental affiliation, and contract type. This section discusses the study ' s limitations,  synthesizes  key  findings  within  existing  literature,  and outlines implications for policy and practice.
+
+## 6.1. Limitations and future directions
+
+While our study offers robust insights into evaluative bias, several limitations warrant careful reflection. First, we based our analysis on data  from  a  single  academic  semester  at  a  private  Latin  American institution.  This  scope  may  limit  the  generalizability  of  our  findings across different institutional types, cultural contexts, or academic disciplines. We designed the methodological framework -particularly the integration of sentiment analysis, score normalization, and demographic stratification -to be scalable and adaptable through contextual calibration.
+
+Second, although sentiment analysis enabled scalable processing of narrative feedback, current NLP techniques -including the Lexalytics engine used -struggle to capture linguistic subtleties such as sarcasm, irony, or culturally coded expressions. While the dual-phase, doubleanonymized  validation protocol improved  reliability, interpretive subjectivity  remains  a  challenge  in  automated  text  mining.  Future research  could  integrate  transformer-based  models  or  hybridize  NLP with manual qualitative coding to enhance semantic nuance.
+
+Third, the analysis focused on gender and structural attributes such as contract type and departmental affiliation. It did not account for other salient  dimensions  of  intersectionality,  including  race,  ethnicity,  or linguistic background. Although all students met standardized language proficiency  requirements,  understanding  how  these  social  identities intersect with gender remains an important research frontier.
+
+Fourth, the cross-sectional design restricted our ability to capture temporal trends or assess the impact of policy interventions. Longitudinal  and  multi-institutional  studies  could  reveal  whether  evaluation biases fluctuate over time or respond to reform efforts. Furthermore, although we propose practical mitigation strategies, our study did not empirically evaluate their effectiveness. Experimental or quasiexperimental designs could test whether interventions such as rubric revision,  anonymized  aggregation,  or  bias-awareness  training  reduce disparities.
+
+Fifth, we did not investigate how biased evaluations may influence faculty career outcomes, such as promotion, retention, or tenure. Understanding  these  long-term  implications  would  offer  critical  insight into the structural consequences of biased evaluation systems.
+
+Finally, as NLP techniques continue to evolve, future research should explore  emerging  algorithms  that  increase  sensitivity  to  context, emotion, and discourse patterns in academic language. Integrating such tools may deepen the interpretive power of computational assessments.
+
+Together, these limitations emphasize the importance of advancing a broader research agenda that moves beyond bias detection to address the causes, consequences, and remediation of inequality in academic evaluations. In support of transparency and replication, we will make the  dataset  and  analysis  code  available  upon  reasonable  academic request.
+
+## 6.2. Advancing methodological and interdisciplinary integration
+
+Our results validate the potential of Natural Language Processing, when  combined  with  statistical  modeling  and  machine  learning,  to identify subtle and systemic patterns of gender bias in student evaluations.  These  findings  align  with  constructivist  theories  of  evaluation, which  assert  that  sociocultural  norms  shape  perceptions  of  teaching effectiveness (Bruner, 1996; Mayer &amp; Schwemmle, 2023; Raghunathan &amp; Kandasamy,  2023).  The  gendered  differences  in  recommendation scores and sentiment classification suggest that evaluations reflect not only pedagogical performance but also implicit identity-based expectations.
+
+E. Diaz de Leon Lopez
+
+The evidence supports earlier studies showing that female instructors often  receive  more  critical  evaluations  despite  comparable  teaching quality (Lavy &amp; Megalokonomou, 2024; MacNell et al., 2015). However, the more balanced sentiment distribution in our stratified sample suggests that gender bias in STEM may manifest in subtler or context-specific ways (Cundiff &amp; Vescio, 2016; Mitchell &amp; Martin, 2018; Zheng et al., 2023).
+
+One potential explanation is the ' stereotype promise, ' in which socially reinforced expectations enhance perceived competence for groups (Su ´ arez  Monz ´ on  et  al.,  2022).  This  bias  may  favor  male  faculty  in technical disciplines, reinforcing implicit associations between gender and competence. Furthermore, an intersectional analysis revealed that gender  disparities  vary  by  department  and  employment  status,  confirming that evaluative bias is not uniform but somewhat shaped by broader structural dynamics (Bayeh &amp; Ryder, 2025; Crenshaw, 2013).
+
+Unlike studies that focus solely on identifying bias, our work advances  practical  tools  for  reform.  By  applying  sentiment  analysis  to narrative  feedback,  institutions  can  differentiate  between  legitimate critique and linguistically biased commentary. This approach enables a shift from reactive detection to proactive redesign of evaluation systems. Building on recent advances in NLP and supervised machine learning (Bangyal  et  al.,  2023;  Zamir  et  al.,  2024),  our  approach  adapts state-of-the-art  sentiment  classification  to  the  domain  of  educational assessment.
+
+For institutions,  this  presents  a  clear  call  to  action.  Reforms  may include revised rubrics that focus on observable teaching behaviors, the anonymous aggregation of feedback to mitigate personal biases, and student-facing interventions that cultivate evaluative awareness. These steps can enhance the interpretive value of evaluations while promoting fairness and accountability.
+
+To support future replication and extension, we have documented the  whole  analytical  workflow,  including  preprocessing  pipelines, model specifications, and configuration parameters. We may provide aggregated  data  upon  reasonable  request  to  academic  researchers engaged in open science and critical inquiry.
+
+## 6.3. Implications for evaluation policy and practice
+
+Our study confirms that gender has a significant influence on both the numerical and narrative aspects of student evaluations. These effects are  not  isolated  but  embedded  within  institutional  structures,  disciplinary norms, and employment arrangements. The evidence suggests that gender bias operates through intersecting perceptual and structural channels.
+
+To  ensure  fairness  in  evaluation  systems,  institutions  must  adopt policies  that  directly  address  these  complexities.  One  approach  is  to offer  training  programs  that  help  students  recognize  implicit  bias. Another is to redesign evaluation rubrics to focus on teaching quality rather than delivery style. Institutions should also interpret feedback within context, considering the department, course type, and faculty role. Such measures will not eliminate bias but can significantly reduce its impact and strengthen the validity of evaluative processes.
+
+By  aligning  assessment  practices  with  principles  of  equity,  transparency, and data-informed decision-making, universities can foster a culture of fair recognition and continuous improvement. These reforms are essential not only for protecting faculty from unjust outcomes but also  for  reinforcing  the  institution ' s  commitment  to  diversity  and inclusion.
+
+## 7. Conclusions
+
+Our study demonstrates the value of NLP techniques in detecting and analyzing gender bias in student evaluations within STEM education. By analyzing  70,000  student  comments  through  sentiment  classification and statistical modeling, we identified subtle yet statistically significant disparities in both recommendation scores and narrative tone -differences  shaped  by  faculty  gender,  departmental  affiliation, and employment status.
+
+These  findings  reinforce  long-standing  concerns  about  gendered dynamics  in  academic  evaluation.  Although  most  faculty  received generally positive feedback, male instructors were more likely to receive higher numerical ratings and more favorable sentiment. Intersectional patterns -particularly  those  involving  gender  in  combination  with department or contract type -reveal that evaluative disparities are not merely perceptual but deeply embedded in structural contexts.
+
+Beyond  identifying  bias,  our  research  contributes  a  scalable  and data-driven  methodology  that  supports  institutional  reform.  By  integrating NLP with demographic stratification and score normalization, the study offers practical tools for improving fairness and transparency in faculty evaluation systems. These methods allow institutions to move beyond surface-level metrics and address the complex mechanisms that reinforce inequity in academic assessment.
+
+Our study focused on a single institution and a single academic semester. Additionally, current NLP techniques still struggle to capture the full  complexity  of  linguistic  nuance.  Despite  these  limitations,  the methodological  framework  offers  a  strong  foundation  for  replication and  adaptation  in  other  educational  contexts.  Future  work  should extend  this  analysis  across  time,  institutions,  and  identity  dimensions -testing the effects of evaluation reforms and exploring the longterm implications of biased assessments on faculty careers.
+
+Advancing this agenda requires sustained commitment. Academic leaders  must  prioritize  the  design  of  bias-aware  evaluation  systems, implement evidence-based interventions, and foster a culture of critical reflection  on  how  teaching  effectiveness  is  defined  and  measured. Addressing the subtle mechanisms that sustain evaluative bias is critical to  building  fairer  academic  assessment  systems -ones  that  recognize faculty based on the demonstrated quality of their teaching rather than on assumptions tied to gender or institutional roles.
+
+## Ethics statement
+
+Ethical approval is not applicable to this manuscript.
+
+## Data availability statement
+
+The data supporting the findings of our study are confidential and not publicly available due to institutional restrictions. Aggregated and anonymized  data  can  be  made  available  upon  reasonable  academic request.
+
+## Declaration of the use of AI assisted technologies
+
+The authors designed, analyzed, and wrote this manuscript without using any generative AI tools.
+
+## Funding statement
+
+This  research  did  not  receive  any  specific  grant  from  funding agencies in the public, commercial, or not-for-profit sectors.
+
+## Declaration of competing interest
+
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+## Acknowledgments
+
+The authors acknowledge the financial and technical support of the Writing  Lab,  Institute  for  the  Future  of  Education,  Tecnol ´ ogico  de Monterrey, Mexico, in the production of this work.
+
+The success of this project is due to the dedication and expertise of E. Diaz de Leon Lopez many contributors. Special thanks to Gabriela Estefanía Martínez García, María Fernanda Gonz ´ alez Ruiz, and Jesús Alfredo Mejía Gil for their invaluable work in data processing and dashboard design. Their attention  to  detail  and  innovative  approach  significantly  enhanced  the analytical capabilities of our study.
+
+We thank Xochitl Lyvier Morales, Architecture and Data Analytics Leader, for her support. Her assistance in software access and technical guidance streamlined student tasks, ensuring an efficient workflow. Her leadership  in  managing  complex  digital  tools  played  a  vital  role  in advancing our research process. Carmen Leticia Salazar Cano, Leader of Intelligence for Faculty Development at the School of Engineering and Sciences, made significant contributions. Her dedication to organized and  clean  data  laid  the  groundwork  for  our  analysis.  It  ensured  the integrity and quality of our research dataset.
+
+We also extend our sincere appreciation to the anonymous reviewers for their insightful and constructive feedback. Their recommendations significantly strengthened the clarity, coherence, and academic rigor of the manuscript. We are deeply grateful for their thoughtful engagement with our work.
+
+These collaborations have made this project possible and established a benchmark for future educational research. We appreciate everyone ' s enthusiasm for enhancing our understanding of the academic experience.
+
+> [!NOTE]
+> References section has been removed.

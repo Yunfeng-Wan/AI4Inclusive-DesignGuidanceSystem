@@ -1,0 +1,525 @@
+============================================================
+## Paper Source: Investigating Features That Play a Role in Predicting Gifted Student Engagement Using Machine Learning: Video log and self-report data
+============================================================
+
+## Investigating features that play a role in predicting gifted student engagement using machine learning: Video log and self-report data
+
+Gülay Öztüre Yavuz 1 · Gökhan Akçapınar 2 · Hatice Çıralı Sarıca 2 · Yasemin Koçak Usluel 2
+
+Received: 28 March 2023 / Accepted: 16 January 2024 / Published online: 8 February 2024 © The Author(s), under exclusive licence to Springer Science+Business Media, LLC, part of Springer Nature 2024
+
+## Abstract
+
+This study aims to develop a predictive model for predicting gifted students' engagement levels  and  to  investigate  the  features  that  are  important  in  such  predictions. Features  reflecting  students'  emotions,  social-emotional  learning  skills,  learning approaches  and  video-watching  behaviours  were  used  in  the  prediction  models. The study group consisted of 36 gifted students between the ages of 12 and 14 who attended an information technologies course, where students engaged with Arduinobased learning tasks. Data related to only one task were analysed. Prediction models were developed using different machine learning algorithms, and information gain scores  were  used  to  investigate  important  features  in  the  prediction  models.  The results  show  that  all  prediction  models  achieved  a  higher  classification  accuracy than the base model. The highest classification accuracy (83%) was achieved with the  Support  Vector  Machine  (SVM)  algorithm.  Students'  self-reported  emotions while performing the task were found to be the most important feature in predicting  their  level  of  engagement.  Other  important  features  in  predicting  engagement level were the students' social-emotional learning skills, deep and surface learning approaches and their video-watching behaviours. As a result, it was found that the engagement level of gifted students could be predicted with high accuracy. These results can be used to predict students' engagement levels and to develop interventions for low-engaged students. The obtained results are discussed within the scope of emotion-aware learning design and social-emotional learning.
+
+Keywords Gifted student · Emotion · Social-emotional learning · Learning approaches · Engagement · Machine learning · Video analytics
+
+
+
+
+
+## 1  Introduction
+
+Social,  economic  and  technological  changes  have  led  to  discussions  about  the meaning of  academic  achievement  and  raised  the  question  of  how  engagement in  learning  environments  can  be  achieved  in  a  multidimensional  way.  Student engagement is  defined  as  the  effort  and  time  a  student  spends  while  achieving learning goals (Kuh, 2009). Learning environment, curriculum/activity, and the way  educational  technology  is  used  are  some  of  the  factors  that  influence  student engagement in the education settings (Bond et al., 2020; Bond &amp; Bedenlier, 2019). Engagement has multiple dimensions: cognitive, emotional, and behavioral. Each of the cognitive, emotional, and behavioral dimensions of engagement comprises  a  range  of  indicators.  For  example,  cognitive  engagement  relates  to deep  learning  strategies,  setting  learning  goals,  and  self-regulation;  emotional engagement  relates  to  interactions,  reactions  to  the  learning  environment,  visible expressions, and students' emotions; and behavioural engagement relates to homework completion, participation, time spent, on/off-task behavior, and action/ initiation (Bond et al., 2020; Bond &amp; Bedenlier, 2019; Henrie et al., 2015).
+
+It  is  noteworthy that studies on student engagement in the literature focus on the  relationships  between  learning,  academic  achievement  and  emotion  (Alpaslan  &amp;  Ulubey,  2021;  Archambault  et  al.,  2022;  Camacho-Morles  et  al.,  2021; Timonen  et  al.,  2022;  Tseng,  2021).  In  addition,  the  relationship  between  student engagement and various variables, such as social-emotional learning (SEL) (Greenberg et al., 2017; Rosen et al., 2022; Santos et al., 2023), academic efficacy,  self-efficacy,  self-esteem  and  self-regulation  (Merhi  et  al.,  2018;  Pellas, 2014; Wang et al., 2020) have also been studied.
+
+Online learning opportunities, such as video-based online learning, are diversifying  and  becoming  progressively  more  enriching.  The  literature  shows  that the use of videos in online learning increases students' engagement and contributes  to  student  learning  (Bonafini,  2017;  Chen  et  al.,  2020;  Ding  et  al.,  2020; Hajhashemi et al., 2017; Kim et al., 2021; Lackmann et al., 2021; Mitra et al., 2010;  Tseng,  2021).  It  has  also  been  found  that  supporting  teaching  processes with video provides stronger learning (Noetel et al., 2021). However, video plays a  role  in  student  engagement in two ways: first are factors related to the video, such  as  video  type,  interaction  with  the  video,  video  platform,  video  viewing intensity  and  video  duration,  and  second  are  factors  related  to  the  individual, such as previous experiences, cognitive load, student emotions, teacher annotations and self-regulated learning strategies (Brame, 2016; Chen et al., 2020; Ding et al., 2020; Tseng, 2021). For example, students' emotions of enjoyment, excitement, annoyance and boredom in an online course are significant predictors of video engagement, and engagement is a predictor of self-perceived achievement (Ding et al., 2020). In addition, it was found that teacher annotations increased the  cognitive  and  behavioural  engagement  of  the  students  while  watching  the video, but did not increase their emotional engagement (Tseng, 2021).
+
+Previous  studies  measured  engagement  in  various  ways  using  scale,  facial expressions, gestures, eye movement, machine learning approach or multimodal data  (Bosch,  2016;  Dewan  et  al.,  2019;  Whitehill  et  al.,  2014).  It  can  be  said that  self-report  studies  collect  data  using  questionnaires,  scales  and  interviews, while  behavioural  studies  analyse  students'  facial  expressions,  video-watching behaviours and eye movements. Thus, there are various classifications related to detecting student engagement in the literature (Bosch, 2016; Dewan et al., 2019). In  a  review  study,  a  taxonomy  was  proposed  by  dividing  existing  methods  into three main categories (manual, semi-automatic and automatic) to detect student engagement  in  the  context  of  online  learning  (Dewan  et  al.,  2019).  According to  this  taxonomy,  the  manual  category  refers  to  the  self-reporting  and  observational checklist methods, the semi-automatic category refers to engagement tracing,  and  the  automatic  category  refers  to  log-file  analysis,  sensor  data  analysis and computer vision-based methods (facial expression, eye movement, and gesture and posture) (Dewan et al., 2019). In another study, two classifications were used to detect participation: emotional and cognitive state detection (using facial features, skin conductance sensors, self-reporting), and behavioural engagement detection  (using  log  file,  machine  predictions)  (Bosch,  2016).  Indeed,  an  alternative  way  to  understand  student  engagement  in  video-based  online  learning  is to  measure students' video-watching behaviours (Guo et al., 2014). It has been stated  that  behavioural  engagement  means  participation  in  learning;  as  this  is related to the fact that learners have completed their video-watching behaviours, it  can  be  measured by stopping the video (Li &amp; Baker, 2016; Liu et al., 2018). In addition, behavioural engagement can be measured through playing, pausing and rewinding videos during learning activities (Goggins &amp; Xing, 2016; Tseng, 2021). Cognitive engagement requires the use of self-regulation strategies, refers to  the  understanding  of  learning  and  can  be  measured  by  pausing  and  seeking the video (Li &amp; Baker, 2016; Liu et al., 2018). While pausing in video-watching behaviour requires a higher level of cognitive interaction, seeking allows learners to jump to any part of the video while remaining in control (Liu et al., 2018; Li &amp; Baker, 2016; Sinha et al., 2014). Emotional engagement is related to learners' emotional reactions and love of learning (Fredricks et al., 2004; Liu et al., 2018). For  example,  lack  of  interest  in  the  content  during  video  watching  might  be related to changing video speed and rewinding the video; as such, it can be measured by the number of speed changes made during the video-watching sessions (Liu  et  al.,  2018).  Although  the  different  dimensions  of  engagement  are  measured through video-watching behaviours, Yoon et al. (2021) argued that behavioural engagement can be measured with behavioural data rather than emotional and cognitive engagement. Some studies have suggested that combining different modalities-such as observational or behavioural data on the individual's externality-with self-report data on an individual's internality can help improve the accuracy of engagement detection (Aslan et al. 2014; Bosch, 2016; Psaltis et al. 2018;  Whitehill  et  al.,  2014).  Therefore,  both  behavioural  data  and  self-report data were considered in this study.
+
+
+
+It is noteworthy that in the studies in the literature that describe the relationship between engagement and various variables, the research findings on the relationship between engagement and learning approach do not support each other. For example, studies have revealed a positive and weak correlation between engagement and deep motivation (Raleiras et al., 2021), that student engagement has a significant effect on the student's deep learning approach (Bevan et al., 2014; Reynell van der Ross et al., 2022) and that there is a positive correlation between the deep learning approach and student engagement (Teoh et al., 2014). In addition to differences in the findings, there are also differences in the treatment of engagement as a dependent and independent variable. In a study in which the video-watching behaviours of students according to their learning approaches were analysed using video analytics, it was found that, while watching the video students with a surface approach performed a statistically significant forward search compared to students using a deep learning approach, paused and played the video more randomly, watched the video more linearly and interacted less with the video (Akçapınar &amp; Bayazıt, 2018).
+
+
+
+The  literature  states  that  emotions  affect  students'  engagement,  learning  and academic  achievement  (Pekrun  &amp;  Linnenbrink-Garcia,  2012):  positive  emotions predict  student  engagement positively and at a high level (Yavuz, 2023; D'Errico et al., 2016), while negative emotions are correlated with low student engagement (Chevrier et al., 2019) in learning environments. Positive emotions experienced in learning  environments  can  encourage  students'  perseverance  and  learning  efforts (Pekrun et al., 2002) and interest them more in learning activities (Reschly et al., 2008), while negative emotions can limit the flexibility of using cognitive resources in learning activities, as students pay more attention to the threats around them (Derakshan et al., 2009). For these reasons, it is claimed that positive emotions experienced in learning environments tend to increase student engagement, while negative emotions can prevent student engagement (Putwain et al., 2013; Zhen et al., 2017).
+
+It has been determined that studies on student engagement with gifted students are limited (Landis &amp; Reschly, 2013; McCormick &amp; Plucker, 2013; Fig. 1). However, the engagement of gifted students is a fundamental construct for understanding, predicting and preventing dropout behaviour (Landis &amp; Reschly, 2013). As stated in the literature, it is thought that gifted students will be successful without special services (Moon, 2009). However, gifted students who show advanced cognitive development but lag behind in emotional development may find that their abilities and strengths become a problem (Majid &amp; Alias, 2010) and they may face having to drop out of school (Landis &amp; Reschly, 2013). Although gifted students have high potential in terms  of  cognitive  development  and  academic  performance  at  school,  they  may experience social and emotional difficulties. Therefore, they should be valued and respected in the teaching-learning process (Renzulli, 2005; Pfeiffer, 2017; Ribeiro Piske &amp; Stoltz, 2021), being taught to strengthen their abilities and receiving love and support (Casper, 2014). It is important to identify the learning differences, cognitive and emotional characteristics, as well as the academic, social, and emotional needs of gifted students and teaching strategies should be developed to enhance their learning (NAGC, 2010). It is claimed that classes in which SEL skills are taught and practiced creates such an environment (Norris, 2003). In fact, studies have shown that SEL competencies support students' well-being, encourage more positive and fewer negative social behaviours and interactions (Guerra &amp; Bradshaw, 2008; McKown et al., 2009), improve academic achievement (Durlak et al., 2011; Weissberg et  al.,  2015;  Zins  et  al.,  2004)  and  increase  high  school  graduation  rates  and  university participation (Taylor et al., 2017). In addition, the literature states that SEL is positively correlated with student engagement or an important variable that predicts engagement; therefore, SEL programs should be given importance to increase engagement (Greenberg et al., 2017; Santos et al., 2023; Yang et al., 2018). In the literature, on the one hand, peer and teacher support, interaction, and collaboration in face-to-face instructional practices (Elmi, 2020), and on the other hand, videos in online education contributes to the development of students' SEL and engages them (Cooper &amp; Brna, 2002; Davis et al., 2021; Hagarty &amp; Morgan, 2020; Knigge et al., 2019). In the case of ICT, for example, if videos are carefully planned, designed, and integrated into classroom practice can support SEL, engagement, relationships (teacher-student and/or student-student), and motivation (Cooper &amp; Brna, 2002). It is stated that video-based online programs provided by Moodle and Blackboard are more engaging for students in their learning experiences and contribute to the development of their SEL (Davis et al., 2021; Knigge et al., 2019). A systematic review study revealed that videos can be used as an effective technique in learning-teaching processes,  especially  for  the  development  of  SEL  skills  of  children  with  learning disabilities (Hagarty &amp; Morgan, 2020). It is also stated that gifted students respond favorably to self-directed projects that can add complexity to their studies compared to  traditional  teacher-led  lectures  (Maniatis  et  al.,  2016).  In  this  regard,  it  can  be argued that the online environment and videos may also hold significance for gifted students' SEL skills and engagement in the learning process. The videos can be also used to encourage gifted students to adapt their learning approach according to their own preferences.
+
+
+
+Fig. 1 Nomological network map of related literature
+
+
+
+Within  the  scope  of  this  study,  a  nomological  network  was  created  to  see  the study  intensities  and  requirements  between  the  variables/constructs  in  the  related literature (Fig. 1). Nomological network was initially introduced by Cronbach and Meehl (1955) to address construct validity, that is, to find and establish the meanings of relationships between constructs. These constructs and relationships can then be displayed as a map. The nomological map allows us to understand the relationship between constructs that become evident in a specific theoretical/conceptual framework, with a holistic approach (Rippee, 2020). Four guidelines have been identified in the development of a nomological network (Cronbach &amp; Meehl, 1955):
+
+
+
+1. Specification: Define the relationships among the model constructs based on theory and prior research.
+2. Investigation: Conduct a comprehensive literature review using data collection from multiple sources and qualitative analysis.
+3. Interpretation: Examine the entire network as a whole.
+4. Replication: Conceptual effects can be multiplied.
+
+In this study, a theoretical/conceptual framework of engagement's relationship with other constructs is presented with the nomological network map created as a result of comprehensive literature review. Thus, it can be more easily understood from a more holistic perspective which gaps in the literature this study fills.
+
+As seen in this nomological network, the most studied subject in studies examining  video-based  online  learning  and  video-watching  behaviours  is  engagement, while emotion, self-regulation strategies and learning approaches are more limited; on  the  other  hand,  while  the  most  studied  subjects  of  engagement  are  academic achievement and emotion, it is noteworthy that studies on self-regulation strategies, social-emotional learning skills and emotion regulation strategies are limited, while learning approaches have not yet been studied. There are studies in the related literature on how emotions experienced in learning environments predict student engagement. These studies investigate the relationship between SEL skills and engagement or learning approaches and engagement, how students' video-watching behaviours differ  according  to  different  learning  approaches,  and  determine  the  relationship between video-watching behaviours and student engagement. However, it has been determined that there is no study that addresses these variables in a holistic way.
+
+At this  point,  it  can  be  argued  that  examining  how  engagement  is  related  to which  variables  among  gifted  students  may  contribute  to  the  learning-teaching processes of these students. From this point of view, this study aims to develop a model for predicting gifted students' engagement levels and to investigate the features  that  are  important  in  such  predictions.  In  the  prediction  models,  features  reflecting  students'  emotions,  social-emotional  learning  skills,  learning approaches and video-watching behaviours were used.
+
+In  this  study,  our  aim  is  to  determine  the  significant  features  in  predicting gifted student engagement and to develop a data-driven prediction model that can be used as an alternative to self-report measures. Therefore, the research questions in our study were structured as follows.
+
+RQ1:  What  are  the  important  features  based  on  behavioural  data  and  selfreport in predicting students' engagement levels?
+
+
+
+RQ2: To what extent can students' engagement levels be predicted when behavioural data and self-report features are used together?
+
+## 2    Method
+
+## 2.1    Study group
+
+The study group of this research consisted of 36 gifted students between the ages of 12-14 who were diagnosed in the field of intellectual ability and were attending the information technologies course at a science and art centre in the spring semester of the 2021-2022 academic year. All secondary school students who chose the IT program at The Science and Art Centre and volunteered where the researcher worked as an IT teacher, were included in this study. Therefore, it can be said that a convenience sampling method was used in this study. Science and art centres are special education institutions whose purpose is to provide educational support to students who attend formal education institutions and are diagnosed as gifted in the fields of general mental ability, visual arts or music talent to develop their talents and enable  them  to  use  their  capacities  at  the  highest  level  (MEB,  2019).  In  the  process of admitting students to these institutions, students attending the 1st, 2nd and 3rd grades of primary school who are deemed to show advanced differences from their peers in the areas of general intellectual ability, visual arts and musical talent are nominated by their classroom teachers. These students take part in a group screening application with a tablet computer, and students who pass the specified score threshold are taken for individual evaluation in their talent areas by The Ministry of National Education. Students who pass the evaluation phase are eligible to enrol in the science and art centre.
+
+Twenty-four of the students in the study group were male and 12 were female, 18 were in sixth grade, 14 were in seventh grade and 4 were in eighth grade. Before starting  the  data  collection  process,  ethics  commission  consent  from  Hacettepe University,  Research  Application  Consent  from  The  Ministry  of  National  Education (22.03.2022 / 46,193,093) and parent permission were obtained. Students were informed and obtained consent forms about voluntary participation.
+
+## 2.2    Data collection tools
+
+To develop prediction models that predict students' level of engagement, self-report and behavioural data sources were used together. Self-reported data were collected using  the  Student  Engagement  Scale  in  Online  Learning  Environments  (Sun  and Rueda 2012), the Geneva Emotion Wheel (Scherer et al., 2013), the Social Emotional Learning Skills Scale (Kabakçı &amp; Korkut Owen, 2010) and the Revised Two Factor Study Process Questionnaire (Biggs et al., 2001). Behavioural data were collected using a special video player that can record students' video interactions.
+
+
+
+## 2.2.1    The student engagement scale in online learning environments
+
+The Student Engagement Scale, originally developed by Sun and Rueda (2012) and adapted into Turkish by Ergün and Usluel (2015), has 19 5-point Likert-type items and consists of three sub-dimensions: emotional, cognitive and behavioural engagement. The Cronbach's alpha reliability coefficient for the three sub-dimensions of the  scale  were  as  follows:  0.846  for  emotional,  0.833  for  cognitive  and  0.707  for behavioural. In addition, the Cronbach's alpha internal consistency coefficient of the scale was 0.898. The authors validated the scale with 230 gifted middle school students.  As  a  result  of  the  confirmatory  factor  analysis,  two  sub-dimensions  of  the scale (emotional, behavioural), which were compatible with the original, were validated with 230 gifted middle school students. The factor load of one of the cognitive sub-dimensions was found to be below 0.50 and was removed from the scale. The scale was applied to 18 items for this study.
+
+## 2.2.2    The geneva emotion wheel
+
+The Geneva Emotion Wheel (GEW) is a simple tool (see Fig. 2) which helps participants to self-report their emotional states (Scherer et al., 2013). The locations of the emotions in the wheel are organised in a theoretically validated two-dimensional system consisting of valence and strength dimensions. The GEW is organised in a wheel-like  format  consisting  of  20  words  representing  the  emotions  experienced and  five  circles  representing  the  intensity  of  each  emotion  (Scherer  et  al.,  2013).
+
+
+
+Fig. 2 The Geneva Emotion Wheel (Scherer et al, 2013)
+
+
+
+Students can write emotions they experience other than those emotions written on the wheel in the "Other" section at the centre of the wheel.
+
+## 2.2.3    The social emotional learning skills scale
+
+The Social Emotional Learning (SEL) Skills Scale was developed by Kabakçı and Korkut  Owen  (2010)  to  measure  the  SEL  skills  of  primary  school  students.  The scale has 40 4-point Likert-type items and consists of four sub-dimensions: problem solving (PS), communication (C), self-worth (SW) and coping with stress (CS). Validation  of  the  scale  with  gifted  middle  school  students  was  conducted  by  the authors with 230 gifted middle school students. Exploratory and confirmatory factor analyses were conducted, and construct validity was ensured. The Cronbach's alpha values of each sub-dimension were calculated as 0.80 for PS, 0.79 for SW, 0.69 for CS and 0.70 for C, and were found to be at acceptable levels. The Cronbach's alpha internal consistency coefficient of the scale was determined to be 0.88. The 4-factor structure of the scale was confirmed for gifted middle school students. A low score on the scale indicates inadequacy in terms of SEL skills, while a high score indicates competence in terms of SEL skills.
+
+## 2.2.4    Revised two factor study process questionnaire (R-SPQ-2F)
+
+The Revised Two Factor Study Process Questionnaire (R-SPQ-2F) was published in 2001 (Biggs et al., 2001) and adapted into Turkish by Tetik et al. (2009). Validation  of  the  Turkish  scale  with  gifted  middle  school  students  was  conducted  by the authors with 230 gifted middle school students. The scale consists of 20 5-point Likert-type items and two subscales: Deep Approach (DA) and Surface Approach (SA).  In  the  reliability  analysis  of  the  scale,  the  Cronbach's  alpha  values  of  each sub-dimension were calculated respectively as 0.835 for the DA and 0.741 for the SA and found to be at acceptable levels. The total scores obtained from the deep and surface subscales were calculated separately.
+
+## 2.2.5    Video player
+
+The video-watching behaviours of the students were collected with a video player embedded in the Moodle learning management system. This video player, shown in Fig. 3, records the Load, Play, Pause and Seek activities performed by the students. In  addition,  the  video  player  triggers  an  automatic  event  at  five-second  intervals, which shows that the video continues to play even if the user is not performing any activity. All events were logged into the database as a click-stream, including students' user IDs and timestamp. The video player helped to obtain a reflection of the video-watching behaviours of the students. In the data pre-processing step, videorelated  features  were  extracted  for  each  student  by  using  the  data  recorded  in  the database.
+
+
+
+Fig. 3 Video player
+
+## 2.3    Data collection process
+
+This application contains only the online two-week part of the Information Technologies (IT) course, which covers the 6-week program conducted in a hybrid way in the spring semester of the 2021-2022 academic year. The 4 weeks of the program were carried out with face-to-face lectures by the teachers, and the last 2 weeks with the videos watched over the learning management system (LMS) in the classroom environment. The course lasts four hours per week. Each week of the course, students  were  given  a  real-life  task,  such  as  a  smart  home  or  smart  agriculture,  and asked to solve it using an Arduino microcontroller and electronic components such as  sensors,  LCD  displays  and  motors.  During  the  two-week  application  period, students  watched  four  videos  prepared  by  their  course  teachers  through  LMS.  In application, students' participation in LMS was carried out in the classroom environment.  During  this  application,  two  IT  teachers  conducted  the  lesson  together. One of the IT teachers is also one of the researchers. The other researchers made observations during each lesson and ensured that data collection tools were completed by the students. In the first week, students were provided with usernames and passwords to access the online environment. They were then instructed to individually watch the videos and apply what they learned. Internet connectivity, video data recording, and necessary controls were conducted during this week. In addition, two videos are provided to demonstrate the use of components required for the task, the smart home project. In the second week, two videos are provided to demonstrate the use of components required for the task, the smart agriculture project. Additionally, an extra video is available for students who require additional activities. Video materials explaining the connections of the different circuit elements were given to the students. The students worked individually on a task and two ICT teachers were present in the class to assist them when they needed technical help. In the first week, taking into account the adaptation of the students to the LMS, the logs were taken over the video in the second week. Students' video interactions were recorded into the LMS's database. After completing the task, students answered the SEL Skills Scale, the R-SPQ-2F and the Student Engagement Scale. While performing the task, they were asked to self-report their emotions through the Geneva Emotion Wheel.
+
+
+
+
+
+Considering the changeable nature of emotions, in this study the GEW was assessed separately for each task; it was completed by students three times: before the task was given, during the task (watching the video), and after the task was completed (Fig. 4).
+
+## 2.4    Data analysis
+
+In  this  study,  the  relationship  between  the  two  research  questions  is  that  one  is related to development of the prediction model that will perform the best, while the other  involves  determining  the  features  that  are  crucial  in  this  prediction  process. This enables us to understand which features the prediction model actually classifies students based on, in other words, which features are more decisive in determining whether students have low or high engagement.
+
+Research on the development of prediction models is widespread in the field of predictive  modelling  in  teaching  and  learning.  Particularly,  in  Educational  Data Mining (EDM), Learning Analytics (LA), and Artificial Intelligence in Education (AIED) domains, researchers conduct studies on the development and implementation  of  such  models.  One  of  the  crucial  data  preprocessing  steps  in  creating  prediction models is feature selection. In this stage, features with high distinctiveness on the target feature are identified from a large number of candidate features, and the prediction model is constructed using these features. This not only reduces the time and computational power required for training the model but also enhances the interpretability of the model. Another application of feature selection is determining the significant features in the prediction model, especially in the field of education (Romero et al., 2013b). The common approach in the development of prediction models based on machine learning involves comparing different algorithms and methods to determine the algorithm that performs best on the specific dataset (Gray &amp; Perkins, 2019; Raj &amp; VG, 2022; Romero et al., 2013a; Wang et al., 2021).
+
+Prediction models were created using Orange data mining software according to the process given in Fig. 5. First, the extracted features were read from a file and related columns were filtered.
+
+
+
+Fig. 4 Students performing the task in the classroom
+
+
+
+Fig. 5 Data analysis process
+
+
+
+The features used in the prediction models and their descriptions are presented in Table 1. These features are: the emotional states of the students during the task, the total scores they obtained from the SEL Skills Scale, the total scores they obtained from the surface approach and deep approach dimensions of the R-SPQ-2F questionnaire, and the features related to their video-watching behaviours.
+
+The total scores of the students obtained from the Student Engagement Scale in Online Learning Environments were used as the prediction variable. We formulated an engagement prediction task as a binary classification problem. As stated by the authors (Ergün &amp; Usluel, 2015) of the scale used, a high score obtained from the scale indicates a high level of engagement to the online learning environment; a low score means that the level of engagement is low. Therefore, students' scale scores were discretized into two categories: low and high using the median split (Iacobucci et al., 2015) method. The median value of 59 was taken as the cut-off point. In other words, students with an engagement score of 59 and above (n = 20) were labelled a high engagement group, while students below 59 (n = 16) were labelled as a low engagement group.
+
+| Feature                | Description                                                              |
+|------------------------|--------------------------------------------------------------------------|
+| emotional_state        | Self-reported emotional state of the student while engaging the task     |
+| sel_score              | The total score obtained from the Social Emotional Learning Skills Scale |
+| surface_approach_score | The surface approach score obtained from the R-SPQ-2F                    |
+| deep_approach_score    | The deep approach score obtained from the R-SPQ-2F                       |
+| video_duration         | Video watching time of the student (seconds)                             |
+| video_pause_and_play   | Number of times student paused and played the video                      |
+| video_pct              | Video watching percentage of the student                                 |
+| video_seek             | Number of seeks made by the student on the video timeline                |
+
+Table 1 Features used in prediction models and their descriptions
+
+
+
+In the second stage, important features were selected using the Rank widget. The information gain scores of the features were used in ranking, and prediction models were then created with the top 5 ranked features. Since the algorithms can produce different  results  in  different  data  sets,  prediction  models  were  created  with  different algorithms and their performances were compared. Algorithms widely used in educational studies were selected for this purpose: Support Vector Machines (SVM), AdaBoost,  CN2  rule  inducer,  Gradient  Boosting,  k  Nearest  Neighbour  (kNN), Logistic Regression, Neural Network, Random Forest and Decision Tree.
+
+Area Under the ROC Curve (AUC), Classification Accuracy (CA), F Measure (F1), Precision and Recall were used to evaluate the performance of the algorithms. The 5 k-cross  validation  method  was  used  to  calculate  performance  metrics.  The AUC,  F1,  Precision  and  Recall  metrics  were  calculated  separately  for  each  case (high and low engagement), as positive cases and the average values were reported. Algorithm performances were also compared with the Constant model, which represents majority class classification.
+
+## 3    Results
+
+Box plots of the numeric features for each group are shown in Fig. 6. When the features reflecting the video-watching behaviours of the students were examined, it  was  seen  that,  except  for  video\_duration, they have a similar distribution. As for video watching time, students in the high engagement group spent more time watching videos than did the students in the low engagement group. When the distribution of the self-report features was examined, it was seen that the students in the high engagement group had higher values, except for the surface approach scores, which were higher in the low engagement group.
+
+
+
+Fig. 6 Box plots of numerical features
+
+
+
+Students' self-report emotions before, during and after the task, according to their  low-high  engagement  levels,  are  shown  in  Table  2,  Table  3  and  Table  4. When analysing the emotions before the task in relation to high and low levels of engagement, it was found that students with high engagement group experienced the emotions of excitement (n = 7) and joy (n = 5) (Table 2). In contrast, students with low engagement reported joy (7) and interest (4) as the most common emotions (Table 2). One student from each engagement level expressed anxiety before the task was given.
+
+When  the  emotions  experienced  by  the  students  while  performing  the  task were examined according to the high and low levels of engagement, students in the  high  engagement group stated that the emotions they experienced the most were excitement ( n =  9) and joy ( n =  7) (Table 3). The students in the low engagement group, on the other hand, stated that the emotions they experienced the most were joy (6) and interest (5).
+
+In the high engagement group, students reported emotions of pride (7), joy (6), and relief (3) after completing their robot tasks. Conversely, students in the low engagement group expressed emotions of joy (9), relief (3), and pride (2) after finishing their tasks (Table 4).
+
+Table 2 Students self-reported emotions before the task
+
+|            | Emotions   | Emotions   | Emotions   | Emotions   | Emotions   | Emotions   | Emotions   | Emotions   |
+|------------|------------|------------|------------|------------|------------|------------|------------|------------|
+| Engagement | joy        | excitement | interest   | pleasure   | curiosity  | sadness    | anxiety    | none       |
+| High (f)   | 5          | 7          | 3          | -          | 3          | -          | 1          | -          |
+| Low (f)    | 7          | 1          | 4          | -          | 2          | -          | 1          | 1          |
+
+Table 3 Students self-reported emotions while performing the task
+
+|            | Emotions   | Emotions   | Emotions   | Emotions   | Emotions   | Emotions   | Emotions   | Emotions   |
+|------------|------------|------------|------------|------------|------------|------------|------------|------------|
+| Engagement | joy        | excitement | interest   | pleasure   | curiosity  | sadness    | anxiety    | none       |
+| High (f)   | 7          | 9          | 2          | 2          | -          | -          | -          | -          |
+| Low (f)    | 6          | 1          | 5          | -          | 1          | 1          | 1          | 1          |
+
+Table 4 Students self-reported emotions after completing their tasks
+
+|            | Emotions   | Emotions   | Emotions   | Emotions   | Emotions    | Emotions   | Emotions   | Emotions   |
+|------------|------------|------------|------------|------------|-------------|------------|------------|------------|
+| Engagement | joy        | excitement | interest   | pleasure   | contentment | pride      | relief     | none       |
+| High (f)   | 6          | 2          | -          | 2          | -           | 7          | 3          | -          |
+| Low (f)    | 9          | -          | -          | -          | 1           | 2          | 3          | 1          |
+
+
+
+According to these findings, it can be said that the emotions experienced by students are related to the process of performing learning tasks. In addition, it can be argued  that  their  task-related  thoughts,  that  is,  their  cognitive  appraisal,  are  also effective in the formation of their emotions.
+
+## 3.1    Findings related to the first research question
+
+Within the scope of the first research question, we aimed to determine the important features in predicting students' engagement levels. For this, we used the Rank module in the Orange data mining software. Information gain scores were taken into account to rank the features according to their importance in separating low- and high-engaged students. When the features given in order according to their information  gain  scores  in  Fig.  7  were  examined,  the  self-reported  emotional  state  of  the students during the task (emotional\_state) was found to be the most important one in predicting their level of engagement. In other words, the self-reported emotional states  of  the  students  while  performing  the  given  task  were  found  to  be  the  most important variable in determining whether the student was classed in the low or high engagement group. Based on the information gain scores, the second important variable was the total score obtained by students on the SEL Skills Scale (sel\_score). The scale  has  four  sub-dimensions:  problem-solving  skills,  communication  skills, self-esteem skills  and  stress  coping  skills.  Low  scores  on  the  scale  indicate  inadequate social-emotional learning (SEL) skills, while high scores indicate sufficient SEL skills. This was followed by Deep Approach scores, Surface Approach scores. Deep approach and surface approach scores represent students' approaches to learning based on their scores on the R-SPQ-2F scale. Next features are the number of pause and play actions (video\_pause\_and\_play) while watching the video and other video-watching behaviours included the percentage of video watched (video\_pct), the  duration  of  video  watched  (video\_duration),  and  video-seeking  behaviour (video\_seek) (Fig. 7).
+
+
+
+Fig. 7 Feature importance based on information gain scores
+
+
+
+The percentage of the video they watched, the total time they spent on the video and the number of seeks they made while watching the video were less important in predicting the level of engagement of the students.
+
+## 3.2    Findings related to the second research question
+
+Within  the  scope  of  the  second  research  question,  we  investigated  the  extent  to which the students' level of engagement could be predicted when the behavioural and self-reported features were used together. Features that were determined to be important in the first research question were used as predictors when developing prediction models. Here, the five top-ranked features, which also had information gain scores above 0.1, were selected. The performance of nine different prediction models (one of which was constant) was compared. The performance metrics calculated as a result of 5 k cross-validation of the created prediction models are presented in Table 5. When the results are compared in terms of Classification Accuracy (CA), it is seen that all prediction models outperformed the base model (Constant). It is also seen  that  the  Support  Vector  Machine  algorithm  exhibited  the  best  performance, while the Naive Bayes algorithm exhibited the lowest performance.
+
+When the confusion matrix regarding the results of the Support Vector Machine model given in Table 6 was examined, it was seen that the Support Vector Machine algorithm correctly predicted 17 of 20 (85%) students with a high engagement level and 13 of 16 (81%) students with a low engagement level. On the other hand, the model misclassified 3 students with a high engagement level and 3 students with a low engagement level.
+
+Table 5 Prediction model results
+
+Table 6 Confusion matrix for Support Vector Machine
+
+
+
+| Model               |   AUC |    CA |    F1 |   Precision |   Recall |
+|---------------------|-------|-------|-------|-------------|----------|
+| SVM                 | 0.734 | 0.833 | 0.833 |       0.833 |    0.833 |
+| Neural Network      | 0.825 | 0.806 | 0.802 |       0.811 |    0.806 |
+| kNN                 | 0.805 | 0.778 | 0.772 |       0.787 |    0.778 |
+| Tree                | 0.750 | 0.750 | 0.751 |       0.752 |    0.750 |
+| Random Forest       | 0.813 | 0.722 | 0.720 |       0.722 |    0.722 |
+| Logistic Regression | 0.766 | 0.722 | 0.723 |       0.728 |    0.722 |
+| Naive Bayes         | 0.772 | 0.667 | 0.663 |       0.665 |    0.667 |
+| CN2 rule inducer    | 0.659 | 0.583 | 0.568 |       0.576 |    0.583 |
+| Constant            | 0.475 | 0.556 | 0.397 |       0.309 |    0.556 |
+
+|        |       | Predicted   | Predicted   | Predicted   |
+|--------|-------|-------------|-------------|-------------|
+|        |       | High        | Low         | Total       |
+| Actual | High  | 17          | 3           | 20          |
+|        | Low   | 3           | 13          | 16          |
+|        | Total | 20          | 16          | 36          |
+
+Except for the Naive Bayes and CN2 rule inducer algorithms, all models had a classification accuracy over 70% in classifying students according to their level of engagement.
+
+## 4    Discussion
+
+In line with two research questions in this study, firstly, the features that are important in predicting the engagement levels of gifted students were investigated. Secondly,  prediction  models  were  developed  to  predict  students'  engagement  levels based on these features. This article concluded with the following answers to the research questions:
+
+## 4.1    RQ1: What are the important features based on behavioural data and self-report in predicting students' engagement levels?
+
+When the  features  in  predicting  students'  engagement  levels  were  examined,  the emotions that students reported while engaging in the task were found to be the most important feature in predicting their engagement levels. This finding is consistent with the findings of previous studies (Artino, 2012; Yavuz, 2023; D'Errico et al., 2016; Ding &amp; Zhao, 2020; O'Regan, 2003).
+
+To understand emotions, it is important to know that emotions have both universal properties and individual uniqueness, and that emotions can vary depending on context and time (Pekrun, 2014). Therefore, it can be argued that identifying tasks and situations that allow students to enjoy lessons will help students develop their capacity to experience positive emotions during the learning process (Pekrun, 2014) and their emotional development.
+
+Students reported that they experienced mostly excitement, joy and interest while performing the task. No negative emotions were expressed by the high engagement group.  Some students in the  low  engagement group, however, expressed negative emotions such as anxiety, while a smaller number felt sadness. It can be said that our  results  are  consistent  with  studies  in  the  literature.  Thus,  the  literature  states that  positive  emotions  are  associated  with  high  student  engagement,  while  negative  emotions  are  associated  with  low  student  engagement  (Reschly  et  al.,  2008). Moreover, when students experience positive emotions in a learning environment, their  engagement level increases significantly (D'Errico et al., 2016). In addition, Ding and Zhao's (2020) analysis of the relation between emotions, engagement and self-perceived achievement revealed that, while positive emotions (enjoyment and excitement) predict engagement positively, negative emotions (boredom and annoyance) predict engagement negatively in the learning environment.
+
+It can be argued that many factors may have played a role in the students' experience of positive emotions. The personal characteristics, for example, they prefer new and difficult experiences while developing their critical thinking skills, their creative traits are strong, they try to produce a product from the fields they are studying, they develop original ideas and they like to be successful in their work (Çitil &amp; Ataman, 2018; NAGC, 2010; Renzulli, 2005; Siegle et al., 2014) or the learning tasks related to the chosen activities or the unique structure of this special education school where only gifted students can be studied might also play a role in their positive emotions.
+
+
+
+It was seen that the second most important feature in predicting students' engagement levels was students' social emotional learning skills. The total score obtained by the students on the Social Emotional Learning Skills Scale was important in predicting whether they were in the low or high engagement group. The literature states that  social  and  emotional  competencies  are  important  features  that  are  positively related to student engagement and predict engagement; thus, SEL programs should be  assigned  importance  to  increase  engagement  (Greenberg  et  al.,  2017;  Santos et al., 2023; Yang et al., 2018). Furthermore, as social-emotional development is an important factor for gifted and talented students to develop their other abilities and to achieve their full potential, the social-emotional needs of these students should be supported (McCormick &amp; Plucker, 2013; Yazgı Yanık &amp; Afat, 2022). Finally, it has been found that the engagement of gifted and talented students can be increased by identifying and supporting their academic and social emotional needs (McCormick &amp; Plucker, 2013).
+
+In this study, the deep learning approach was found to be another important factor in predicting students' engagement levels. Studies suggest that learning approaches affect the quality of learning outcomes, generally stating that learners with a deep approach achieve better learning outcomes than those with a surface approach (Gijbels et al., 2005). Some studies in the literature have found statistically significant positive  relationships  between  student  engagement  and  a  deep  learning  approach, while  there  is  no  relationship  between  engagement  and  surface  learning  (Reynell van der Ross et al., 2022). Other research suggests a positive relationship between student  engagement  and  a  student-centred  teaching  approach  with  a  deep  learning  approach  (Teoh  et  al.,  2014).  In  addition,  studies  focusing  on  gifted  students found that positive emotions were associated with a deep approach, while negative emotions were associated with a surface approach. These studies also explored the impact of learning approaches on engagement (Yavuz, 2023).
+
+When  considering  the  features  reflecting  the  students'  video-watching  behaviours, pausing and playing the video was identified as the most prominent behaviour in predicting their level of engagement. Previous studies also reported that learner engagement can be measured by video-related metrics such as rewinding the video, seeking, changing the play speed, and time spent with the video (Liu et al., 2018; Li &amp; Baker, 2016; Sinha et al., 2014; Tseng, 2021). Also, Ding and Zhao (2020) have combined self-reported emotional data with behavioural data, and one such study found that pleasure,  excitement,  boredom,  and  fatigue  were  all  significant  predictors of video engagement. In our study, video-related features were found to be less important than the self-reported features in predicting students' engagement levels. This finding may be due to the fact that the students had to watch the videos to complete the assigned learning task. All of the students completed the task, regardless of their engagement level.
+
+
+
+## 4.2    RQ2. To what extent can students' engagement levels be predicted when behavioural data and self-report features are used together?
+
+For RQ2, prediction models were developed to predict students' engagement levels based on important behavioural and self-reported features (emotional state, SEL scores, deep approach scores, surface approach scores, and the number of pause and play activities while watching the video). When the findings related to the prediction of the students' engagement levels were examined, it was seen that different machine learning algorithms achieved high accuracy in predicting the students' engagement level as low or high. All models outperformed the prediction made by the constant model, which assigned all students to the majority class without using an algorithm. The  best-performing  algorithm  (Support  Vector  Machine)  classified  the  students with 83% accuracy. The performance of algorithms in machine learning problems may vary depending on the data set and problem situation. For this reason, comparing different algorithms is a widely used approach (Gray &amp; Perkins, 2019; Raj &amp; VG, 2022; Romero et al., 2013a; Wang et al., 2021). Here, it is important to choose algorithms with different characteristics when developing prediction models. If the aim is to predict students' level of engagement with the greatest accuracy, the prediction  model  created  with  the  Support  Vector  Machine  algorithm,  known  as  the black box, can be used, but if the aim is to understand the underlying relationships between features while performing the prediction, then the prediction model created with the Decision Tree algorithm (75% accuracy) can be used.
+
+This study shows that the level of engagement of gifted students engaged in a task could be predicted. Thus, this study contributes to the limited number of studies examining student engagement with gifted students in the literature (Landis &amp; Reschly,  2013;  McCormick  &amp;  Plucker,  2013).  The  features  that  are  important  in this prediction model were also revealed. Predicting students' engagement levels is important in terms of developing interventions for those students with low engagement levels.
+
+## 5    Conclusion
+
+This study developed models for predicting gifted students' engagement levels and to investigate the features that are important in such predictions. In the prediction models,  features  reflecting  students'  emotions,  social-emotional  learning  skills, learning approaches and video-watching behaviours were used. Prediction models were developed using different machine learning algorithms, and information gain scores  were  used  to  investigate  important  features  in  the  prediction  models.  All prediction  models  achieved  a  higher  classification  accuracy  than  the  base  model. The  highest  classification  accuracy  (83%)  was  achieved  with  the  Support  Vector Machine (SVM) algorithm. Students' self-reported emotions while performing the task were found to be the most important feature in predicting their level of engagement.  Other  important  features  in  predicting  engagement  level  were  the  students' social-emotional  learning  skills,  deep  and  surface  learning  approaches  and  their video-watching behaviours.
+
+
+
+As a  result,  it  was  found  that  the  engagement  level  of  gifted  students  could be predicted with high accuracy. These results can be used to predict students' engagement levels and to develop interventions for low-engaged students. It can also be argued that the results obtained are important in emotion-aware learning design and social-emotional learning.
+
+## 6    Limitations and future research
+
+Due to  the  study's  limited  sample  size,  predicting  students'  engagement  levels was  considered  a  binary  classification  problem.  This  situation  caused  students whose engagement scores were close to the cut-off value (median) to be in either the low or high group, despite having similar scores. Further studies could assign students in the middle group to a separate class and investigate the matter as a multiclass classification problem. The external validity of the prediction models can also be tested with larger sample sizes. Moreover, students' engagement levels in learning environments that consider their emotions can be studied longitudinally and in depth.
+
+Students'  video-watching  behaviours  might  be  related  to  learning  tasks  and video types.  Therefore,  future  studies  need  to  analyse  students'  video-watching behaviours and their  relation  with  engagement  in  different  learning  settings.  In addition to the behavioural and self-report data used in this study, future studies could  use  additional  measures,  such  as  biometrics,  to  provide  a  deeper  understanding of detecting student engagement.
+
+Since emotions are an important predictor of students' engagement level, further  studies  can  be  designed  to  test  the  effects  of  emotions  in  different  instructional settings. In addition, it can be argued that, based on the fact that positive emotions are positively related to engagement, the learning situations that play a role in students' positive emotions should be investigated in depth and considered for implementation in instructional design.
+
+Acknowledgements This  study  was  partially  supported  by  the  Erasmus  KA201  project  numbered 2020-1-TR01-KA201-094326 named "Emotions and Robotics".
+
+Data availability The datasets generated during and/or analysed during the current study are available from the corresponding author on reasonable request.
+
+## Declarations
+
+Ethics approval The study complies with Ethical Standards.
+
+Consent to participate The participants all agreed to take part in this study.
+
+Consent for publication The publication of this study has been approved by all authors.
+
+Conflicts of interests/Competing interests The authors declare that they have no conflicts of interests.
+
+
+
+> [!NOTE]
+> References section has been removed.
+============================================================
+## Paper Source: Using ChatGPT in the Secondary Gifted Classroom for Personalized Learning and Mentoring
+============================================================
+
+## Using ChatGPT in the Secondary Gifted Classroom for Personalized Learning and Mentoring
+
+Keri M. Guilbault, EdD 1  , Yi Wang, EdD 1 , and Kimberly M. McCormick, PhD 2 
+
+Abstract: Artificial intelligence (AI) has the potential to revolutionize education by promoting personalized
+
+learning experiences and enhancing educators ' ef fi ciency. Generative AI tools like ChatGPT are increasingly used by K-12 teachers for lesson planning, differentiated instruction, and automated feedback. This article examines how ChatGPT, in alignment with the National Association for Gifted Children (NAGC) standards, can be used to address the unique cognitive and affective needs of secondary gifted learners. Case studies provide examples of how to use ChatGPT to facilitate differentiation, personalized learning, support independent research, and provide signi fi cantly enhancing educators ' ef fi ciency. Generative AI tools (e.g., ChatGPT, Copilot, Gemini, Claude 3.5)
+
+' EDUCATORS ARE ENCOURAGED TO EXPLORE AND INTEGRATE CHATGPT INTO EDUCATIONAL PRACTICES TO EFFECTIVELY SUPPORT GIFTED LEARNERS. '
+
+virtual mentorship. The importance of prompt engineering is emphasized and encouragement of critical thinking skills when using AI tools. By integrating human expertise with AI capabilities, educators can enhance the mentorship experience, foster re fl ective learning, and cultivate future-ready leaders .
+
+Keywords: gifted education, ChatGPT, mentoring, personalized learning
+
+A rti fi cial intelligence (AI) experts have hyped its potential to revolutionize education by promoting more personalized learning experiences and have been leveraged by one-third of K-12 teachers in their classrooms to help design and modify lesson plans, differentiate instruction, automate grading and feedback, and assist in planning professional learning experiences (Langreo, 2024). While some critics have voiced concern over issues like plagiarism, bias, and data privacy, others suggest that with thoughtful implementation and guidance, it has the potential to transform the way we teach and learn (Ng, 2023). AI offers educators that work with students with gifts and talents new ways to tailor educational experiences to the unique cognitive and affective needs of their students (Siegle, 2023).
+
+Gifted education programs provide instruction to support advanced learners ' cognitive needs and their social and emotional development. In fact, the NAGC PreK-Grade 12 Gifted Programming Standards (National Association for Gifted Children, 2019) highlight student outcomes and evidence-based practices that address social-emotional areas across all six standards. Some of these needs include earlier career exploration and guidance due to students ' multi-potentiality and diverse range of interests; mentoring; goal-setting and identi fi cation of talent development pathways to reach these goals; cultural competence; and development of
+
+DOI: 10.1177/10762175241308950. From 1 Johns Hopkins University and 2 University of Cincinnati. Address correspondence to: Keri M. Guilbault, Department of Advanced Studies, Johns Hopkins University, 2800 N. Charles St, Baltimore, MD 21218, USA. Email: kguilba1@jhu.edu.
+
+For Article reuse guidelines, please visit SAGE ' s Web site at sagepub.com/journals-permissions
+
+© The Author(s) 2025.
+
+## FEATURE
+
+their leadership and communication skills. AI can be used to address the additional needs of gifted and talented students from rural communities, diverse cultural or linguistic backgrounds, and those who are twice exceptional. In this article we will share with you a few examples of ways to use generative AI tools like ChatGPT to address NAGC standards related to guidance, mentoring, and advanced learning needs of students with gifts and talents.
+
+## What is Generative AI?
+
+Arti fi cial intelligence, or ' machine-learning models that can learn to make predictions based on data ' (Zewe, 2023, p. 2) has long been used in schools with instruments like self-adaptive assessments and educational computer games. At the end of 2022, a type of AI became widely available to the public when OpenAI released ChatGPT (https://chatgpt.com), now in its GPT-4o iteration and offering a GPT-4o mini version with knowledge through 2023. This generative arti fi cial intelligence (GenAI) is a different form of machinelearning model that is trained to ' create new data, rather than making a prediction about a speci fi c dataset ' (Zewe, 2023, p. 2). There are now numerous useful GenAI tools that can help educators customize lesson plans, differentiate activities, create presentations, grade student work and provide feedback, and modify instruction (see Table 1 for examples.)
+
+One of the most popular GenAI tools, ChatGPT, is an advanced arti fi cial intelligence (AI) system known as a large language model (LLM) that is designed to understand and generate human-like text based on the input it receives. Interacting with ChatGPT is like having conversations with an expert who can adapt their language and explanations to match the user ' s level of understanding. The architecture of GenAI provides adaptability with re fl ection and self-correction ability, which is crucial for gifted students who often grapple with complex concepts beyond their years. In the evolving educational landscape, AI tools like ChatGPT are invaluable for gifted learners, offering personalized learning, differentiation, a guide for independent research projects, and virtual mentoring. ChatGPT (when prompted with speci fi c and targeted requests) acts as a knowledgeable mentor to meet the advanced learning needs of gifted students by providing differentiation that allows exploration beyond the standard curriculum.
+
+## Student Safety and Data Privacy
+
+With the rise of AI use in education, policymakers and educators are focusing on children ' s rights and safety. An important consideration when planning instruction with students is data privacy. The Children ' s Online Privacy Protection Act (The Child Online Privacy Protection Act, 15 U.S.C. §§ 6501-6506) is a federal law that protects the privacy of children under age 13 online. It prohibits websites, online services, mobile apps, and social media companies from collecting individually identi fi able information about children under age 13 without prior parental consent.
+
+Several international organizations created frameworks for guidance on the use of AI with children, including the Institute of Electrical and Electronics Engineers (IEEE), United Nations International Children ' s Emergency Fund (UNICEF), and the World Economic Forum. UNICEF Innovation Human Rights Center UC Berkeley (2019) acknowledged the potential bene fi ts of AI in education such as ' personalized learning, helping kids develop social skills, enabling distance education for children in remote regions ' (p. 11); however, they also highlight potential risks to human rights including ' the right to an education, as well as the right to protection from exploitation and abuse, and the protection of children with disabilities ' (p. 11).
+
+Companies that use AI technology must disclose their privacy and data collection practices. In fact, both Google and Microsoft recently established principles of the ethical use of AI yet neither have shared policies speci fi c to children (UNICEF Innovation Human Rights Center UC Berkeley, 2019). In light of these potential issues, educators and administrators should carefully review adaptive technology and generative AI tools ' data protection and security policies before purchasing products and subscriptions. Furthermore, district policies must address parent consent for students between the ages of 13 and 18 and students of all ages should be engaged in conversation around the bene fi ts and potential drawbacks of using AI tools. Consent forms should include information on how the tool will be used in class and how. Teachers working with students younger than 13 should use teacher-facing versus student-facing AI technology (i.e., the student does not use the AI directly; the teacher collects student input and uses the tool to create customized assignments) and know to maintain con fi dentiality when using GenAI products to individualize instruction, such as avoiding use of speci fi c student data or personal information. Keeping these ideas in mind, let us explore the possibilities of GenAI through three cases of middle and high school gifted learners: Sophia, Mateo, and Kiara. 1
+
+## Sophia: AI for Differentiation
+
+One useful application of ChatGPT is its ability to provide differentiated, personalized learning experiences. Differentiated instruction is a method used to adapt to students ' varying levels of readiness to learn, ability, and interests (Tomlinson, 2014). This is a core tenant of the NAGC Standards and encompasses Standard 3: Curriculum Planning and Instruction . ChatGPT supports teachers in designing tiered assignments, creating extension activities, producing project-based learning opportunities, and generating challenging questions that promote critical thinking and creativity for gifted learners. Additionally, ChatGPT can help teachers quickly develop materials that are engaging and rigorous and cater to students ' unique intellectual and social-emotional needs. By offering insights and resources that align with students ' individual pro fi les, ChatGPT acts as a fl exible tool that enables teachers to provide a more meaningful, personalized educational experience for each student. Whether modifying the complexity of tasks, providing enrichment opportunities, or helping to adjust pacing, ChatGPT serves as an accessible tool for enhancing the differentiation process.
+
+
+
+Table 1. AI Tools for Teachers.
+
+| Tool and Url                               | Description                                                                                                      | Benefits                                                                                                                                                                        | Limitations                                                                     | Data Use Policy                                                                                                                                                                    |
+|--------------------------------------------|------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Claude 3.5 Sonnet https://claude.ai/       | AI powered natural language model for interactive text generation                                                | Strong vision model can interpret graphs and charts; can generate code, text documents, websites                                                                                | Lacks some useful features that ChatGPT-4o has, like memory/custom instructions | User inputs and outputs are not used to train the models                                                                                                                           |
+| Goblin Tools https://goblin.tools/         | Streamline tasks with specialized tools for neurodivergent individuals                                           | Free; great for 2e and neurodivergent students                                                                                                                                  | Limited tool selection; some users may not fi nd interface intuitive            | Does not store data on their servers and does not share it with any other third party                                                                                              |
+| Hello History https://www.hellohistory. ai | Interactive tools for exploring historical knowledge through role-playing                                        | Immersive historical contexts for students; experiential learning                                                                                                               | Cost may be a barrier; requires devices with Internet access                    | Does not use student data to train AI models. All data is encrypted and protected                                                                                                  |
+| Knowji https://www.knowji.com/             | Vocabulary learning through interactive and adaptive apps                                                        | Helpful for English language learners; adaptive learning features                                                                                                               | Requires consistent use to be effective; limited to vocabulary learning         | May use or share aggregate or anonymous data collected for purposes such as understanding or improving the service                                                                 |
+| MagicSchoolAI https://www. magicschool.ai  | Assists teachers with developing lesson plans, designing assignments, generating materials, creating newsletters | Free version available; saves time with auto- generation of content aligned to standards; helps rewrite content for different reading levels; tools for different subject areas | Information not past 2021; may produce biased or incorrect content              | See their student data policy that outlines speci fi c guidelines for agreements with educational institutions: https:// www.magicschool.ai/ privacy-security/ student-data-policy |
+| Synthesia https://www.synthesia.io/        | Transform text into videos featuring human presenters                                                            | Enhances visual and auditory learning experiences; high- quality video production                                                                                               | Cost may be prohibitive; video accuracy is dependent on text quality            | Collects information such as use, feedback, and technical issues; Customer data are collected but users may request erasure of personal data                                       |
+
+
+
+Imagine a gifted high school student, Sophia, who lives in a rural community and lacks access to advanced science courses in her high school. Sophia ' s science teacher, Mr. Edwards, recognizes her passion for marine biology and wants to use ChatGPT to differentiate instruction so that she remains challenged and engaged. After obtaining a signed parental consent form (required for ChatGPT users between the ages of 13 and 18), Mr. Edwards adapts a standard grade-level science assignment on coral reefs into a more advanced, inquirydriven project for Sophia. Instead of a typical research report, Sophia ' s assignment is restructured to include the exploration of deeper, more complex issues, such as the speci fi c threats to coral reefs and the broader implications for marine biodiversity. As Sophia types more speci fi c queries like ' Can you explain how coral reefs are affected by ocean acidi fi cation? ' ChatGPT tailors its responses by providing scienti fi cally accurate, yet more detailed information to expand the complexity and depth of the topic. ChatGPT ' s adaptability allows Mr. Edwards to offer Sophia targeted resources, ask higherlevel probing questions, and guide her toward advanced academic sources, such as NOAA and WWF, to help verify her fi ndings as shown in Figure 1.
+
+Through this modi fi cation, Sophia is encouraged not only to learn about coral reefs but also to engage in critical thinking by verifying the information ChatGPT
+
+provides. Mr Edwards also prompts her to re fl ect on the sources of information and encourages the use of additional credible resources, such as academic articles or conservation reports. As Sophia poses increasingly complex questions about deep-sea ecosystems, ChatGPT adeptly adjusts its responses, matching her level of understanding and pushing her knowledge boundaries further. This adaptive capability stems from ChatGPT ' s ability to analyze the nuances in Sophia ' s language, the complexity of her queries, and the context of their ongoing conversation. NAGC Standard 3, evidence-based practice 3.1.4. states, ' Educators design differentiated curriculum that incorporates advanced, conceptually challenging, in-depth, and complex content for students with gifts and talents ' (National Association for Gifted Children, 2019, p. 10). In this scenario, ChatGPT becomes a tool that assists Sophia ' s teacher in utilizing best practices for instruction and technology integration.
+
+For educators to ensure ChatGPT-facilitated personalized learning is both tailored and accurate lies in guiding students like Sophia to provide clear context in their prompts and encouraging them to ask follow-up questions. For instance, Sophia might continue her session by stating, ' Howmight the combined effects of climate change, ocean acidi fi cation, and pollution impact communities that rely on coral reefs, and what could they do to adapt? ' This level of speci fi city helps ChatGPT calibrate its responses appropriately (see Table 2 for sample prompts). Additionally, AI-assisted personalized learning requires educator oversight. According to Guilbault &amp; Burrows (2023), ' When ChatGPT gives an answer, it appears to be valid and trustworthy but is oftentimes not completely correct. This provides a prime opportunity for students to practice and develop their critical analysis skills ' (p. 1). Hence, educators play a crucial role in regularly verifying ChatGPT ' s responses against standard curricula and expert knowledge, ensuring that the information students receive is not just engaging but also academically sound. One imperative strategy is to instruct students about the concept of AI hallucinations, where the model may generate incorrect or nonsensical information. This is a critical thinking skill for advanced learners that should be incorporated into any AI-assisted learning activities. Assignments should be designed with a critical thinking step included in which the learner evaluates the results from ChatGPT and con fi rms their validity. For example, Sophia ' s teacher could pose the following questions: (a) What new information did you learn from ChatGPT? (b) How did you verify the accuracy of this information? (c) What discrepancies did you fi nd between ChatGPT ' s responses and other sources? and (d)
+
+
+
+Table 2. Sample ChatGPT Prompts -Sophia ' s Marine Biology Scenario.
+
+| Task                                | Examples                                                                                                                                                                              |
+|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Student scenario prompts            | Broad: ' What are the most interesting things about the ocean? '                                                                                                                      |
+| Student scenario prompts            | Speci fi c: ' Can you tell me about different types of sea creatures in coral reefs? '                                                                                                |
+| Student scenario prompts            | Focused: ' How do coral reefs work? What lives there? '                                                                                                                               |
+| Student scenario prompts            | Detailed: ' Why do clown fi sh and sea anemones have a symbiotic relationship? How do they help each other? '                                                                         |
+| Student scenario prompts            | Application: ' How might the combined effects of climate change, ocean acidi fi cation, and pollution impact communities that rely on coral reefs, and what could they do to adapt? ' |
+| Student scenario prompts            | Re fl ection: ' If you were a marine biologist, what would you do to help protect coral reefs? '                                                                                      |
+| Student fi nal comprehensive prompt | ' Imagine you ' re a marine biologist exploring a coral reef. Describe your adventure, including                                                                                      |
+| Student fi nal comprehensive prompt | - Five different sea creatures you see and what they ' re doing                                                                                                                       |
+| Student fi nal comprehensive prompt | - How the clown fi sh and sea anemones work together                                                                                                                                  |
+| Student fi nal comprehensive prompt | - Three ways the coral reef might be in danger                                                                                                                                        |
+| Student fi nal comprehensive prompt | - Your ideas to help protect the reef                                                                                                                                                 |
+| Student fi nal comprehensive prompt | Be creative and use lots of details. '                                                                                                                                                |
+| Teacher to-dos                      | 1. Review ChatGPT ' s responses for reading level- appropriateness and accuracy                                                                                                       |
+| Teacher to-dos                      | 2. Create a fact-checking activity: Have Sophia verify three interesting facts from ChatGPT ' s response using reliable sources                                                       |
+| Teacher to-dos                      | 3. Design a re fl ection exercise: ' What surprised you most about coral reefs? What more do you want to learn? '                                                                     |
+| Teacher to-dos                      | 4. Use ChatGPT ' s response as a basis for a creative writing or art project about ocean conservation                                                                                 |
+
+Figure 2. Critical thinking activities and re fl ection questions.
+
+
+
+Table 3. Sample ChatGPT Prompts -Mateo ' s French Revolution Research.
+
+| Task                                | Examples                                                                                                                                                  |
+|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Student scenario prompts            | Broad: ' What was the French revolution all about? '                                                                                                      |
+| Student scenario prompts            | Speci fi c: ' Why were people in France unhappy before the revolution? '                                                                                  |
+| Student scenario prompts            | Focused: ' How was life different for rich and poor people in France back then? '                                                                         |
+| Student scenario prompts            | Detailed: ' Can you explain the tax system in pre-revolutionary France like I ' m a child? '                                                              |
+| Student scenario prompts            | Application: ' If you were a poor farmer in France during this time, how might your life change after the revolution? '                                   |
+| Student scenario prompts            | Re fl ection: ' What lessons do you think we can learn from the French Revolution that are still important today? '                                       |
+| Student fi nal comprehensive prompt | ' Pretend you ' re a time-traveling reporter visiting France just before the Revolution. Write a news article that includes                               |
+| Student fi nal comprehensive prompt | - A catchy headline                                                                                                                                       |
+| Student fi nal comprehensive prompt | - What daily life is like for a rich person and a poor person                                                                                             |
+| Student fi nal comprehensive prompt | - Three reasons why people are upset                                                                                                                      |
+| Student fi nal comprehensive prompt | - An interview with a French citizen (you choose who!)                                                                                                    |
+| Student fi nal comprehensive prompt | - A prediction about what might happen next                                                                                                               |
+| Student fi nal comprehensive prompt | Use basic vocabulary, short sentences, and include a small glossary of fi ve important terms. '                                                           |
+| Teacher to-dos                      | 1. Use ChatGPT to generate a list of key vocabulary in both English and Mateo ' s fi rst language                                                         |
+| Teacher to-dos                      | 2. Create a comparison activity: Have Mateo identify similarities and differences between ChatGPT ' s description and a textbook account using a mind map |
+| Teacher to-dos                      | 3. Design a critical thinking exercise: ' If you were the King of France then, what could you do to help people? '                                        |
+| Teacher to-dos                      | 4. Use ChatGPT ' s response to create a simple role-playing scenario for the class                                                                        |
+
+How would you rate the reliability of the information provided, and why? Figure 2 provides sample activities to use with ChatGPT to encourage critical thinking and re fl ection.
+
+## Mateo: AI as an Independent Research Guide
+
+NAGC Standard 3, student outcome 3.5 Instructional Strategies states, ' Students with gifts and talents become independent investigators ' (National Association for Gifted Children, 2019, p. 11). AI can be used to help educators address this outcome. One of ChatGPT ' s most powerful features is its ability to provide instant access to a vast reservoir of information, a perfect fi t for gifted students with insatiable curiosity. Consider Mateo, a gifted English language learner with a passion for history. In mere seconds, ChatGPT provides Mateo with a comprehensive overview of the socio-economic factors leading to the French Revolution, complete with key dates, fi gures, and events. The power behind this instant access lies in GenAI ' s ability to quickly synthesize information on a wide range of topics. It achieves this through its vast training data and sophisticated natural language processing algorithms. When Mateo asks about the French Revolution, ChatGPT doesn ' t simply retrieve a pre-written paragraph. Instead, it dynamically generates a response by drawing connections between relevant pieces of information in its knowledge base. ChatGPT nurtures Mateo ' s curiosity by encouraging and responding to his open-ended questions. His teacher combines the use of ChatGPT with Knowji, a GenAI app that helps build vocabulary (see Table 1), to help Mateo with any new sophisticated vocabulary that he is unfamiliar with, thus strengthening his English language skills and content expertise.
+
+To ensure accuracy, again, it ' s crucial to instruct students like Mateo to frame speci fi c, well-structured questions (see Table 3). For instance, instead of asking ' Tell me about the French Revolution, ' Mateo could ask, ' What were the primary economic factors that contributed to the onset of the French Revolution, and how did they interact with social and political issues of the time? ' This speci fi city guides ChatGPT to provide more focused and relevant information. However, while it ' s important to use ChatGPT as a starting point for deeper research, it is by no means a fi nal authority. While it provides quick, synthesized information, in-depth understanding often requires more extensive study. Mateo could use ChatGPT ' s overview as a foundation to identify areas for further exploration, formulate more speci fi c questions, or discover new avenues of historical inquiry.
+
+## Kiara: AI as a Virtual Mentor
+
+Kiara is a twice exceptional student who is interested in astrophysics and whose role model is Neil deGrasse Tyson, PhD. In a traditional classroom, she might struggle to fi nd resources that challenge her beyond the standard science curriculum due to her asynchronous or uneven development (Guilbault &amp; Kane, 2016). With ChatGPT, Kiara can dive into discussions with her hero, Dr deGrasse Tyson, about black holes, careers in quantum mechanics, and the nature of dark matter, receiving explanations tailored to her advanced understanding but still accessible for her age. By asking ChatGPT, ' Pretend you are Neil deGrasse Tyson. Explain to me how you believe black holes work, ' she is instantly having a thought-provoking discussion with her virtual mentor. For other ideas of how to use ChatGPT to have students access the voices of historical fi gures and authors see https://www.hellohistory.ai. Her teacher, Mrs. Spencer, might also use MagicToDo (https://www.goblin.tools) to help Kiara break down her project into smaller, manageable chunks that keep her organized.
+
+Maximizing the true power of ChatGPT requires the adoption and mastery of the art of prompt engineering. Educators and students need to learn how to craft questions and instructions that elicit the most useful and insightful responses from the AI model. It ' s like learning to speak a new language -the language of AI interaction. Effective prompt engineering is akin to being a skilled interviewer. Instead of asking ChatGPT to simply ' explain black holes, ' Kiara might learn to phrase her query more precisely: ' Explain the concept of Hawking radiation in black holes, comparing it to similar phenomena in quantum fi eld theory. Use analogies suitable for a high school physics student. ' This level of speci fi city guides ChatGPT to provide a response that is not only informative but also tailored to Kiara ' s advanced level of understanding (see Table 4 for prompt examples).
+
+## Using GenAI for Guidance and Future Planning
+
+Gifted students may have areas of interest and expertise that appear at a young age. They often require career exploration and guidance at an earlier age than typical, especially if they experience multi-potentiality. NAGC Standard 1, Learning and Development , recommends educators use evidence-based practices that help students with gifts and talents identify their interests, strengths, and needs and gather information to ' inform students and families about resources available to develop their child ' s talents ' (National Association for Gifted Children, 2019, p. 6) and ' help students identify college and career goals that are consistent with their interests and strengths ' (2019, p. 7). In addition, Standard 5, Programming includes student outcome 5.3 related to career pathways that states, ' Students with gifts and talents create future career-oriented goals and identify talent development pathways to reach those goals ' (2019, p. 15). Let ' s explore a few ways teachers can utilize GenAI to address these objectives.
+
+## Creating Individualized Learning Plans
+
+As ChatGPT becomes one of Sophia, Mateo, and Kiara ' s constant companions on their learning journey, teachers can use it for guidance on various educational paths and assistance with decision-making processes. To effectively tailor the learning experience, formal assessments (e.g., standardized tests, unit tests, and grades) provide a starting point by establishing students ' baseline knowledge and readiness levels. Informal assessments (e.g., observations, one-on-one conversations, or ongoing formative assessments) allow teachers to continuously gauge each student ' s interests, strengths, and areas needing growth.
+
+
+
+Table 4. Sample ChatGPT Prompts -Kiara ' s Astrophysics Exploration.
+
+| Task                                | Examples                                                                                                                                     |
+|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| Student scenario prompts            | Broad: ' What ' s the most unusual thing about black holes? '                                                                                |
+| Student scenario prompts            | Speci fi c: ' If I fell into a black hole, what would happen? '                                                                              |
+| Student scenario prompts            | Focused: ' Can you explain Hawking radiation? '                                                                                              |
+| Student scenario prompts            | Detailed: ' How do scientists study black holes if we can ' t see them? What tools do they use? '                                            |
+| Student scenario prompts            | Application: ' How might understanding black holes help us learn about the beginning of the universe? '                                      |
+| Student scenario prompts            | Re fl ection: ' If you could ask a famous scientist like Neil deGrasse Tyson one question about black holes, what would it be and why? '     |
+| Student fi nal comprehensive prompt | ' You ' re a young scientist who just discovered a new type of black hole. Create a report for other student scientists that includes        |
+| Student fi nal comprehensive prompt | - A fun name for your black hole                                                                                                             |
+| Student fi nal comprehensive prompt | - A drawing or description of what it looks like                                                                                             |
+| Student fi nal comprehensive prompt | - Three special features that make it different from other black holes                                                                       |
+| Student fi nal comprehensive prompt | - How it behaves (what it does, how it moves, what it ' eats ' )                                                                             |
+| Student fi nal comprehensive prompt | - Two questions you still have about your discovery                                                                                          |
+| Student fi nal comprehensive prompt | Be as creative and scienti fi c as you can. '                                                                                                |
+| Teacher to-dos                      | 1. Use ChatGPT to generate analogies that explain complex concepts in simpler terms                                                          |
+| Teacher to-dos                      | 2. Create a ' spot the mistake ' game: Intentionally include a few errors in ChatGPT ' s response for Kiara to identify and correct          |
+| Teacher to-dos                      | 3. Design a multi-sensory activity based on ChatGPT ' s explanations (e.g., a physical model, a sound representation of black hole behavior) |
+| Teacher to-dos                      | 4. Use ChatGPT to generate ideas for connecting astrophysics concepts to other subjects Kiara enjoys                                         |
+
+For example, when Sophia expresses her interest in marine ecosystems, ChatGPT doesn ' t just provide information. It can help chart a course through this vast fi eld of study based on both her formal and informal assessment data. Sophia ' s teacher, Mr Edwards, could begin by reviewing formal assessments that show her advanced reading level and academic performance, while informal observations and check-ins reveal her feeling of being unchallenged in school. With this combined insight, Mr. Edwards can use ChatGPT to create an individualized learning plan that adjusts to Sophia ' s unique needs.
+
+Mr. Edwards could type in to ChatGPT, ' Create an individualized learning plan for an advanced 10 th grade student who reads on a college level based on her interests (marine biology, deep-sea ecosystems), strengths (needs differentiated learning, feels unchallenged in school), and goals (wants to be a marine biologist and contribute to marine conservation efforts, but has limited access to AP classes). ' When this prompt is entered into ChatGPT, it responds with suggested independent study projects and online courses in marine biology, encourages her participation in science clubs and competitions, shares ideas for research resources, and provides conservation project ideas and career planning. This personalized guidance helps Sophia navigate her educational path with con fi dence and purpose and provides her teachers with support in curriculum planning. It is important, however, to be careful not to use private individual student data or information (e.g., names, test data); schools should develop AI policies and provide training for teachers that include ethical considerations and data privacy.
+
+## Setting Goals
+
+One of the key aspects of effective mentoring is helping mentees set and achieve goals. ChatGPT excels at this, assisting gifted learners like Sophia, Mateo, and Kiara in establishing clear, achievable objectives aligned with their capabilities and aspirations. Sophia ' s long-term goal is to contribute to marine conservation efforts. When prompted with speci fi c questions from Sophia and her human advisers (e.g., caregivers, teachers, counselor), ChatGPT can help break this down into manageable steps. It might suggest short-term goals like mastering the classi fi cation of marine species, understanding the basics of oceanography, or completing a project on local marine ecosystems. For each goal, ChatGPT can provide resources, set milestones, and offer encouragement along the way.
+
+## Facilitating Re fl ection on Learning
+
+Self-re fl ection is a crucial component of effective learning and is included as a goal in the NAGC Standards. Standard 2, Assessment , recommends educators use evidence-based practices to, ' Educators provide opportunities for students to set personal goals, keep records, and monitor their own learning progress ' (National Association for Gifted Children, 2019, p. 9). It is important to remember that teachers still play a vital role in their learning experiences. For example, after Kiara completes a virtual astrophysics course, Mrs. Spencer might ask, ' What was the most surprising thing you learned about dark matter? How has this new knowledge changed your understanding of astrophysics? ' These questions encourage metacognition by having Kiara pause and consider her learning journey, helping her understand her thought processes, identify areas for improvement, and recognize her achievements. This activity aligns with NAGC Standard 3 Evidence-Based Practice 3.5.1, ' Educators model and teach metacognitive models to meet the needs of students with gifts and talents such as self-assessment, goal setting, and monitoring of learning ' (National Association for Gifted Children, 2019, p. 11). Through this guided re fl ection, Kiara not only consolidates her knowledge but also develops metacognitive skills that will serve her well in future academic pursuits. She learns to analyze her own learning strategies, identify what works best for her, and adjust her approach accordingly. Her teacher can ask her to write down her re fl ection responses in a journal and then use them to facilitate a check-in one-on-one session discussing her progress. 1
+
+## Conclusion
+
+Leveraging the power of AI, this innovative approach aims to enhance the mentorship experience by offering personalized guidance, facilitating independent research, providing real-time feedback, supporting career and future planning, and creating robust, interactive learning opportunities. Throughout this investigation, ChatGPT has demonstrated effectiveness in tailoring educational content, providing consistent virtual mentorship, and fostering re fl ective learning practices. By aligning with the NAGC standards, ChatGPT ensures it meets the unique cognitive and affective needs of gifted students.
+
+Educators are encouraged to explore and integrate ChatGPT into educational practices to effectively support gifted learners. The integration of AI tools like ChatGPT has the potential to transform traditional mentorship models, making them more dynamic and responsive to individual student needs. By merging human expertise with AI capabilities, a more enriching and supportive learning environment can be cultivated, nurturing wellrounded, future-ready leaders. AI will not replace the need for highly quali fi ed teachers, yet it signi fi cantly enhances educators ' ability to mentor and guide students. Educators are urged to explore the use of ChatGPT and other AI tools to elevate teaching strategies and better support students ' growth and development. Together, this approach fosters a new era of education that empowers gifted learners to reach their full potential.
+
+## Declaration of Con fl icting Interests
+
+The author(s) declared no potential con fl icts of interest with respect to the research, authorship, and/or publication of this article.
+
+## Funding
+
+The author(s) received no fi nancial support for the research, authorship, and/or publication of this article.
+
+## ORCID iDs
+
+Keri M. Guilbault  https://orcid.org/0000-0002-9563633X
+
+Kimberly M. McCormick  https://orcid.org/0000-00018385-7437
+
+## Note
+
+1. The GenAI tool Claude 3.5 was used to help create sample activities for the student case scenarios in this manuscript.
+
+> [!NOTE]
+> References section has been removed.
